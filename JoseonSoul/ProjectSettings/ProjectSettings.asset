@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 24
-  productGUID: ca30307f23ef2624a8501343436c20b9
+  productGUID: e8dafac8036193c48a58b5a9fd35e86a
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -721,11 +721,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 2c440773-0459-4d17-942a-fb0e0b015b32
+  cloudProjectId: ebfb8869-6553-4b69-a532-0b60d924657a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: JoseonSoul
-  organizationId: unity_1253spring
+  projectName: JoseonSoul 2024-11-01_15-37-12
+  organizationId: sheon_0409
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
