@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638660398836291586
-    m_Hash: 1779094231
+      ticks: 638660647344246467
+    m_Hash: 2297744442
   m_LockFileStatus:
     m_FilePath: C:/git_swpp/team-project-for-2024-fall-swpp-team-01/JoseonSoul/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638660399616712129
-    m_Hash: 863343227
+      ticks: 638660647344258971
+    m_Hash: 3818652773
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
