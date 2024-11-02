@@ -30,6 +30,9 @@ public class UIManager : MonoBehaviour
     private float hpMaxOffsetScaleX = 1, hpMaxOffsetScaleY = 1;
     private float hpNowHeightScale = 0.6f;
 
+    // initial settings
+    private int maxHP = 120, nowHP = 87, SP = 68;
+
     void Start()
     {
         // Assign profile image to imageObject
@@ -71,6 +74,7 @@ public class UIManager : MonoBehaviour
         float hpTextOffsetY = profileImageOffsetY * 2.6f * hpTextOffsetScaleY;
         hpTextRect.anchoredPosition = new Vector2(hpTextOffsetX, hpTextOffsetY);
         hpText.fontSize = canvasWidth * 18 / 976;
+        hpText.text = GenerateHPText(nowHP, maxHP);
 
         // Position & scale hpMax
         hpMaxRect.anchorMin = new Vector2(0, 1);
@@ -79,6 +83,7 @@ public class UIManager : MonoBehaviour
         float hpMaxOffsetY = profileImageOffsetY * 3.4f * hpMaxOffsetScaleY;
         hpMaxRect.anchoredPosition = new Vector2(hpMaxOffsetX, hpMaxOffsetY);
         hpMaxHeight = canvasWidth * 20 / 976;
+        UpdateHPMax(maxHP, true);
 
         // Position & scale hpNow
         hpNowRect.anchorMin = new Vector2(0, 1);
@@ -87,6 +92,7 @@ public class UIManager : MonoBehaviour
         float hpNowOffsetY = hpMaxOffsetY - (1 - hpNowHeightScale) * hpMaxHeight / 2;
         hpNowRect.anchoredPosition = new Vector2(hpNowOffsetX, hpNowOffsetY);
         hpNowHeight = hpMaxHeight * hpNowHeightScale;
+        UpdateHPNow(nowHP, true);
 
         // Position & scale sp (TEMPORARY)
         spRect.anchorMin = new Vector2(0, 1);
@@ -96,19 +102,72 @@ public class UIManager : MonoBehaviour
         float spOffsetY = profileImageOffsetY;
         spRect.sizeDelta = new Vector2(spSize, spSize);
         spRect.anchoredPosition = new Vector2(spOffsetX, spOffsetY);
+        UpdateSP(SP, true);
     }
 
     void Update()
     {
-        // Update HP info
-        int nowHP = 87;
-        int maxHP = 120;
-        int SP = 68;
-        hpText.text = "HP " + nowHP + "/" + maxHP;
+
+    }
+
+    // Format the text showing nowHP/maxHP
+    string GenerateHPText(int nowHP, int maxHP)
+    {
+        return "HP " + nowHP + "/" + maxHP;
+    }
+
+    // Update maxHP value
+    public void UpdateHPMax(int value, bool isAbsolute)
+    {
+        maxHP = isAbsolute ? value : (maxHP + value);
+        hpText.text = GenerateHPText(nowHP, maxHP);
         hpMaxWidth = canvasWidth * 1.5f * maxHP / 976;
         hpMaxRect.sizeDelta = new Vector2(hpMaxWidth, hpMaxHeight);
+    }
+
+    // Update nowHP value
+    public void UpdateHPNow(int value, bool isAbsolute)
+    {
+        nowHP = isAbsolute ? value : (nowHP + value);
+        hpText.text = GenerateHPText(nowHP, maxHP);
         hpNowWidth = canvasWidth * 1.5f * nowHP / 976;
-        hpNowRect.sizeDelta = new Vector2( hpNowWidth, hpNowHeight);
-        sp.fillAmount = (float)SP / 100;
+        hpNowRect.sizeDelta = new Vector2(hpNowWidth, hpNowHeight);
+    }
+
+    // Update SP value
+    public void UpdateSP(int value, bool isAbsolute)
+    {
+        SP = isAbsolute ? value : (SP + value);
+        sp.fillAmount =(float)SP / 100;
+    }
+     // TEMPORARY FUNCTIONS used to debug UIManager
+    public void Temp_IncHPMax()
+    {
+        UpdateHPMax(1, false);
+    }
+
+    public void Temp_DecHPMax()
+    {
+        UpdateHPMax(-1, false);
+    }
+
+    public void Temp_IncHPNow()
+    {
+        UpdateHPNow(1, false);
+    }
+
+    public void Temp_DecHPNow()
+    {
+        UpdateHPNow(-1, false);
+    }
+
+    public void Temp_IncSP()
+    {
+        UpdateSP(1, false);
+    }
+
+    public void Temp_DecSP()
+    {
+        UpdateSP(-1, false);
     }
 }
