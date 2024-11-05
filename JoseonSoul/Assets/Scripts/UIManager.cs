@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     public Image hpNow;
     public Image sp;
 
+    public GameObject GameMenuPanel; //Game Menu Panel
+
     // parameters that need to be shared over functions
     private float canvasWidth;
     RectTransform hpMaxRect;
@@ -103,11 +105,16 @@ public class UIManager : MonoBehaviour
         spRect.sizeDelta = new Vector2(spSize, spSize);
         spRect.anchoredPosition = new Vector2(spOffsetX, spOffsetY);
         UpdateSP(SP, true);
-    }
+
+        
+}
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameMenuPanel.SetActive(!GameMenuPanel.activeSelf);
+        }
     }
 
     // Format the text showing nowHP/maxHP
@@ -169,5 +176,21 @@ public class UIManager : MonoBehaviour
     public void Temp_DecSP()
     {
         UpdateSP(-1, false);
+    }
+
+    //메인 메뉴로 나가기 버튼
+    public void ClickReturnToGameButton()
+    {
+        GameMenuPanel.SetActive(!GameMenuPanel.activeSelf);
+    }
+
+    //게임 종료 버튼
+    public void ClickExitGameButton()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
