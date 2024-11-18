@@ -1,13 +1,26 @@
 # `feature/map-scene1-zone2` branch
 
-목적: Scene1의 맵을 구성합니다. 대로를 기준으로 우측 부분(zone2)을 구현합니다.
+이름은 zone2이지만 zone1도 그냥 여기로 merge 해버렸습니다. (zone1 기존 구현 branch: `feature/Scene1_asset`, 담당: 김성헌) 여기에서 scene1의 맵을 총괄합니다.
+
+목적: Scene1의 맵을 구성합니다. ~~대로를 기준으로 우측 부분(zone2)을 구현합니다.~~ 
 
 관리: 박혜준
 
-구현 설명
-
-* L-Block (or I-Block): L 모양 (혹은 I 모양)으로 생긴 단지
-
-* 바닥 색깔 마음대로 깔아봄
-
-* 일단 그림이랑 비슷하게 만들어 보았습니다. 1차본이니까 일단...
+### 구현 설명
+나름 hierarchical structure를 잘 구현해보려 노력했습니다. 예를 들어,
+```
+Zone2Objects
+├── House_Blocks
+│   ├── I_Block
+│   ├── I_Block (1)
+│   ├── L_Block
+│   ├── L_Block (1)
+│   ...
+├── Monsters
+│   ├── monster_1_animation
+│   ├── monster_1_animation (1)
+│   ├── monster_1_animation (2)
+│   ...
+├── Wells
+└── Plane
+```
