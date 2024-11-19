@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class Stage_UIManager : MonoBehaviour
 {
     // public variables that MUST be assigned objects before playing
     public Image imageObject;
@@ -31,10 +31,20 @@ public class UIManager : MonoBehaviour
     private float hpNowHeightScale = 0.6f;
 
     // initial settings
-    private int maxHP = 120, nowHP = 87, SP = 68;
+    private float maxHP = 120, nowHP = 87, SP = 68, maxSP = 100;
+
+    [Header("Player")]
+    [SerializeField] private Transform player;
+    private PlayerHealthManager healthManager;
 
     void Start()
     {
+        healthManager = player.gameObject.GetComponent<PlayerHealthManager>();
+        if(healthManager == null)
+            Debug.LogError("Player Health Manager Not Detected");
+        maxHP = healthManager.getMaxHP();
+        maxSP = healthManager.getMaxSP();
+        
         // Assign profile image to imageObject
         imageObject.sprite = profileImage;
 
@@ -83,7 +93,7 @@ public class UIManager : MonoBehaviour
         float hpMaxOffsetY = profileImageOffsetY * 3.4f * hpMaxOffsetScaleY;
         hpMaxRect.anchoredPosition = new Vector2(hpMaxOffsetX, hpMaxOffsetY);
         hpMaxHeight = canvasWidth * 20 / 976;
-        UpdateHPMax(maxHP, true);
+        healthManager.updateMaxHP(maxHP, true);
 
         // Position & scale hpNow
         hpNowRect.anchorMin = new Vector2(0, 1);
@@ -92,7 +102,7 @@ public class UIManager : MonoBehaviour
         float hpNowOffsetY = hpMaxOffsetY - (1 - hpNowHeightScale) * hpMaxHeight / 2;
         hpNowRect.anchoredPosition = new Vector2(hpNowOffsetX, hpNowOffsetY);
         hpNowHeight = hpMaxHeight * hpNowHeightScale;
-        UpdateHPNow(nowHP, true);
+        healthManager.updateCurrentHP(nowHP, true);
 
         // Position & scale sp (TEMPORARY)
         spRect.anchorMin = new Vector2(0, 1);
@@ -102,72 +112,71 @@ public class UIManager : MonoBehaviour
         float spOffsetY = profileImageOffsetY;
         spRect.sizeDelta = new Vector2(spSize, spSize);
         spRect.anchoredPosition = new Vector2(spOffsetX, spOffsetY);
-        UpdateSP(SP, true);
+        healthManager.updateCurrentSP(SP, true);
     }
 
     void Update()
     {
-
     }
 
     // Format the text showing nowHP/maxHP
-    string GenerateHPText(int nowHP, int maxHP)
+    string GenerateHPText(float nowHP, float maxHP)
     {
-        return "HP " + nowHP + "/" + maxHP;
+        return "HP " + (int)nowHP + "/" + (int)maxHP;
     }
 
     // Update maxHP value
-    public void UpdateHPMax(int value, bool isAbsolute)
+    public void UpdateMaxHP()
     {
-        maxHP = isAbsolute ? value : (maxHP + value);
+        maxHP = healthManager.getMaxHP();
         hpText.text = GenerateHPText(nowHP, maxHP);
         hpMaxWidth = canvasWidth * 1.5f * maxHP / 976;
         hpMaxRect.sizeDelta = new Vector2(hpMaxWidth, hpMaxHeight);
     }
 
     // Update nowHP value
-    public void UpdateHPNow(int value, bool isAbsolute)
+    public void UpdateCurrentHP()
     {
-        nowHP = isAbsolute ? value : (nowHP + value);
+        nowHP = healthManager.getCurrentHP();
         hpText.text = GenerateHPText(nowHP, maxHP);
         hpNowWidth = canvasWidth * 1.5f * nowHP / 976;
         hpNowRect.sizeDelta = new Vector2(hpNowWidth, hpNowHeight);
     }
 
     // Update SP value
-    public void UpdateSP(int value, bool isAbsolute)
+    public void UpdateSP()
     {
-        SP = isAbsolute ? value : (SP + value);
-        sp.fillAmount =(float)SP / 100;
+        SP = healthManager.getCurrentSP();
+        sp.fillAmount = SP / 100;
     }
      // TEMPORARY FUNCTIONS used to debug UIManager
     public void Temp_IncHPMax()
     {
-        UpdateHPMax(1, false);
+        healthManager.updateMaxHP(1.0f, false);
     }
 
     public void Temp_DecHPMax()
     {
-        UpdateHPMax(-1, false);
+        healthManager.updateMaxHP(-1.0f, false);
     }
 
     public void Temp_IncHPNow()
     {
-        UpdateHPNow(1, false);
+        healthManager.updateCurrentHP(1.0f, false);
     }
 
     public void Temp_DecHPNow()
     {
-        UpdateHPNow(-1, false);
+        healthManager.updateCurrentHP(-1.0f, false);
     }
 
     public void Temp_IncSP()
     {
-        UpdateSP(1, false);
+        healthManager.updateCurrentSP(1.0f, false);
     }
 
     public void Temp_DecSP()
     {
-        UpdateSP(-1, false);
+        healthManager.updateCurrentSP(-1.0f, false);
     }
 }
