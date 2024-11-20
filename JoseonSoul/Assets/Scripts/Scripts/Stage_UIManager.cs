@@ -93,7 +93,7 @@ public class Stage_UIManager : MonoBehaviour
         float hpMaxOffsetY = profileImageOffsetY * 3.4f * hpMaxOffsetScaleY;
         hpMaxRect.anchoredPosition = new Vector2(hpMaxOffsetX, hpMaxOffsetY);
         hpMaxHeight = canvasWidth * 20 / 976;
-        healthManager.updateMaxHP(maxHP, true);
+        
 
         // Position & scale hpNow
         hpNowRect.anchorMin = new Vector2(0, 1);
@@ -102,7 +102,7 @@ public class Stage_UIManager : MonoBehaviour
         float hpNowOffsetY = hpMaxOffsetY - (1 - hpNowHeightScale) * hpMaxHeight / 2;
         hpNowRect.anchoredPosition = new Vector2(hpNowOffsetX, hpNowOffsetY);
         hpNowHeight = hpMaxHeight * hpNowHeightScale;
-        healthManager.updateCurrentHP(nowHP, true);
+        
 
         // Position & scale sp (TEMPORARY)
         spRect.anchorMin = new Vector2(0, 1);
@@ -112,11 +112,20 @@ public class Stage_UIManager : MonoBehaviour
         float spOffsetY = profileImageOffsetY;
         spRect.sizeDelta = new Vector2(spSize, spSize);
         spRect.anchoredPosition = new Vector2(spOffsetX, spOffsetY);
+
+
+        healthManager.updateMaxHP(maxHP, true);
+        healthManager.updateCurrentHP(nowHP, true);
         healthManager.updateCurrentSP(SP, true);
+    }
+
+    void Awake()
+    {
     }
 
     void Update()
     {
+        
     }
 
     // Format the text showing nowHP/maxHP

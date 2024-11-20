@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player; // Ensure this namespace contains PlayerController and PlayerState
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttackManager : MonoBehaviour
 {
     private PlayerController playerController;
 
@@ -81,6 +81,7 @@ public class PlayerAttack : MonoBehaviour
     void Attack2()
     {
         playerController.SetPlayerState((int)PlayerState.Attacking2Closed);
+        Debug.Log("Attack2 Closed Started");
         isQueued = false;
         // Schedule transition to Attack2Open after 1.8 seconds
         Invoke(nameof(TransitionToAttack2Open), closedPhaseDuration);
@@ -89,6 +90,7 @@ public class PlayerAttack : MonoBehaviour
     void TransitionToAttack2Open()
     {
         playerController.SetPlayerState((int)PlayerState.Attacking2Open);
+        Debug.Log("Attack2 Open Started");
         attackOpenEndTime = Time.time + openPhaseDuration;
         // Schedule end of Attack2 after 0.2 seconds
         Invoke(nameof(EndAttack2), openPhaseDuration);
@@ -143,10 +145,12 @@ public class PlayerAttack : MonoBehaviour
         if (nextState == PlayerState.Attacking2Closed)
         {
             Invoke(nameof(Attack2), remainingTime);
+            CancelInvoke(nameof(EndAttack1));
         }
         else if (nextState == PlayerState.Attacking3Closed)
         {
             Invoke(nameof(Attack3), remainingTime);
+            CancelInvoke(nameof(EndAttack2));
         }
         // Add more conditions here if you have more attacks
     }

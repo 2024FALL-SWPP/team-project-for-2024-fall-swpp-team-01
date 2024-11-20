@@ -21,20 +21,20 @@ public class Title_UIManager : MonoBehaviour
     }
     public void ClickNewGameButton()
     {
-        SceneManager.LoadScene("Stage1Scene");
+        SceneManager.LoadScene("Stage1Scene1");
     }
 
     public void ClickLoadGameButton()
     {
-        // TODO : Load ¹öÆ°À» ´­·¶À» ¶§ ÇÔ¼ö È£Ãâ
+        // TODO : Load ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
     }
-    /*title scene¿¡¼­ "Á¶ÀÛ¹ý" ¹öÆ°À» ´­·¶À» ¶§ Á¶ÀÛ¹ý Ã¢À» ¶ç¿ì´Â ÇÔ¼ö*/
+    /*title sceneï¿½ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½Û¹ï¿½" ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Û¹ï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½*/
     public void ClickShowControlsButton()
     {
         ControlsPanel.SetActive(true);
     }
 
-    /* Á¶ÀÛ¹ý Ã¢¿¡¼­ x¹öÆ°À» ´­·¶À» ¶§ Ã¢À» Á¾·áÇÏ´Â ÇÔ¼ö*/
+    /* ï¿½ï¿½ï¿½Û¹ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ xï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½*/
     public void CilckExitControlsPanelButton()
     {
         ControlsPanel.SetActive(false);

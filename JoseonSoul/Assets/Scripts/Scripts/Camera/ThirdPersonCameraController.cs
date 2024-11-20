@@ -80,7 +80,7 @@ public class ThirdPersonCameraController : MonoBehaviour
         HandleZoom();
         CalculateDesiredPosition();
         ApplyCollision();
-        SmoothCameraMovement();
+        //SmoothCameraMovement();
     }
 
     /// <summary>
@@ -91,12 +91,9 @@ public class ThirdPersonCameraController : MonoBehaviour
         // Get mouse input
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
-
-        // Update yaw and pitch
+        
         yaw += mouseX * rotationSpeed;
         pitch -= mouseY * rotationSpeed;
-
-        // Clamp the vertical angle to prevent flipping
         pitch = Mathf.Clamp(pitch, minYAngle, maxYAngle);
     }
 
