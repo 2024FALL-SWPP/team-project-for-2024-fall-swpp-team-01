@@ -11,7 +11,7 @@ public class PlayerHealthManager : MonoBehaviour
     private float currentHP;
     private float currentSP;
 
-    private Stage_UIManager UIManager;
+    public Stage_UIManager UIManager;
     
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
@@ -19,8 +19,9 @@ public class PlayerHealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIManager = FindObjectOfType<Stage_UIManager>();
-        currentHP= maxHP;
+        if(UIManager == null)
+            Debug.LogError("UIManager Not Found");
+        currentHP = maxHP;
         currentSP = maxSP;
     }
 

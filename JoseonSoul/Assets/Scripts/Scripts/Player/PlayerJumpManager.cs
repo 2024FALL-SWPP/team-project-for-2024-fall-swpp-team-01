@@ -9,6 +9,8 @@ public class PlayerJumpManager : MonoBehaviour
     [SerializeField] private float jumpForce = 8.0f;
     [SerializeField] private float walkJumpSpeed = 5.0f;
     [SerializeField] private float runJumpSpeed = 10.0f;
+    [SerializeField] private float jumpDelayTime = 0.4f;
+    [SerializeField] private float jumpBackDelay = 0.15f;
     private PlayerController playerController;
     private PlayerLocomotionManager playerLocomotionManager;
     private bool jumpable;
@@ -64,7 +66,7 @@ public class PlayerJumpManager : MonoBehaviour
                 speed = walkJumpSpeed;
         }
         playerController.SetPlayerState((int)PlayerState.JumpingDelay);
-        Invoke("Jump",0.4f);
+        Invoke("Jump",jumpDelayTime);
     }
 
     void Jump()
@@ -77,7 +79,8 @@ public class PlayerJumpManager : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground") && playerController.GetPlayerState() == (int)PlayerState.Jumping)
         {
-            playerController.SetPlayerState((int)PlayerState.Idle);
+            Invoke("EndJump", jumpBackDelay);
+            
         }
     }
 
@@ -89,6 +92,11 @@ public class PlayerJumpManager : MonoBehaviour
         {
             //TODO
         }
+    }
+
+    void EndJump()
+    {
+        playerController.SetPlayerState((int)PlayerState.Idle);
     }
 
     void MovePlayer(Vector3 moveDirection, float speed)

@@ -7,16 +7,15 @@ using UnityEngine;
 public class PlayerLocomotionManager : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private bool movable = true;
-    [SerializeField] private const float walkingSpeed = 5f;
-    [SerializeField] private const float runningSpeed = 10f;
-    [SerializeField] private const float staminaDecrementSpeed = 25f;
+    [SerializeField] private float walkingSpeed = 5f;
+    [SerializeField] private float runningSpeed = 10f;
+    [SerializeField] private float staminaDecrementSpeed = 25f;
 
     private bool runnable = true;
+    private bool movable = true;
     private bool isRunning = false;
-    private float speed = walkingSpeed;                   // Movement speed
+    private float speed;                   // Movement speed
     private float rotationSpeed = 720f;         // Degrees per second for rotation
-    public TextMeshProUGUI textMesh;
     
     [Header("Camera Reference")]
     public Transform cameraTransform;           // Reference to the camera's transform
@@ -24,6 +23,8 @@ public class PlayerLocomotionManager : MonoBehaviour
     private Animator animator;
     private PlayerHealthManager healthManager;
     private PlayerController playerController;
+
+    public float Speed { get => speed; set => speed = value; }
 
     void Start()
     {
@@ -107,7 +108,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     private void SetSpeed()
     {
-        speed = isRunning ? runningSpeed : walkingSpeed;
+        Speed = isRunning ? runningSpeed : walkingSpeed;
     }
 
     private void SetAnimation()
@@ -180,7 +181,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     void MovePlayer(Vector3 moveDirection)
     {
         // Calculate movement vector
-        Vector3 movement = speed * Time.deltaTime * moveDirection;
+        Vector3 movement = Speed * Time.deltaTime * moveDirection;
 
         // Apply movement to the player's position
         transform.position += movement;
