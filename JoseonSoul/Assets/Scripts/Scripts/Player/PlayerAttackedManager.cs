@@ -20,16 +20,26 @@ public class PlayerAttackedManager : MonoBehaviour
     void Update()
     {
         int state = playerController.GetPlayerState();
-        hittable = state != (int) PlayerState.RollingInvincible;
+        hittable = state != (int) PlayerState.RollingInvincible && state != (int)PlayerState.Dead;
     }
 
     void onCollisionEnter(Collider other)
     {
         if (other.tag == "EnemyAttack" && hittable)
         {
-            playerController.SetPlayerState((int)PlayerState.Stunned);
-            Invoke("EndStunned", 2f);
-            healthManager.updateCurrentHP(-5f, false); // TODO Value subject to change
+            healthManager.updateCurrentHP(-5f, false);              // TODO Value subject to change
+            if (healthManager.getCurrentHP() <= 0)
+            {
+                healthManager.updateCurrentHP(0f, true);
+                playerController.SetPlayerState((int) PlayerState.Dead);
+            }
+            else
+            {
+                playerController.SetPlayerState((int)PlayerState.Stunned);
+                Invoke("EndStunned", 2f); // Order important as SetPlayerState cancels pending invokes. 
+            }
+            
+
         }
     }
 

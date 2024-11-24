@@ -84,9 +84,5 @@ public class PlayerRollingManager : MonoBehaviour
         Vector3 movement = rollingSpeed * Time.deltaTime * moveDirection;
         transform.position += movement;
     }
-
-    public void CancleRoll() // Call this function when hitted during hittable roll (state 9)
-    {
-        CancelInvoke("EndRoll");
-    }
+    
 }

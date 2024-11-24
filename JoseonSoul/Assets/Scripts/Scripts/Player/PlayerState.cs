@@ -15,5 +15,6 @@ namespace Player
         Stunned, // 10
         JumpingDelay,//11
         Jumping, //12
+        Dead  // 13
     }
 }
