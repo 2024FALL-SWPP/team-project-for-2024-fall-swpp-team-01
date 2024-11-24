@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,8 @@ public class Stage_UIManager : MonoBehaviour
     public Sprite profileImage;
     public TextMeshProUGUI profileText;
     public TextMeshProUGUI hpText;
+    public TextMeshProUGUI interactionText;  
+
     public Image hpMax;
     public Image hpNow;
     public Image sp;
@@ -36,6 +39,11 @@ public class Stage_UIManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private Transform player;
     private PlayerHealthManager healthManager;
+
+    [Header("Strings for message")]
+    public String wellString = "우물 정화 : E";
+    public String nextStageString = "이동 : E";
+    public String saveString = "저장 및 회복 : E";
 
     void Start()
     {
@@ -117,6 +125,12 @@ public class Stage_UIManager : MonoBehaviour
         healthManager.updateMaxHP(maxHP, true);
         healthManager.updateCurrentHP(nowHP, true);
         healthManager.updateCurrentSP(SP, true);
+
+        // 인터랙션 텍스트 초기 설정 (하단 중앙에 위치)
+        interactionText.rectTransform.anchorMin = new Vector2(0.5f, 0f);  // X축 중앙, Y축 하단
+        interactionText.rectTransform.anchorMax = new Vector2(0.5f, 0f);  // X축 중앙, Y축 하단
+        interactionText.rectTransform.anchoredPosition = new Vector2(0, 100);  // 하단에서 50px 위쪽
+        interactionText.gameObject.SetActive(false);  // 초기에는 텍스트 숨기기
     }
 
     void Awake()
@@ -158,34 +172,38 @@ public class Stage_UIManager : MonoBehaviour
         SP = healthManager.getCurrentSP();
         sp.fillAmount = SP / 100;
     }
-     // TEMPORARY FUNCTIONS used to debug UIManager
-    public void Temp_IncHPMax()
+
+        // OnTriggerEnter 함수 추가
+    void OnTriggerEnter(Collider other)
     {
-        healthManager.updateMaxHP(1.0f, false);
+        // 상호작용할 오브젝트와 충돌했을 때
+        if (other.CompareTag("Well"))  
+        {
+            interactionText.text = wellString;  // 텍스트 변경
+            interactionText.gameObject.SetActive(true);  // 텍스트 활성화
+        }
+
+        if (other.CompareTag("Fire"))  
+        {
+            interactionText.text = saveString;  
+            interactionText.gameObject.SetActive(true);
+        }
+
+        if (other.CompareTag("NextStage"))  
+        {
+            interactionText.text = nextStageString;  
+            interactionText.gameObject.SetActive(true);
+        }
     }
 
-    public void Temp_DecHPMax()
+    // OnTriggerExit 함수 추가
+    void OnTriggerExit(Collider other)
     {
-        healthManager.updateMaxHP(-1.0f, false);
+        // 상호작용할 오브젝트에서 벗어났을 때
+        if (other.CompareTag("Well") || other.CompareTag("Fire") || other.CompareTag("NextStage"))
+        {
+            interactionText.gameObject.SetActive(false);  // 텍스트 비활성화
+        }
     }
 
-    public void Temp_IncHPNow()
-    {
-        healthManager.updateCurrentHP(1.0f, false);
-    }
-
-    public void Temp_DecHPNow()
-    {
-        healthManager.updateCurrentHP(-1.0f, false);
-    }
-
-    public void Temp_IncSP()
-    {
-        healthManager.updateCurrentSP(1.0f, false);
-    }
-
-    public void Temp_DecSP()
-    {
-        healthManager.updateCurrentSP(-1.0f, false);
-    }
 }
