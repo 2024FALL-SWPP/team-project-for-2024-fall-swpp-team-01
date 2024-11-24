@@ -6,11 +6,15 @@ using TMPro;
 using UnityEngine.UI;
 public class Title_UIManager : MonoBehaviour
 {
-
+    [Header("Manager Objects")]
     public GameObject ControlsPanel;
-    // Start is called before the first frame update
+    public GameManager gameManager;
+    
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+        if(gameManager == null)
+            Debug.LogError("Game Manager Not Found");
         ControlsPanel.SetActive(false);
     }
 
@@ -21,20 +25,20 @@ public class Title_UIManager : MonoBehaviour
     }
     public void ClickNewGameButton()
     {
-        SceneManager.LoadScene("Stage1Scene1");
+        gameManager.NewGame();
     }
 
     public void ClickLoadGameButton()
     {
-        // TODO : Load ��ư�� ������ �� �Լ� ȣ��
+        gameManager.LoadGame();
     }
-    /*title scene���� "���۹�" ��ư�� ������ �� ���۹� â�� ���� �Լ�*/
+    
     public void ClickShowControlsButton()
     {
         ControlsPanel.SetActive(true);
     }
 
-    /* ���۹� â���� x��ư�� ������ �� â�� �����ϴ� �Լ�*/
+    
     public void CilckExitControlsPanelButton()
     {
         ControlsPanel.SetActive(false);
