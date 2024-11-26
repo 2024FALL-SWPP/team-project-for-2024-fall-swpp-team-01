@@ -12,4 +12,6 @@
 
 3. Stage boundary 지정 - 나무 에셋 ([출처](https://assetstore.unity.com/packages/3d/vegetation/trees/realistic-tree-9-rainbow-tree-54622)) 및 절벽 에셋에 Box collider 적용하여 맵을 감쌌음
 
+4. (추가) Cliff object도 새로 지정 ([에셋 출처](https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-cliff-pack-67289))
+
 **질문**: Canvas의 하얀 테두리가 Game 창에서도 보이는데 저만 그런가요???
