@@ -19,7 +19,6 @@ public class PlayerHealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIManager = FindObjectOfType<Stage_UIManager>();
         if(UIManager == null)
             Debug.LogError("UIManager Not Found");
         currentHP = maxHP;

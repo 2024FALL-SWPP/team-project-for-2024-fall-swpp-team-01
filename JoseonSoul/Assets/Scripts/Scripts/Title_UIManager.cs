@@ -12,7 +12,6 @@ public class Title_UIManager : MonoBehaviour
     
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
         if(gameManager == null)
             Debug.LogError("Game Manager Not Found");
         ControlsPanel.SetActive(false);

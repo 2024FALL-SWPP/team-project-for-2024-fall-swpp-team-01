@@ -5,10 +5,43 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using GameManagement;
+using UnityEngine.SceneManagement;
 
 public class Stage_UIManager : MonoBehaviour
 {
     // public variables that MUST be assigned objects before playing
+    public static Stage_UIManager Instance { get; private set; }
+
+    private Animator animator;
+    // Start is called before the first frame update
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 객체 유지
+        }
+        else
+        {
+            Destroy(gameObject);  // 이미 인스턴스가 있으면 새로 생성된 오브젝트 삭제
+            return;
+        }
+
+        DontDestroyOnLoad(canvas);
+        canvas.SetActive(false);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    {
+        if(scene.buildIndex == 5)
+            canvas.SetActive(false);
+        else
+            canvas.SetActive(true);
+    }
+
     public Image imageObject;
     public Sprite profileImage;
     public TextMeshProUGUI profileText;
@@ -37,9 +70,11 @@ public class Stage_UIManager : MonoBehaviour
     // initial settings
     private float maxHP = 120, nowHP = 87, SP = 68, maxSP = 100;
 
+    [Header("Stage_Canvas")]
+    public GameObject canvas;
+
     [Header("Player")]
-    [SerializeField] private Transform player;
-    private PlayerHealthManager healthManager;
+    public GameObject player;
 
     [Header("Strings for message")]
     private String[] eventStrings = {"Purify a Well : E", // Well Event String
@@ -47,11 +82,14 @@ public class Stage_UIManager : MonoBehaviour
                                     "Move to next Stage : E"}; // Next Stage Event String
 
 
+    private PlayerHealthManager healthManager;
+
     void Start()
     {
-        healthManager = player.gameObject.GetComponent<PlayerHealthManager>();
+        healthManager = player.GetComponent<PlayerHealthManager>();
         if(healthManager == null)
             Debug.LogError("Player Health Manager Not Detected");
+
         maxHP = healthManager.getMaxHP();
         maxSP = healthManager.getMaxSP();
         
@@ -59,7 +97,7 @@ public class Stage_UIManager : MonoBehaviour
         imageObject.sprite = profileImage;
 
         // Get component RectTransform of each UI elements
-        RectTransform canvasRect = GameObject.Find("Canvas").GetComponent<RectTransform>();
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
         RectTransform imageRect = imageObject.GetComponent<RectTransform>();
         RectTransform profileTextRect = profileText.GetComponent<RectTransform>();
         RectTransform hpTextRect = hpText.GetComponent<RectTransform>();
@@ -135,14 +173,6 @@ public class Stage_UIManager : MonoBehaviour
         healthManager.updateCurrentSP(SP, true);
     }
 
-    void Awake()
-    {
-    }
-
-    void Update()
-    {
-        
-    }
 
     // Format the text showing nowHP/maxHP
     string GenerateHPText(float nowHP, float maxHP)
@@ -171,6 +201,8 @@ public class Stage_UIManager : MonoBehaviour
     // Update SP value
     public void UpdateSP()
     {
+        if(healthManager == null)
+            Debug.LogError("health Manager is NULL!!!");
         SP = healthManager.getCurrentSP();
         sp.fillAmount = SP / 100;
     }

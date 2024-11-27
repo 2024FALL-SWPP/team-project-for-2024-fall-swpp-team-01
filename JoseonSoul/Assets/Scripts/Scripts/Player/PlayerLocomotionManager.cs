@@ -184,7 +184,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         Vector3 movement = Speed * Time.deltaTime * moveDirection;
 
         // Apply movement to the player's position
-        transform.position += movement;
+        gameObject.transform.position += movement;
     }
 
     /// <summary>
@@ -197,10 +197,10 @@ public class PlayerLocomotionManager : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
 
         // Smoothly rotate towards the target rotation
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            targetRotation,
-            rotationSpeed * Time.deltaTime
+        gameObject.transform.rotation = Quaternion.RotateTowards(
+        gameObject.transform.rotation,
+        targetRotation,
+        rotationSpeed * Time.deltaTime
         );
     }
 
