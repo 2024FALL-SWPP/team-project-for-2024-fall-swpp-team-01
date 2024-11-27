@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using GameManagement;
 
 public class Stage_UIManager : MonoBehaviour
 {
@@ -41,9 +42,10 @@ public class Stage_UIManager : MonoBehaviour
     private PlayerHealthManager healthManager;
 
     [Header("Strings for message")]
-    public String wellString = "우물 정화 : E";
-    public String nextStageString = "이동 : E";
-    public String saveString = "저장 및 회복 : E";
+    private String[] eventStrings = {"Purify a Well : E", // Well Event String
+                                    "Save and Heal : E", // Fire Event String
+                                    "Move to next Stage : E"}; // Next Stage Event String
+
 
     void Start()
     {
@@ -121,16 +123,16 @@ public class Stage_UIManager : MonoBehaviour
         spRect.sizeDelta = new Vector2(spSize, spSize);
         spRect.anchoredPosition = new Vector2(spOffsetX, spOffsetY);
 
+        interactionText.rectTransform.anchorMin = new Vector2(0.5f, 0f);  // X축 중앙, Y축 하단
+        interactionText.rectTransform.anchorMax = new Vector2(0.5f, 0f);  // X축 중앙, Y축 하단
+        interactionText.rectTransform.anchoredPosition = new Vector2(0, 100);  // 하단에서 50px 위쪽
+
+        interactionText.gameObject.SetActive(false);  // 초기에는 텍스트 숨기기
+
 
         healthManager.updateMaxHP(maxHP, true);
         healthManager.updateCurrentHP(nowHP, true);
         healthManager.updateCurrentSP(SP, true);
-
-        // 인터랙션 텍스트 초기 설정 (하단 중앙에 위치)
-        interactionText.rectTransform.anchorMin = new Vector2(0.5f, 0f);  // X축 중앙, Y축 하단
-        interactionText.rectTransform.anchorMax = new Vector2(0.5f, 0f);  // X축 중앙, Y축 하단
-        interactionText.rectTransform.anchoredPosition = new Vector2(0, 100);  // 하단에서 50px 위쪽
-        interactionText.gameObject.SetActive(false);  // 초기에는 텍스트 숨기기
     }
 
     void Awake()
@@ -173,37 +175,15 @@ public class Stage_UIManager : MonoBehaviour
         sp.fillAmount = SP / 100;
     }
 
-        // OnTriggerEnter 함수 추가
-    void OnTriggerEnter(Collider other)
+    public void EventTextOn(int eventNum)
     {
-        // 상호작용할 오브젝트와 충돌했을 때
-        if (other.CompareTag("Well"))  
-        {
-            interactionText.text = wellString;  // 텍스트 변경
-            interactionText.gameObject.SetActive(true);  // 텍스트 활성화
-        }
-
-        if (other.CompareTag("Fire"))  
-        {
-            interactionText.text = saveString;  
-            interactionText.gameObject.SetActive(true);
-        }
-
-        if (other.CompareTag("NextStage"))  
-        {
-            interactionText.text = nextStageString;  
-            interactionText.gameObject.SetActive(true);
-        }
+        interactionText.text = eventStrings[eventNum];
+        interactionText.gameObject.SetActive(true);
     }
 
-    // OnTriggerExit 함수 추가
-    void OnTriggerExit(Collider other)
+    public void EventTextOff()
     {
-        // 상호작용할 오브젝트에서 벗어났을 때
-        if (other.CompareTag("Well") || other.CompareTag("Fire") || other.CompareTag("NextStage"))
-        {
-            interactionText.gameObject.SetActive(false);  // 텍스트 비활성화
-        }
+        interactionText.gameObject.SetActive(false);
     }
 
 }
