@@ -51,6 +51,8 @@ public class Stage_UIManager : MonoBehaviour
     public Image hpMax;
     public Image hpNow;
     public Image sp;
+    public Image bossHpMax;
+    public Image bossHpNow;
 
     // parameters that need to be shared over functions
     private float canvasWidth;
@@ -58,6 +60,10 @@ public class Stage_UIManager : MonoBehaviour
     RectTransform hpNowRect;
     private float hpMaxWidth, hpMaxHeight;
     private float hpNowWidth, hpNowHeight;
+    RectTransform bossHpMaxRect;
+    RectTransform bossHpNowRect;
+    private float bossHpMaxWidth, bossHpMaxHeight;
+    private float bossHpNowWidth, bossHpNowHeight;
 
     // constant parameters that are used to position & scale UI elements
     private float profileImageScale = 13;
@@ -66,6 +72,27 @@ public class Stage_UIManager : MonoBehaviour
     private float hpTextOffsetScaleX = 1, hpTextOffsetScaleY = 1;
     private float hpMaxOffsetScaleX = 1, hpMaxOffsetScaleY = 1;
     private float hpNowHeightScale = 0.6f;
+
+    // Switches UI between boss mode and stage mode
+    public void setBossStage(Boolean setBoss)
+    {
+        if (setBoss)
+        {
+            Debug.Log("Set!");
+        }
+        else
+        {
+            Debug.Log("Reset!");
+        }
+    }
+
+    // Temporary function and variable to debug setBossStage function
+    Boolean isBossSet = false;
+    public void debugBossSet()
+    {
+        isBossSet = !isBossSet;
+        setBossStage(isBossSet);
+    }
 
     // initial settings
     private float maxHP = 120, nowHP = 87, SP = 68, maxSP = 100;
@@ -104,6 +131,8 @@ public class Stage_UIManager : MonoBehaviour
         hpMaxRect = hpMax.GetComponent<RectTransform>();
         hpNowRect = hpNow.GetComponent<RectTransform>();
         RectTransform spRect = sp.GetComponent<RectTransform>();
+        bossHpMaxRect = bossHpMax.GetComponent<RectTransform>();
+        bossHpNowRect = bossHpNow.GetComponent<RectTransform>();
 
         canvasWidth = canvasRect.rect.width;
 
@@ -166,6 +195,28 @@ public class Stage_UIManager : MonoBehaviour
         interactionText.rectTransform.anchoredPosition = new Vector2(0, 100);  // 하단에서 50px 위쪽
 
         interactionText.gameObject.SetActive(false);  // 초기에는 텍스트 숨기기
+
+
+        // Position & scale bossHpMax
+        bossHpMaxRect.anchorMin = new Vector2(0.5f, 0.5f);
+        bossHpMaxRect.anchorMax = new Vector2(0.5f, 0.5f);
+        float bossHpMaxOffsetX = 0;
+        float bossHpMaxOffsetY = -canvasWidth * 150 / 976;
+        bossHpMaxRect.anchoredPosition = new Vector2(bossHpMaxOffsetX, bossHpMaxOffsetY);
+        bossHpMaxWidth = canvasWidth * 500 / 976;
+        bossHpMaxHeight = canvasWidth * 20 / 976;
+        bossHpMaxRect.sizeDelta = new Vector2(bossHpMaxWidth, bossHpMaxHeight);
+
+
+        // Position & scale bossHpNow
+        bossHpNowRect.anchorMin = new Vector2(0, 0.5f);
+        bossHpNowRect.anchorMax = new Vector2(0, 0.5f);
+        float bossHpNowOffsetX = canvasWidth / 2 - bossHpMaxWidth / 2;
+        float bossHpNowOffsetY = 0;
+        bossHpNowRect.anchoredPosition = new Vector2(bossHpNowOffsetX, bossHpNowOffsetY);
+        bossHpNowWidth = canvasWidth * 400 / 976;
+        bossHpNowHeight = canvasWidth * 20 / 976;
+        bossHpNowRect.sizeDelta = new Vector2(bossHpNowWidth, bossHpNowHeight);
 
 
         healthManager.updateMaxHP(maxHP, true);
