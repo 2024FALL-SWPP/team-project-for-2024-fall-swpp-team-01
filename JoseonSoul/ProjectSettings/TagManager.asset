@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Well
+  - Fire
+  - NextStage
   layers:
   - Default
   - TransparentFX
