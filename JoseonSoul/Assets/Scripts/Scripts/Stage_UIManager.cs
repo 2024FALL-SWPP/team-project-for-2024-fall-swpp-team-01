@@ -237,6 +237,7 @@ public class Stage_UIManager : MonoBehaviour
 
 
         setBossStage(isBossSet);
+        Debug.Log(canvasWidth);
 
 
         healthManager.updateMaxHP(maxHP, true);
