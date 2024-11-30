@@ -1,4 +1,5 @@
 // ThirdPersonCameraController.cs
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThirdPersonCameraController : MonoBehaviour
@@ -44,6 +45,22 @@ public class ThirdPersonCameraController : MonoBehaviour
     private float desiredDistance;
     private float distanceSmoothVelocity = 0.0f;
     private Vector3 currentVelocity = Vector3.zero;
+
+    public static ThirdPersonCameraController Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 객체 유지
+        }
+        else
+        {
+            Destroy(gameObject);  // 이미 인스턴스가 있으면 새로 생성된 오브젝트 삭제
+            return;
+        }
+    }
 
     void Start()
     {

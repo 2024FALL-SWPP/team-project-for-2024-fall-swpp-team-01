@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerHealthManager : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField] private float maxHP = 100;
-    [SerializeField] private float maxSP = 100;
+    [SerializeField] public static float maxHP = 100;
+    [SerializeField] public static float maxSP = 100;
     [SerializeField] private float SPIncrementSpeed = 15f;
     
     private float currentHP;
