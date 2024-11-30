@@ -46,7 +46,8 @@ public class Stage_UIManager : MonoBehaviour
     public Sprite profileImage;
     public TextMeshProUGUI profileText;
     public TextMeshProUGUI hpText;
-    public TextMeshProUGUI interactionText;  
+    public TextMeshProUGUI interactionText;
+    public TextMeshProUGUI bossNameText;
 
     public Image hpMax;
     public Image hpNow;
@@ -74,28 +75,31 @@ public class Stage_UIManager : MonoBehaviour
     private float hpNowHeightScale = 0.6f;
 
     // Switches UI between boss mode and stage mode
+    Boolean isBossSet = false;
     public void setBossStage(Boolean setBoss)
     {
-        if (setBoss)
-        {
-            Debug.Log("Set!");
-        }
-        else
-        {
-            Debug.Log("Reset!");
-        }
+        bossHpMax.gameObject.SetActive(setBoss);
+        bossHpNow.gameObject.SetActive(setBoss);
+        bossNameText.gameObject.SetActive(setBoss);
     }
 
     // Temporary function and variable to debug setBossStage function
-    Boolean isBossSet = false;
     public void debugBossSet()
     {
         isBossSet = !isBossSet;
         setBossStage(isBossSet);
     }
+    public void BossNowHPInc()
+    {
+        UpdateBossNowHP(10, false);
+    }
+    public void BossNowHPDec()
+    {
+        UpdateBossNowHP(-10, false);
+    }
 
     // initial settings
-    private float maxHP = 120, nowHP = 87, SP = 68, maxSP = 100;
+    private float maxHP = 120, nowHP = 87, SP = 68, maxSP = 100, bossMaxHP = 500, bossNowHP = 470;
 
     [Header("Stage_Canvas")]
     public GameObject canvas;
@@ -133,6 +137,7 @@ public class Stage_UIManager : MonoBehaviour
         RectTransform spRect = sp.GetComponent<RectTransform>();
         bossHpMaxRect = bossHpMax.GetComponent<RectTransform>();
         bossHpNowRect = bossHpNow.GetComponent<RectTransform>();
+        RectTransform bossNameTextRect = bossNameText.GetComponent<RectTransform>();
 
         canvasWidth = canvasRect.rect.width;
 
@@ -200,8 +205,9 @@ public class Stage_UIManager : MonoBehaviour
         // Position & scale bossHpMax
         bossHpMaxRect.anchorMin = new Vector2(0.5f, 0.5f);
         bossHpMaxRect.anchorMax = new Vector2(0.5f, 0.5f);
+        bossHpMaxRect.pivot = new Vector2(0.5f, 1);
         float bossHpMaxOffsetX = 0;
-        float bossHpMaxOffsetY = -canvasWidth * 150 / 976;
+        float bossHpMaxOffsetY = -canvasWidth * 140 / 976;
         bossHpMaxRect.anchoredPosition = new Vector2(bossHpMaxOffsetX, bossHpMaxOffsetY);
         bossHpMaxWidth = canvasWidth * 500 / 976;
         bossHpMaxHeight = canvasWidth * 20 / 976;
@@ -211,12 +217,26 @@ public class Stage_UIManager : MonoBehaviour
         // Position & scale bossHpNow
         bossHpNowRect.anchorMin = new Vector2(0, 0.5f);
         bossHpNowRect.anchorMax = new Vector2(0, 0.5f);
+        bossHpNowRect.pivot = new Vector2(0, 1);
+        bossHpNowWidth = canvasWidth * 500 / 976 * bossNowHP / bossMaxHP;
+        bossHpNowHeight = canvasWidth * 10 / 976;
         float bossHpNowOffsetX = canvasWidth / 2 - bossHpMaxWidth / 2;
-        float bossHpNowOffsetY = 0;
+        float bossHpNowOffsetY = bossHpMaxOffsetY - (bossHpMaxHeight - bossHpNowHeight) / 2;
         bossHpNowRect.anchoredPosition = new Vector2(bossHpNowOffsetX, bossHpNowOffsetY);
-        bossHpNowWidth = canvasWidth * 400 / 976;
-        bossHpNowHeight = canvasWidth * 20 / 976;
         bossHpNowRect.sizeDelta = new Vector2(bossHpNowWidth, bossHpNowHeight);
+
+
+        // Position & scale bossNameText
+        bossNameText.fontSize = canvasWidth * 20 / 976;
+        bossNameTextRect.anchorMin = new Vector2(0, 0.5f);
+        bossNameTextRect.anchorMax = new Vector2(0, 0.5f);
+        bossNameTextRect.pivot = new Vector2(0, 0);
+        float bossNameTextOffsetX = bossHpNowOffsetX;
+        float bossNameTextOffsetY = bossHpMaxOffsetY;
+        bossNameTextRect.anchoredPosition = new Vector2(bossNameTextOffsetX, bossNameTextOffsetY);
+
+
+        setBossStage(isBossSet);
 
 
         healthManager.updateMaxHP(maxHP, true);
@@ -256,6 +276,20 @@ public class Stage_UIManager : MonoBehaviour
             Debug.LogError("health Manager is NULL!!!");
         SP = healthManager.getCurrentSP();
         sp.fillAmount = SP / 100;
+    }
+
+    public void UpdateBossMaxHP(float value, bool isAbsolute)
+    {
+        bossMaxHP = isAbsolute ? value : bossMaxHP + value;
+        bossHpNowWidth = canvasWidth * 500 / 976 * bossNowHP / bossMaxHP;
+        bossHpNowRect.sizeDelta = new Vector2(bossHpNowWidth, bossHpNowHeight);
+    }
+
+    public void UpdateBossNowHP(float value, bool isAbsolute)
+    {
+        bossNowHP = isAbsolute ? value : bossNowHP + value;
+        bossHpNowWidth = canvasWidth * 500 / 976 * bossNowHP / bossMaxHP;
+        bossHpNowRect.sizeDelta = new Vector2(bossHpNowWidth, bossHpNowHeight);
     }
 
     public void EventTextOn(int eventNum)
