@@ -5,11 +5,12 @@ using Enemy;
 
 public class EnemyAttackManager : MonoBehaviour
 {
+    private Transform player;
+
     private Animator animator;
     private EnemyLocomotionManager locomotionManager;
     private EnemyController enemyController;
 
-    [SerializeField] private Transform player;
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1.5f;
 
@@ -19,6 +20,16 @@ public class EnemyAttackManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerController.Instance != null)
+        {
+            player = PlayerController.Instance.transform;
+        }
+        else
+        {
+            Debug.LogError("PlayerController.Instance is null. Ensure PlayerController exists in the scene.");
+        }
+
+        enemyController = GetComponent<EnemyController>();
         locomotionManager = GetComponent<EnemyLocomotionManager>();
         animator = GetComponent<Animator>();
     }
@@ -45,6 +56,15 @@ public class EnemyAttackManager : MonoBehaviour
         StartCoroutine(AttackCooldownRoutine());
     }
 
+    public void CancelAttack()
+    {
+        if (isAttacking)
+        {
+            isAttacking = false;
+            StopAllCoroutines();
+        }
+    }
+
     IEnumerator AttackCooldownRoutine()
     {
         yield return new WaitForSeconds(attackCooldown);
@@ -61,5 +81,10 @@ public class EnemyAttackManager : MonoBehaviour
             enemyController.SetEnemyState((int)EnemyState.Moving);
             locomotionManager.ResumeMoving();
         }
+    }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
     }
 }

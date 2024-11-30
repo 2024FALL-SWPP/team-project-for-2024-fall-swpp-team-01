@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyLocomotionManager : MonoBehaviour
 {
-    [SerializeField] private Transform player;            // player transform
+    private Transform player;            // player transform
+
     [SerializeField] private float followRange = 10f;     // following range
     [SerializeField] private float returnRange = 15f;     // stop following range
     [SerializeField] private float homeLimit = 20f;       // max distance from initial position
@@ -23,6 +24,15 @@ public class EnemyLocomotionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerController.Instance != null)
+        {
+            player = PlayerController.Instance.transform;
+        }
+        else
+        {
+            Debug.LogError("PlayerController.Instance is null. Ensure PlayerController exists in the scene.");
+        }
+
         enemyController = GetComponent<EnemyController>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -34,7 +44,7 @@ public class EnemyLocomotionManager : MonoBehaviour
     // Update is called once per frame
     public void HandleMovement()
     {
-        if (agent.isStopped) return;
+        if (agent.isStopped || enemyController.IsStunnedOrAttacking()) return;
 
         float playerDistance = Vector3.Distance(transform.position, player.position); // distance from enemy to player
         float homeDistance = Vector3.Distance(transform.position, homePosition);      // distance from enemy to initial position
