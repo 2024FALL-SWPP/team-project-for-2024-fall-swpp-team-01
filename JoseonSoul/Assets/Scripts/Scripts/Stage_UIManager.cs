@@ -54,9 +54,12 @@ public class Stage_UIManager : MonoBehaviour
     public Image sp;
     public Image bossHpMax;
     public Image bossHpNow;
+    public Image potionContainer;
+    public Image potionImage;
 
     // parameters that need to be shared over functions
     private float canvasWidth;
+    private float canvasHeight;
     RectTransform hpMaxRect;
     RectTransform hpNowRect;
     private float hpMaxWidth, hpMaxHeight;
@@ -138,8 +141,11 @@ public class Stage_UIManager : MonoBehaviour
         bossHpMaxRect = bossHpMax.GetComponent<RectTransform>();
         bossHpNowRect = bossHpNow.GetComponent<RectTransform>();
         RectTransform bossNameTextRect = bossNameText.GetComponent<RectTransform>();
+        RectTransform potionContainerRect = potionContainer.GetComponent<RectTransform>();
+        RectTransform potionImageRect = potionImage.GetComponent<RectTransform>();
 
         canvasWidth = canvasRect.rect.width;
+        canvasHeight = canvasRect.rect.height;
 
         // Position & scale imageObject
         imageRect.anchorMin = new Vector2(0, 1);
@@ -236,8 +242,30 @@ public class Stage_UIManager : MonoBehaviour
         bossNameTextRect.anchoredPosition = new Vector2(bossNameTextOffsetX, bossNameTextOffsetY);
 
 
+        // Position & scale potionContainer
+        potionContainerRect.anchorMin = new Vector2(0, 1);
+        potionContainerRect.anchorMax = new Vector2(0, 1);
+        float potionContainerWidth = imageWidth;
+        float potionContainerHeight = imageHeight;
+        float potionContainerOffsetX = profileImageOffsetX;
+        float potionContainerOffsetY = - canvasHeight - profileImageOffsetY + potionContainerHeight;
+        potionContainerRect.sizeDelta = new Vector2(potionContainerWidth, potionContainerHeight);
+        potionContainerRect.anchoredPosition = new Vector2(potionContainerOffsetX, potionContainerOffsetY);
+
+
+        // Position & scale potionImage
+        potionImageRect.anchorMin = new Vector2(0, 1);
+        potionImageRect.anchorMax = new Vector2(0, 1);
+        potionImageRect.pivot = new Vector2(0.5f, 0.5f);
+        float potionImageWidth = potionContainerHeight;
+        float potionImageHeight = potionContainerHeight;
+        float potionImageOffsetX = potionContainerOffsetX + potionContainerWidth / 2;
+        float potionImageOffsetY = potionContainerOffsetY - potionContainerHeight / 2;
+        potionContainerRect.sizeDelta = new Vector2(potionImageWidth, potionImageHeight);
+        potionContainerRect.anchoredPosition = new Vector2(potionImageOffsetX, potionImageOffsetY);
+
+
         setBossStage(isBossSet);
-        Debug.Log(canvasWidth);
 
 
         healthManager.updateMaxHP(maxHP, true);
