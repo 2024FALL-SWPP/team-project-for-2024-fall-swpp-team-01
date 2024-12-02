@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private int enemyState = 0;
     [SerializeField] private float stunnedDuration = 1.5f;
+    [SerializeField] int maxHealth = 100;
+
+    private int currentHealth;
     private bool isStunned = false;
 
     // Start is called before the first frame update
@@ -20,6 +23,8 @@ public class EnemyController : MonoBehaviour
         locomotionManager = GetComponent<EnemyLocomotionManager>();
         attackManager = GetComponent<EnemyAttackManager>();
         animator = GetComponent<Animator>();
+
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -30,9 +35,15 @@ public class EnemyController : MonoBehaviour
         locomotionManager.HandleMovement();
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
         isStunned = true;
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+            return;
+        }
 
         locomotionManager.StopMoving();
         attackManager.CancelAttack();
@@ -62,5 +73,19 @@ public class EnemyController : MonoBehaviour
     public bool IsStunnedOrAttacking()
     {
         return isStunned || attackManager.IsAttacking();
+    }
+
+    private void Die()
+    {
+        SetEnemyState((int)EnemyState.death);
+        Destroy(gameObject, 4f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("PlayerWeapon"))
+        {
+            TakeDamage(10); //TODO : Player 공격력만큼 체력 감소
+        }
     }
 }
