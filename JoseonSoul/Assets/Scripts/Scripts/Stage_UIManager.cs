@@ -48,6 +48,7 @@ public class Stage_UIManager : MonoBehaviour
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI interactionText;
     public TextMeshProUGUI bossNameText;
+    public TextMeshProUGUI potionCountText;
 
     public Image hpMax;
     public Image hpNow;
@@ -100,9 +101,19 @@ public class Stage_UIManager : MonoBehaviour
     {
         UpdateBossNowHP(-10, false);
     }
+    public void PotionInc()
+    {
+        potionCount++;
+        potionCountText.text = potionCount.ToString();
+    }
+    public void PotionDec()
+    {
+        potionCount--;
+        potionCountText.text = potionCount.ToString();
+    }
 
     // initial settings
-    private float maxHP = 120, nowHP = 87, SP = 68, maxSP = 100, bossMaxHP = 500, bossNowHP = 470;
+    private float maxHP = 120, nowHP = 87, SP = 68, maxSP = 100, bossMaxHP = 500, bossNowHP = 470, potionCount = 0;
 
     [Header("Stage_Canvas")]
     public GameObject canvas;
@@ -143,6 +154,7 @@ public class Stage_UIManager : MonoBehaviour
         RectTransform bossNameTextRect = bossNameText.GetComponent<RectTransform>();
         RectTransform potionContainerRect = potionContainer.GetComponent<RectTransform>();
         RectTransform potionImageRect = potionImage.GetComponent<RectTransform>();
+        RectTransform potionCountTextRect = potionCountText.GetComponent<RectTransform>();
 
         canvasWidth = canvasRect.rect.width;
         canvasHeight = canvasRect.rect.height;
@@ -260,9 +272,20 @@ public class Stage_UIManager : MonoBehaviour
         float potionImageWidth = potionContainerHeight;
         float potionImageHeight = potionContainerHeight;
         float potionImageOffsetX = potionContainerOffsetX + potionContainerWidth / 2;
-        float potionImageOffsetY = potionContainerOffsetY - potionContainerHeight / 2;
-        potionContainerRect.sizeDelta = new Vector2(potionImageWidth, potionImageHeight);
-        potionContainerRect.anchoredPosition = new Vector2(potionImageOffsetX, potionImageOffsetY);
+        float potionImageOffsetY = potionContainerOffsetY - potionContainerHeight / 2 - potionImageHeight * 0.05f;
+        potionImageRect.sizeDelta = new Vector2(potionImageWidth, potionImageHeight);
+        potionImageRect.anchoredPosition = new Vector2(potionImageOffsetX, potionImageOffsetY);
+
+
+        // Position & scale potionCount
+        potionCountTextRect.anchorMin = new Vector2(0, 1);
+        potionCountTextRect.anchorMax = new Vector2(0, 1);
+        potionCountTextRect.pivot = new Vector2(1, 1);
+        float potionCountOffsetX = potionContainerOffsetX + potionContainerWidth;
+        float potionCountOffsetY = potionContainerOffsetY;
+        potionCountTextRect.anchoredPosition = new Vector2(potionCountOffsetX, potionCountOffsetY);
+        potionCountText.fontSize = canvasWidth * 18 / 1067;
+        potionCountText.text = "0";
 
 
         setBossStage(isBossSet);

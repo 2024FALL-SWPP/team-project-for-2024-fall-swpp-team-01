@@ -17,3 +17,4 @@
 
 2. 포션 슬롯
     - [이미지 출처](https://www.pngegg.com/en/png-yoagx/download#goog_rewarded)
+    - 얘도 마찬가지로 버튼을 통해 구현 내용 확인할 수 있도록 해둠. 나중에 포션 관리 시스템 연결할 때 참고하시면 됩니다.
