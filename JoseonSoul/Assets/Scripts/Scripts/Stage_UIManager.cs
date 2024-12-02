@@ -74,6 +74,7 @@ public class Stage_UIManager : MonoBehaviour
     private float bossHpMaxWidth, bossHpMaxHeight;
     private float bossHpOldWidth, bossHpOldHeight;
     private float bossHpNowWidth, bossHpNowHeight;
+    Boolean isHPAnimPlaying = false;
 
     // constant parameters that are used to position & scale UI elements
     private float profileImageScale = 13;
@@ -354,7 +355,11 @@ public class Stage_UIManager : MonoBehaviour
         hpNowRect.sizeDelta = new Vector2(hpNowWidth, hpNowHeight);
         if (nowHP < oldHP)
         {
-            StartCoroutine(HPAnim(nowHP, oldHP));
+            if (!isHPAnimPlaying)
+            {
+                isHPAnimPlaying = true;
+                StartCoroutine(HPAnim(oldHP));
+            }
         }
         else
         {
@@ -363,7 +368,7 @@ public class Stage_UIManager : MonoBehaviour
         }
     }
 
-    IEnumerator HPAnim(float nowHP, float oldHP)
+    IEnumerator HPAnim(float oldHP)
     {
         yield return new WaitForSeconds(hpAnimDelay);
         while (nowHP < oldHP)
@@ -373,6 +378,7 @@ public class Stage_UIManager : MonoBehaviour
             hpOldRect.sizeDelta = new Vector2(hpOldWidth, hpOldHeight);
             yield return null;
         }
+        isHPAnimPlaying = false;
     }
 
     // Update SP value
