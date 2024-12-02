@@ -26100,6 +26100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerState: 0
   playerHealthManager: {fileID: 913355441}
+  playerLocomotionManager: {fileID: 913355439}
+  playerAttackManager: {fileID: 913355445}
+  playerJumpManager: {fileID: 913355440}
+  playerRollingManager: {fileID: 913355438}
 --- !u!114 &913355443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26112,7 +26116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86262d53b09c0445c8b0a1df962e643d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 913355437}
   shieldBlockAngle: 120
 --- !u!114 &913355445
 MonoBehaviour:
