@@ -8,6 +8,7 @@ TagManager:
   - Well
   - Fire
   - NextStage
+  - EnemyBody
   layers:
   - Default
   - TransparentFX
