@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.36084905, g: 0.40023136, b: 0.5, a: 1}
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -97,7 +97,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: d3254258a43744105949a6c06526967c, type: 2}
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -24422,11 +24422,9 @@ MonoBehaviour:
   profileImage: {fileID: 21300000, guid: 667c5286a7c36a54eb6a4b6a33d8bf8a, type: 3}
   profileText: {fileID: 449753808}
   hpText: {fileID: 1648593107}
-  interactionText: {fileID: 0}
   hpMax: {fileID: 1786112392}
   hpNow: {fileID: 1264004829}
   sp: {fileID: 2099617369}
-  canvas: {fileID: 0}
   player: {fileID: 913355437}
 --- !u!4 &853834467 stripped
 Transform:
@@ -26054,6 +26052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6a82549d6bf4fa8b4c6f4e04cad18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 100
+  maxSP: 100
   SPIncrementSpeed: 15
   UIManager: {fileID: 852614185}
 --- !u!114 &913355442
@@ -26069,7 +26069,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: 0
-  playerHealthManager: {fileID: 0}
 --- !u!114 &913355443
 MonoBehaviour:
   m_ObjectHideFlags: 0
