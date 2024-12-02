@@ -4,23 +4,30 @@ using UnityEngine;
 using Player;
 using Unity.VisualScripting; // Ensure this namespace contains PlayerController and PlayerState
 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Player;
+
 public class PlayerAttackManager : MonoBehaviour
 {
     private PlayerController playerController;
+    private SwordColliderManager swordColliderManager;
 
     private bool isQueued = false; // Indicates if the next attack is queued
     private float openPhaseDuration = 0.2f;   // Duration of the Open phase
     private float closedPhaseDuration = 1.3f; // Duration of the Closed phase
     private float attackOpenEndTime = 0f;     // Tracks when the Open phase ends
 
-    // Attack1 Animation 1.667s
-    // Attack2 Animation 1.50s
-    // Attack3 Animation 1.30s
     void Start()
     {
         playerController = GetComponent<PlayerController>();
+        swordColliderManager = GetComponentInChildren<SwordColliderManager>();
+
         if (playerController == null)
             Debug.LogError("PlayerController is null");
+        if (swordColliderManager == null)
+            Debug.LogError("SwordColliderManager is null");
     }
 
     void Update()
@@ -48,7 +55,6 @@ public class PlayerAttackManager : MonoBehaviour
             Debug.Log("Queuing Attack3");
             QueueNextAttack(PlayerState.Attacking3Closed);
         }
-        // Extend this pattern for more attacks if needed
     }
 
     // ====================
@@ -58,6 +64,10 @@ public class PlayerAttackManager : MonoBehaviour
     {
         playerController.SetPlayerState((int)PlayerState.Attacking1Closed);
         isQueued = false; // Reset any previous queue
+
+        // Enable the sword collider
+        swordColliderManager.EnableCollider();
+
         // Schedule transition to Attack1Open after 1.8 seconds
         Invoke(nameof(TransitionToAttack1Open), closedPhaseDuration);
     }
@@ -74,9 +84,11 @@ public class PlayerAttackManager : MonoBehaviour
     {
         playerController.SetPlayerState((int)PlayerState.Idle);
         Debug.Log("Attack1 Ended");
-        isQueued = false; // Reset queued flag
 
-        // If an attack was queued during Attack1Open, it will have been scheduled to execute via Invoke
+        // Disable the sword collider
+        swordColliderManager.DisableCollider();
+
+        isQueued = false; // Reset queued flag
     }
 
     // ====================
@@ -87,6 +99,10 @@ public class PlayerAttackManager : MonoBehaviour
         playerController.SetPlayerState((int)PlayerState.Attacking2Closed);
         Debug.Log("Attack2 Closed Started");
         isQueued = false;
+
+        // Enable the sword collider
+        swordColliderManager.EnableCollider();
+
         // Schedule transition to Attack2Open after 1.8 seconds
         Invoke(nameof(TransitionToAttack2Open), closedPhaseDuration);
     }
@@ -104,6 +120,10 @@ public class PlayerAttackManager : MonoBehaviour
     {
         playerController.SetPlayerState((int)PlayerState.Idle);
         Debug.Log("Attack2 Ended");
+
+        // Disable the sword collider
+        swordColliderManager.DisableCollider();
+
         isQueued = false;
     }
 
@@ -114,6 +134,10 @@ public class PlayerAttackManager : MonoBehaviour
     {
         playerController.SetPlayerState((int)PlayerState.Attacking3Closed);
         isQueued = false;
+
+        // Enable the sword collider
+        swordColliderManager.EnableCollider();
+
         // Schedule transition to Attack3Open after 1.8 seconds
         Invoke(nameof(TransitionToAttack3Open), closedPhaseDuration);
     }
@@ -130,8 +154,11 @@ public class PlayerAttackManager : MonoBehaviour
     {
         playerController.SetPlayerState((int)PlayerState.Idle);
         Debug.Log("Attack3 Ended");
+
+        // Disable the sword collider
+        swordColliderManager.DisableCollider();
+
         isQueued = false;
-        // Further attacks can be queued here
     }
 
     // ====================
@@ -156,16 +183,11 @@ public class PlayerAttackManager : MonoBehaviour
             Invoke(nameof(Attack3), remainingTime);
             CancelInvoke(nameof(EndAttack2));
         }
-        // Add more conditions here if you have more attacks
     }
 
     // ====================
     // Cancel All Invokes
     // ====================
-    /// <summary>
-    /// Cancels all pending Invoke calls related to attack sequences.
-    /// Resets the player's state to Idle and clears any queued attacks.
-    /// </summary>
     public void CancelAllAttacks()
     {
         Debug.Log("Cancelling all pending attacks.");
@@ -173,9 +195,11 @@ public class PlayerAttackManager : MonoBehaviour
         // Cancel all Invokes
         CancelInvoke();
 
+        // Disable the sword collider
+        swordColliderManager.DisableCollider();
+
         // Reset attack flags
         isQueued = false;
-
     }
 
     // ====================
