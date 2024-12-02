@@ -58,13 +58,6 @@ public class PlayerHealthManager : MonoBehaviour
         return currentSP;
     }
 
-    public void updateMaxHP(float value, bool isAbsolute)
-    {
-        maxHP = isAbsolute ? value : maxHP + value;
-        UIManager.UpdateMaxHP();
-        return;
-    }
-
     public void updateCurrentHP(float value, bool isAbsolute)
     {
         currentHP = isAbsolute ? value : currentHP + value;
@@ -72,18 +65,9 @@ public class PlayerHealthManager : MonoBehaviour
         return;
     }
 
-    public void updateMaxSP(float value, bool isAbsolute)
-    {
-        maxSP = isAbsolute ? value : maxSP + value;
-        //UIManager.UpdateMaxSP(); 
-        // TODO
-        return;
-    }
-
     public void updateCurrentSP(float value, bool isAbsolute)
     {
         currentSP = isAbsolute ? value : currentSP + value;
-        //UIManager.UpdateCurrentSP();
         UIManager.UpdateSP();
         return;
     }
