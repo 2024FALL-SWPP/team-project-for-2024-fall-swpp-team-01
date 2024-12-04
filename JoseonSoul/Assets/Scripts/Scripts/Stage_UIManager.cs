@@ -314,10 +314,10 @@ public class Stage_UIManager : MonoBehaviour
         potionImageRect.anchorMin = new Vector2(0, 1);
         potionImageRect.anchorMax = new Vector2(0, 1);
         potionImageRect.pivot = new Vector2(0.5f, 0.5f);
-        float potionImageWidth = potionContainerHeight;
+        float potionImageWidth = potionContainerHeight * 2 / 3;
         float potionImageHeight = potionContainerHeight;
         float potionImageOffsetX = potionContainerOffsetX + potionContainerWidth / 2;
-        float potionImageOffsetY = potionContainerOffsetY - potionContainerHeight / 2 - potionImageHeight * 0.05f;
+        float potionImageOffsetY = potionContainerOffsetY - potionContainerHeight / 2;
         potionImageRect.sizeDelta = new Vector2(potionImageWidth, potionImageHeight);
         potionImageRect.anchoredPosition = new Vector2(potionImageOffsetX, potionImageOffsetY);
 
