@@ -80,12 +80,13 @@ public class EnemyController : MonoBehaviour
         SetEnemyState((int)EnemyState.death);
         Destroy(gameObject, 10f);
     }
-
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("PlayerWeapon"))
         {
-            TakeDamage(10); //TODO : Player ���ݷ¸�ŭ ü�� ����
+            TakeDamage(10); //TODO : Player damage
         }
     }
+    */
 }
