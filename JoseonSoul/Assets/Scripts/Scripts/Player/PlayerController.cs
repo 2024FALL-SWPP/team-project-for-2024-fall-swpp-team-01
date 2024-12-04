@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,11 @@ public class PlayerController : MonoBehaviour
     public static GameObject Instance { get; private set; }
 
     private Animator animator;
+    
+    [SerializeField] private PlayerLocomotionManager playerLocomotionManager;
+    [SerializeField] private PlayerAttackManager playerAttackManager;
+    [SerializeField] private PlayerJumpManager playerJumpManager;
+    [SerializeField] private PlayerRollingManager playerRollingManager;
     // Start is called before the first frame update
 
     void Awake()
@@ -54,8 +60,21 @@ public class PlayerController : MonoBehaviour
     public void SetPlayerState(int state)
     {
         playerState = state;
+        if (playerState == (int)PlayerState.Stunned || playerState == (int)PlayerState.Dead)
+        {
+            CancelPendingInvokes();
+        }
         SyncAnimationState();
     }
+
+    private void CancelPendingInvokes()
+    {
+        playerJumpManager.CancelInvoke();
+        playerAttackManager.CancelAllAttacks(); // Needed to cancel queued attacks.
+        // playerLocomotionManager.CancelInvoke(); This just invokes runnable on stamina refill
+        playerRollingManager.CancelInvoke(); 
+    }
+
 
     public int GetPlayerState()
     {
