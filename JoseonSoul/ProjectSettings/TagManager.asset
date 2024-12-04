@@ -9,6 +9,8 @@ TagManager:
   - Fire
   - NextStage
   - EnemyBody
+  - PlayerAttack
+  - PlayerBody
   layers:
   - Default
   - TransparentFX

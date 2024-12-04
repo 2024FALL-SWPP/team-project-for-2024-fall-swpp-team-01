@@ -6,6 +6,7 @@ public class SwordColliderManager : MonoBehaviour
 {
     private Collider swordCollider;
 
+    [SerializeField] private int damage = 40;
     private void Start()
     {
         // Get the collider attached to the sword object
@@ -52,12 +53,11 @@ public class SwordColliderManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if the collider hits an enemy
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("EnemyBody"))
         {
             Debug.Log("Sword hit: " + other.gameObject.name);
-
-            // You can add additional logic here, such as dealing damage to the enemy
-            // other.GetComponent<EnemyController>().TakeDamage(damage);
+    
+            other.GetComponent<EnemyController>().TakeDamage(damage);
 
             // Disable the collider to prevent multiple hits in one attack
             DisableCollider();
