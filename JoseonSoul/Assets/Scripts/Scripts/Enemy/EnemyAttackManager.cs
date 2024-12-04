@@ -15,7 +15,7 @@ public class EnemyAttackManager : MonoBehaviour
     [SerializeField] private float attackCooldown = 1.5f;
 
     [SerializeField] private bool isAttacking = false;
-    [SerializeField] private int attackDamage = 10;
+    [SerializeField] public int attackDamage = 10;
 
     // Start is called before the first frame update
     void Start()
