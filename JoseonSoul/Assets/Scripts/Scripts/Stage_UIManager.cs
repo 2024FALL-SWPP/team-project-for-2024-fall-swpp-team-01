@@ -74,7 +74,7 @@ public class Stage_UIManager : MonoBehaviour
     private float bossHpMaxWidth, bossHpMaxHeight;
     private float bossHpOldWidth, bossHpOldHeight;
     private float bossHpNowWidth, bossHpNowHeight;
-    Boolean isHPAnimPlaying = false;
+    Boolean isHPAnimPlaying = false, isBossHPAnimPlaying = false;
 
     // constant parameters that are used to position & scale UI elements
     private float profileImageScale = 13;
@@ -137,7 +137,7 @@ public class Stage_UIManager : MonoBehaviour
     // ----------------------------------- END -----------------------------------
 
     // initial settings - constants
-    private float maxHP, maxSP, bossMaxHP = 500, hpAnimSpeed = 1, hpAnimDelay = 2;
+    private float maxHP, maxSP, bossMaxHP = 500, hpAnimSpeed = 1, hpAnimDelay = 2, bossHPAnimSpeed = 1, bossHPAnimDelay = 2;
 
     // initial settings - variables
     private float nowHP = 87, oldHP = 87, SP = 68, bossNowHP = 470, bossOldHP = 470, potionCount = 0;
@@ -295,7 +295,7 @@ public class Stage_UIManager : MonoBehaviour
         bossNameText.fontSize = canvasWidth * 20 / 976;
         bossNameTextRect.anchorMin = new Vector2(0, 0.5f);
         bossNameTextRect.anchorMax = new Vector2(0, 0.5f);
-        bossNameTextRect.pivot = new Vector2(0, 0);
+        bossNameTextRect.pivot = new Vector2(0, 0); 
         float bossNameTextOffsetX = bossHpNowOffsetX;
         float bossNameTextOffsetY = bossHpMaxOffsetY;
         bossNameTextRect.anchoredPosition = new Vector2(bossNameTextOffsetX, bossNameTextOffsetY);
@@ -390,9 +390,36 @@ public class Stage_UIManager : MonoBehaviour
 
     public void UpdateBossNowHP(float value, bool isAbsolute)
     {
+        bossOldHP = bossNowHP;
         bossNowHP = isAbsolute ? value : bossNowHP + value;
         bossHpNowWidth = canvasWidth * 500 / 976 * bossNowHP / bossMaxHP * bossHpWidthScale;
         bossHpNowRect.sizeDelta = new Vector2(bossHpNowWidth, bossHpNowHeight);
+        if (bossNowHP < bossOldHP)
+        {
+            if (!isBossHPAnimPlaying)
+            {
+                isBossHPAnimPlaying = true;
+                StartCoroutine(BossHPAnim(bossOldHP));
+            }
+        }
+        else
+        {
+            bossHpOldWidth = bossHpNowWidth;
+            bossHpOldRect.sizeDelta = new Vector2(bossHpOldWidth, bossHpOldHeight);
+        }
+    }
+
+    IEnumerator BossHPAnim(float bossOldHP)
+    {
+        yield return new WaitForSeconds(bossHPAnimDelay);
+        while (bossNowHP < bossOldHP)
+        {
+            bossOldHP -= bossHPAnimSpeed;
+            bossHpOldWidth = canvasWidth * 500 / 976 * bossOldHP / bossMaxHP * bossHpWidthScale;
+            bossHpOldRect.sizeDelta = new Vector2(bossHpOldWidth, bossHpOldHeight);
+            yield return null;
+        }
+        isBossHPAnimPlaying = false;
     }
 
     public void EventTextOn(int eventNum)
