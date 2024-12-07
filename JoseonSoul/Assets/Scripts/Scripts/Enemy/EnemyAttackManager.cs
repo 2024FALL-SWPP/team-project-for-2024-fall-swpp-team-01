@@ -13,9 +13,12 @@ public class EnemyAttackManager : MonoBehaviour
 
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1.5f;
+    [SerializeField] private float attackActiveDuration = 1.0f;
 
     [SerializeField] private bool isAttacking = false;
     [SerializeField] private int attackDamage = 10;
+
+    private bool hasDealtDamage = false;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,7 @@ public class EnemyAttackManager : MonoBehaviour
     void StartAttack()
     {
         isAttacking = true;
+        hasDealtDamage = true;
 
         locomotionManager.StopMoving();
 
@@ -67,9 +71,10 @@ public class EnemyAttackManager : MonoBehaviour
 
     IEnumerator AttackCooldownRoutine()
     {
-        yield return new WaitForSeconds(attackCooldown);
 
+        yield return new WaitForSeconds(attackActiveDuration);
         isAttacking = false;
+        yield return new WaitForSeconds(attackCooldown - attackActiveDuration);
 
         float playerDistance = Vector3.Distance(transform.position, player.position);
         if (playerDistance <= attackRange)
@@ -91,7 +96,7 @@ public class EnemyAttackManager : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && isAttacking)
+        if (other.CompareTag("Player") && isAttacking && !hasDealtDamage)
         {
             Debug.Log("Player entered the trigger zone!");
         }
