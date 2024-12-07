@@ -14,8 +14,8 @@ public class EnemyAttackManager : MonoBehaviour
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1.5f;
 
-    [SerializeField] private bool isAttacking = false; 
-
+    [SerializeField] private bool isAttacking = false;
+    [SerializeField] public int attackDamage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -88,10 +88,10 @@ public class EnemyAttackManager : MonoBehaviour
         return isAttacking;
     }
 
-    //임시 코드
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && isAttacking)
         {
             Debug.Log("Player entered the trigger zone!");
         }
