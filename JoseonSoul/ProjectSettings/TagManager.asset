@@ -11,6 +11,7 @@ TagManager:
   - EnemyBody
   - PlayerAttack
   - PlayerBody
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
