@@ -337,7 +337,7 @@ public class Stage_UIManager : MonoBehaviour
         float potionCountOffsetY = potionContainerOffsetY;
         potionCountTextRect.anchoredPosition = new Vector2(potionCountOffsetX, potionCountOffsetY);
         potionCountText.fontSize = canvasWidth * 18 / 1067;
-        potionCountText.text = "0";
+        potionCountText.text = PlayerPotionManager.maxPotion.ToString();
 
         setBossStage(isBossSet);
 

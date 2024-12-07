@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
     public GameObject player = PlayerController.Instance;
     public Stage_UIManager stage_UIManager = Stage_UIManager.Instance;
     public ThirdPersonCameraController mainCamera = ThirdPersonCameraController.Instance;
+
+
+    private PlayerHealthManager healthManager;
+    private PlayerPotionManager potionManager;
     
 
     private void Awake()
@@ -49,6 +53,17 @@ public class GameManager : MonoBehaviour
         filePath = Path.Combine(Application.persistentDataPath, "gameData.json");
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void Start()
+    {
+        healthManager = PlayerController.Instance.GetComponent<PlayerHealthManager>();
+        if(healthManager == null)
+            Debug.LogError("Player Health Manager Not Detected");
+
+        potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
+        if(potionManager == null)
+            Debug.LogError("Player Potion Manager Not Detected");
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -137,8 +152,8 @@ public class GameManager : MonoBehaviour
         {
             lastVisitedFire = player.transform.position;
             
-            currentHP = PlayerHealthManager.maxHP;
-            // potionRemained = PlayerPotionManager.maxPotion;
+            healthManager.updateCurrentHP(PlayerHealthManager.maxHP, true);
+            potionManager.updateCurrentPotion(PlayerPotionManager.maxPotion);
             SaveGame();
             Debug.Log("Saved and Healed");
         }
