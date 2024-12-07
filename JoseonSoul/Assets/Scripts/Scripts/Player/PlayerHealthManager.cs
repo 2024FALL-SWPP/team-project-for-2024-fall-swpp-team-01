@@ -74,7 +74,7 @@ public class PlayerHealthManager : MonoBehaviour
     public void updateCurrentHP(float value, bool isAbsolute)
     {
         currentHP = isAbsolute ? value : currentHP + value;
-        currentHP = maxHP < currentHP ? maxHP : currentHP;
+        currentHP = Mathf.Clamp(currentHP,0,maxHP);
         UIManager.UpdateCurrentHP();
         gameManager.SetPlayerStatus(currentHP,potionManager.getCurrentPotion());
         return;
@@ -83,6 +83,7 @@ public class PlayerHealthManager : MonoBehaviour
     public void updateCurrentSP(float value, bool isAbsolute)
     {
         currentSP = isAbsolute ? value : currentSP + value;
+        currentSP = Mathf.Clamp(currentSP,0,maxSP);
         UIManager.UpdateSP();
         return;
     }

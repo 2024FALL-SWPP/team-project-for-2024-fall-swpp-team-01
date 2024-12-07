@@ -13,21 +13,26 @@ public class PlayerAttackManager : MonoBehaviour
 {
     private PlayerController playerController;
     private SwordColliderManager swordColliderManager;
+    private PlayerHealthManager healthManager;
 
     private bool isQueued = false; // Indicates if the next attack is queued
     private float openPhaseDuration = 0.2f;   // Duration of the Open phase
     private float closedPhaseDuration = 1.3f; // Duration of the Closed phase
     private float attackOpenEndTime = 0f;     // Tracks when the Open phase ends
+    private float staminaConsume = 35.0f;
 
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         swordColliderManager = GetComponentInChildren<SwordColliderManager>();
+        healthManager = GetComponent<PlayerHealthManager>();
 
         if (playerController == null)
             Debug.LogError("PlayerController is null");
         if (swordColliderManager == null)
             Debug.LogError("SwordColliderManager is null");
+        if(healthManager == null)
+            Debug.LogError("Health Manager Not Detected");
     }
 
     void Update()
@@ -37,20 +42,22 @@ public class PlayerAttackManager : MonoBehaviour
 
         int state = playerController.GetPlayerState();
 
+        float stamina = healthManager.getCurrentSP();
+
         // Handle initiating attacks
-        if ((state == (int)PlayerState.Idle || state == (int)PlayerState.Moving) && !isQueued)
+        if ((state == (int)PlayerState.Idle || state == (int)PlayerState.Moving) && !isQueued && stamina > staminaConsume)
         {
             Debug.Log("Initiating Attack1");
             Attack1();
         }
         // Handle queuing Attack2 during Attack1Open
-        else if (state == (int)PlayerState.Attacking1Open && !isQueued)
+        else if (state == (int)PlayerState.Attacking1Open && !isQueued && stamina > staminaConsume)
         {
             Debug.Log("Queuing Attack2");
             QueueNextAttack(PlayerState.Attacking2Closed);
         }
         // Handle queuing Attack3 during Attack2Open
-        else if (state == (int)PlayerState.Attacking2Open && !isQueued)
+        else if (state == (int)PlayerState.Attacking2Open && !isQueued && stamina > staminaConsume)
         {
             Debug.Log("Queuing Attack3");
             QueueNextAttack(PlayerState.Attacking3Closed);
@@ -63,6 +70,7 @@ public class PlayerAttackManager : MonoBehaviour
     void Attack1()
     {
         playerController.SetPlayerState((int)PlayerState.Attacking1Closed);
+        healthManager.updateCurrentSP(-staminaConsume,false);
         isQueued = false; // Reset any previous queue
 
         // Enable the sword collider
@@ -97,6 +105,7 @@ public class PlayerAttackManager : MonoBehaviour
     void Attack2()
     {
         playerController.SetPlayerState((int)PlayerState.Attacking2Closed);
+        healthManager.updateCurrentSP(-staminaConsume,false);
         Debug.Log("Attack2 Closed Started");
         isQueued = false;
 
@@ -133,6 +142,7 @@ public class PlayerAttackManager : MonoBehaviour
     void Attack3()
     {
         playerController.SetPlayerState((int)PlayerState.Attacking3Closed);
+        healthManager.updateCurrentSP(-staminaConsume,false);
         isQueued = false;
 
         // Enable the sword collider
