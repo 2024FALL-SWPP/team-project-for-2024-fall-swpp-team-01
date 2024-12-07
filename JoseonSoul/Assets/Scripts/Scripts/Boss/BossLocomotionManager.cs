@@ -51,5 +51,13 @@ public class BossLocomotionManager : MonoBehaviour
         bossController.SetBossState((int)BossState.Moving);
     }
 
+    public void StopMoving()
+    {
+        agent.isStopped = true;
+    }
 
+    public void ResumeMoving()
+    {
+        agent.isStopped = false;
+    }
 }
