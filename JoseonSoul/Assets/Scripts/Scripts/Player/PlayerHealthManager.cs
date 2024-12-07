@@ -12,6 +12,9 @@ public class PlayerHealthManager : MonoBehaviour
     private float currentSP;
 
     public Stage_UIManager UIManager;
+    public GameManager gameManager;
+    public PlayerPotionManager potionManager;
+
     
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
@@ -19,8 +22,18 @@ public class PlayerHealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UIManager = Stage_UIManager.Instance;
         if(UIManager == null)
-            Debug.LogError("UIManager Not Found");
+            Debug.LogError("UIManager Not Detected");
+
+        gameManager = GameManager.Instance;
+        if(gameManager == null)
+            Debug.LogError("Game Manager Not Detected");
+
+        potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
+        if(potionManager == null)
+            Debug.LogError("Potion Manager Not Detected");
+
         currentHP = maxHP;
         currentSP = maxSP;
     }
@@ -62,6 +75,7 @@ public class PlayerHealthManager : MonoBehaviour
     {
         currentHP = isAbsolute ? value : currentHP + value;
         UIManager.UpdateCurrentHP();
+        gameManager.SetPlayerStatus(currentHP,potionManager.getCurrentPotion());
         return;
     }
 

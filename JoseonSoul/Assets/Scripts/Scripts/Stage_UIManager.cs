@@ -126,6 +126,12 @@ public class Stage_UIManager : MonoBehaviour
         potionCount--;
         potionCountText.text = potionCount.ToString();
     }
+
+    public void PotionSync()
+    {
+        potionCount = potionManager.getCurrentPotion();
+        potionCountText.text = potionCount.ToString();
+    }
     public void HPInc()
     {
         healthManager.updateCurrentHP(10, false);
@@ -145,9 +151,6 @@ public class Stage_UIManager : MonoBehaviour
     [Header("Stage_Canvas")]
     public GameObject canvas;
 
-    [Header("Player")]
-    public GameObject player;
-
     [Header("Strings for message")]
     private String[] eventStrings = {"Purify a Well : E", // Well Event String
                                     "Save and Heal : E", // Fire Event String
@@ -155,12 +158,17 @@ public class Stage_UIManager : MonoBehaviour
 
 
     private PlayerHealthManager healthManager;
+    private PlayerPotionManager potionManager;
 
     void Start()
     {
-        healthManager = player.GetComponent<PlayerHealthManager>();
+        healthManager = PlayerController.Instance.GetComponent<PlayerHealthManager>();
         if(healthManager == null)
             Debug.LogError("Player Health Manager Not Detected");
+
+        potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
+        if(potionManager == null)
+            Debug.LogError("Player Potion Manager Not Detected");
 
         maxHP = healthManager.getMaxHP();
         maxSP = healthManager.getMaxSP();
