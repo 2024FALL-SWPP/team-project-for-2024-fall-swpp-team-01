@@ -17,5 +17,7 @@ namespace Player
         Jumping, //12
         Dead, // 13
         Guarding, // 14
+        HealingDelay, // 15
+        Healing, // 16
     }
 }

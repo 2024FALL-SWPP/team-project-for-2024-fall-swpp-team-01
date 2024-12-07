@@ -3082,22 +3082,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 462354480, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
-      propertyPath: damage
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 913355435, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
-      propertyPath: m_Size.y
-      value: 2.4480934
-      objectReference: {fileID: 0}
-    - target: {fileID: 913355435, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
-      propertyPath: m_Center.y
-      value: 1.154686
-      objectReference: {fileID: 0}
-    - target: {fileID: 913355435, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
-      propertyPath: m_Center.z
-      value: 0.4010696
-      objectReference: {fileID: 0}
     - target: {fileID: 913355439, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
       propertyPath: cameraTransform
       value: 
@@ -6504,7 +6488,6 @@ MonoBehaviour:
   potionContainer: {fileID: 160354369}
   potionImage: {fileID: 284239465}
   canvas: {fileID: 351931779}
-  player: {fileID: 957419708}
 --- !u!4 &1882150239
 Transform:
   m_ObjectHideFlags: 0

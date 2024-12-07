@@ -95,6 +95,7 @@ public class PlayerAttackedManager : MonoBehaviour
             if (IsAttackBlocked(attackerPosition))
             {
                 Debug.Log("Attack blocked by the shield.");
+                healthManager.updateCurrentSP(-damage/2,false);
                 // Optional: Add effects or animations for blocking
                 return; // Attack is blocked, no further damage logic needed
             }

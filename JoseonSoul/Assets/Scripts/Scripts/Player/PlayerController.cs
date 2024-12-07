@@ -7,17 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Player State")]
     [SerializeField] private int playerState = 0;
+    public static GameObject Instance { get; private set; }
+    
     [Header("Player Managers")]
     public PlayerHealthManager playerHealthManager;
-
-    public static GameObject Instance { get; private set; }
-
     private Animator animator;
     
     [SerializeField] private PlayerLocomotionManager playerLocomotionManager;
     [SerializeField] private PlayerAttackManager playerAttackManager;
     [SerializeField] private PlayerJumpManager playerJumpManager;
     [SerializeField] private PlayerRollingManager playerRollingManager;
+    [SerializeField] private PlayerPotionManager playerPotionManager;
     // Start is called before the first frame update
 
     void Awake()
@@ -36,13 +36,33 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = Instance.GetComponent<Animator>();
         if(animator == null)
             Debug.LogError("Animator Not Detected");
         
-        playerHealthManager = GetComponent<PlayerHealthManager>();
+        playerHealthManager = Instance.GetComponent<PlayerHealthManager>();
         if(playerHealthManager == null)
             Debug.LogError("Health Manager Not Detected");
+
+        playerPotionManager = Instance.GetComponent<PlayerPotionManager>();
+        if(playerPotionManager == null)
+            Debug.LogError("Potion Manager Not Detected");
+
+        playerLocomotionManager = Instance.GetComponent<PlayerLocomotionManager>();
+        if(playerLocomotionManager == null)
+            Debug.LogError("Locomotion Manager Not Detected");
+
+        playerAttackManager = Instance.GetComponent<PlayerAttackManager>();
+        if(playerAttackManager == null)
+            Debug.LogError("Attack Manager Not Detected");
+
+        playerJumpManager = Instance.GetComponent<PlayerJumpManager>();
+        if(playerJumpManager == null)
+            Debug.LogError("Jump Manager Not Detected");
+
+        playerRollingManager = Instance.GetComponent<PlayerRollingManager>();
+        if(playerRollingManager == null)
+            Debug.LogError("Rolling Manager Not Detected");
 
         Instance.SetActive(false);
     }
@@ -73,6 +93,8 @@ public class PlayerController : MonoBehaviour
         playerAttackManager.CancelAllAttacks(); // Needed to cancel queued attacks.
         // playerLocomotionManager.CancelInvoke(); This just invokes runnable on stamina refill
         playerRollingManager.CancelInvoke(); 
+        playerPotionManager.CancelInvoke();
+        
     }
 
 
