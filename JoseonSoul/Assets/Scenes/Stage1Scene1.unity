@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.21960664, g: 0.2564673, b: 0.3301887, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
   m_HaloStrength: 0.5
@@ -97,7 +97,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: c69f28c014dd6429a99aaf2123f1a0c9, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5398,6 +5398,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 341401732}
     m_Modifications:
+    - target: {fileID: 1522880355, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7149647427075812156, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
       propertyPath: m_Name
       value: well_0
@@ -8650,10 +8654,6 @@ PrefabInstance:
     - target: {fileID: 7149647427075812156, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
       propertyPath: m_Name
       value: well_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7149647427075812156, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
-      propertyPath: m_TagString
-      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 7526490075615719814, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
       propertyPath: m_RootOrder
@@ -13010,6 +13010,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 341401732}
     m_Modifications:
+    - target: {fileID: 1522880355, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7149647427075812156, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
       propertyPath: m_Name
       value: well_2
@@ -13299,51 +13303,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3424539567499388887, guid: 71ab1db17c9f9b04d85a1737e1b6208c, type: 3}
   m_PrefabInstance: {fileID: 1518742618}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1522880354
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1522880355}
-  - component: {fileID: 1522880356}
-  m_Layer: 0
-  m_Name: tag_1
-  m_TagString: Well
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1522880355
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522880354}
-  m_LocalRotation: {x: 0.50000006, y: -0.49999994, z: -0.50000006, w: 0.49999994}
-  m_LocalPosition: {x: 0.00006856283, y: 0.000036366382, z: 0.003010143}
-  m_LocalScale: {x: 0.0033333325, y: 0.005, z: 0.0033333327}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1029652398}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1522880356
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522880354}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 2, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1522947204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14470,6 +14429,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 341401732}
     m_Modifications:
+    - target: {fileID: 1522880355, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7149647427075812156, guid: 3c1c03389d353314589889f43ce16f40, type: 3}
       propertyPath: m_Name
       value: well_3
