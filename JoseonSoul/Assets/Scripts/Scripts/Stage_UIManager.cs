@@ -34,10 +34,17 @@ public class Stage_UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if(scene.buildIndex == 5)
+        if(scene.buildIndex == 4)
             canvas.SetActive(false);
         else
+        {
+            if(scene.buildIndex == 3)
+                setBossStage(true);
+            else
+                setBossStage(false);
             canvas.SetActive(true);
+        }
+
     }
 
     // public variables that MUST be assigned objects before playing

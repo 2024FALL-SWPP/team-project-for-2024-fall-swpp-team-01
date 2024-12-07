@@ -815,6 +815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar_2
       objectReference: {fileID: 0}
+    - target: {fileID: 2736143303655806455, guid: 505bbaa8e62141a4fa45b71b546d892e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 3365151518814080845, guid: 505bbaa8e62141a4fa45b71b546d892e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6887,6 +6891,10 @@ PrefabInstance:
     - target: {fileID: 5913236377811246227, guid: 0ae4894d0ffc9e548a213b900985035e, type: 3}
       propertyPath: m_Name
       value: Platform_circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913236377811246227, guid: 0ae4894d0ffc9e548a213b900985035e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 6438979285275051561, guid: 0ae4894d0ffc9e548a213b900985035e, type: 3}
       propertyPath: m_RootOrder

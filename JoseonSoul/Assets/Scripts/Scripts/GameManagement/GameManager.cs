@@ -21,12 +21,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float currentHP;
     [SerializeField] private int potionRemained;
     [Header("Player Init Positions")]
-    [SerializeField] private Vector3[] initPositions = new Vector3[5]{
+    [SerializeField] private Vector3[] initPositions = new Vector3[4]{
         new Vector3(0,0,0),//Stage1Scene1
         new Vector3(0,0,0),//Stage1Scene2
-        new Vector3(0,0,0),//Boss1
         new Vector3(0,0,0),//Stage2
-        new Vector3(0,0,0)//Boss2
+        new Vector3(0,0,0),//boss
     };
 
     [Header("Singleton Objects")]
@@ -69,6 +68,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         player.SetActive(true);
+        Stage_UIManager.Instance.EventTextOff();
     }
 
     public void LoadGame()

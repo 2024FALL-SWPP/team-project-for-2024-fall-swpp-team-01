@@ -295,7 +295,7 @@ MonoBehaviour:
   initPositions:
   - {x: 20, y: 0, z: -35}
   - {x: 160, y: 0, z: -70}
-  - {x: 0, y: 0, z: 0}
+  - {x: 38, y: 4, z: 70}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   player: {fileID: 957419708}
