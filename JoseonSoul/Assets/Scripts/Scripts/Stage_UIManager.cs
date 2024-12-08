@@ -47,9 +47,40 @@ public class Stage_UIManager : MonoBehaviour
 
     }
 
+    private bool escButtonOn = false;
+    void Update()
+    {
+        // ESC 키를 눌렀을 때
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (escButtonOn)
+            {
+                ResumeGame(); // 다시 시작
+            }
+            else
+            {
+                ESCGame(); // 일시 정지
+            }
+        }
+    }
+
+    void ESCGame()
+    {
+        escButtonOn = true;
+        menuPanel.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        escButtonOn = false;
+        menuPanel.SetActive(false);
+    }
+
+
     // public variables that MUST be assigned objects before playing
     public Image imageObject;
     public Sprite profileImage;
+    public GameObject menuPanel;
     public TextMeshProUGUI profileText;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI interactionText;

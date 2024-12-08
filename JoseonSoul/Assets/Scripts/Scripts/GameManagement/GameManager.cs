@@ -172,4 +172,15 @@ public class GameManager : MonoBehaviour
         Debug.Log(wellId.ToString() + " Purified!!");
         wellPurified[wellId] = true;
     }
+
+    public void exitGame()
+    {
+        Debug.Log("QUIT BUTTON PRESSED");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit(); // 빌드된 환경에서 게임 종료
+        #endif
+    }
+
 }
