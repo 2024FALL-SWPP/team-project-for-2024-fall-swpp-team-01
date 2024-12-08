@@ -141,6 +141,8 @@ public class PlayerAttackedManager : MonoBehaviour
             playerController.SetPlayerState((int)PlayerState.Dead);
 
             Debug.Log("Player is dead.");
+
+            Invoke("RestartGame",5.0f);
         }
         else
         {
@@ -164,5 +166,12 @@ public class PlayerAttackedManager : MonoBehaviour
             playerController.SetPlayerState((int)PlayerState.Idle);
             Debug.Log("Player recovered from stunned state.");
         }
+    }
+
+    void RestartGame()
+    {
+        healthManager.updateCurrentHP(PlayerHealthManager.maxHP,true);
+        GameManager.Instance.LoadInfo();
+        GameManager.Instance.LoadScene(true);
     }
 }

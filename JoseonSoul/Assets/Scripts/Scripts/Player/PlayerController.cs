@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = position;
         playerHealthManager.updateCurrentHP(currnetHP,true);
-        //playerPotionmanager.setPotionRemained(potionRemained);
+        playerPotionManager.updateCurrentPotion(potionRemained);
+        SetPlayerState((int)PlayerState.Idle);
     }
 }
