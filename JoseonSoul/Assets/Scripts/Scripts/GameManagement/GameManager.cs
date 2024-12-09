@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
         lastVisitedFireSceneIdx = 0;
         lastVisitedFire = new Vector3(0,0,0);
         potionRemained = PlayerPotionManager.maxPotion;
+        SaveGame();
         LoadScene(false);
     }
 
