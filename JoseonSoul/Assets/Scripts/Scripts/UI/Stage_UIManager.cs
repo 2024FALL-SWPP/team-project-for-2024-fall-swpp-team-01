@@ -34,15 +34,53 @@ public class Stage_UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if(scene.buildIndex == 5)
+        if(scene.buildIndex == 4)
             canvas.SetActive(false);
         else
+        {
+            if(scene.buildIndex == 3)
+                setBossStage(true);
+            else
+                setBossStage(false);
             canvas.SetActive(true);
+        }
+
     }
+
+    private bool escButtonOn = false;
+    void Update()
+    {
+        // ESC 키를 눌렀을 때
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (escButtonOn)
+            {
+                ResumeGame(); // 다시 시작
+            }
+            else
+            {
+                ESCGame(); // 일시 정지
+            }
+        }
+    }
+
+    void ESCGame()
+    {
+        escButtonOn = true;
+        menuPanel.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        escButtonOn = false;
+        menuPanel.SetActive(false);
+    }
+
 
     // public variables that MUST be assigned objects before playing
     public Image imageObject;
     public Sprite profileImage;
+    public GameObject menuPanel;
     public TextMeshProUGUI profileText;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI interactionText;
@@ -126,6 +164,12 @@ public class Stage_UIManager : MonoBehaviour
         potionCount--;
         potionCountText.text = potionCount.ToString();
     }
+
+    public void PotionSync()
+    {
+        potionCount = potionManager.getCurrentPotion();
+        potionCountText.text = potionCount.ToString();
+    }
     public void HPInc()
     {
         healthManager.updateCurrentHP(10, false);
@@ -145,9 +189,6 @@ public class Stage_UIManager : MonoBehaviour
     [Header("Stage_Canvas")]
     public GameObject canvas;
 
-    [Header("Player")]
-    public GameObject player;
-
     [Header("Strings for message")]
     private String[] eventStrings = {"Purify a Well : E", // Well Event String
                                     "Save and Heal : E", // Fire Event String
@@ -155,12 +196,17 @@ public class Stage_UIManager : MonoBehaviour
 
 
     private PlayerHealthManager healthManager;
+    private PlayerPotionManager potionManager;
 
     void Start()
     {
-        healthManager = player.GetComponent<PlayerHealthManager>();
+        healthManager = PlayerController.Instance.GetComponent<PlayerHealthManager>();
         if(healthManager == null)
             Debug.LogError("Player Health Manager Not Detected");
+
+        potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
+        if(potionManager == null)
+            Debug.LogError("Player Potion Manager Not Detected");
 
         maxHP = healthManager.getMaxHP();
         maxSP = healthManager.getMaxSP();
@@ -329,7 +375,7 @@ public class Stage_UIManager : MonoBehaviour
         float potionCountOffsetY = potionContainerOffsetY;
         potionCountTextRect.anchoredPosition = new Vector2(potionCountOffsetX, potionCountOffsetY);
         potionCountText.fontSize = canvasWidth * 18 / 1067;
-        potionCountText.text = "0";
+        potionCountText.text = PlayerPotionManager.maxPotion.ToString();
 
         setBossStage(isBossSet);
 
