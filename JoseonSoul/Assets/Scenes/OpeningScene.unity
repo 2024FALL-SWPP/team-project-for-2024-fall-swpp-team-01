@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e3c980df7484247e79a3b2fe4fe9eddf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bc5374aa8a5349e891e0bc03087a572, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -487,17 +487,20 @@ MonoBehaviour:
   displayImage: {fileID: 363672481}
   subtitleText: {fileID: 1649089591}
   openingImages:
-  - {fileID: 21300000, guid: e3c980df7484247e79a3b2fe4fe9eddf, type: 3}
   - {fileID: 21300000, guid: 6bc5374aa8a5349e891e0bc03087a572, type: 3}
+  - {fileID: 21300000, guid: e3c980df7484247e79a3b2fe4fe9eddf, type: 3}
   - {fileID: 21300000, guid: c641b77f3cd084bc9853b407c628408f, type: 3}
   - {fileID: 21300000, guid: 2a789faee89524164a17460ccbfe9e35, type: 3}
   - {fileID: 21300000, guid: 5ae42e340762c47548ed508d2d7c4b7e, type: 3}
   subtitles:
-  - "\uC870\uC120 \uBA87 \uB144 \uC5B4\uCA4C\uAD6C,,,,"
-  - "\uC7A0\uC5D0 \uB4E0 \uB2F9\uC2E0..."
-  - "\uD574\uD0DC\uAC00 \uB098\uD0C0\uB098 \uB9D0\uD55C\uB2E4 "
-  - "\uB3C4\uAE68\uBE44\uAC00 \uC5B4\uCA4C"
-  - "\uC774\uC81C \uC870\uC120\uC758 \uC6B4\uBA85\uC740 \uB2F9\uC2E0\uC5D0\uAC8C..."
+  - 
+  - "1410\uB144 \uC870\uC120, \uC7A0\uC5D0 \uB4E0 \uB2F9\uC2E0"
+  - "\uD574\uD0DC\uAC00 \uB098\uD0C0\uB098 \uB2F9\uC2E0\uC5D0\uAC8C \uB9D0\uC744
+    \uC804\uD55C\uB2E4"
+  - "\"\uD55C\uC591\uC744 \uBE44\uB86F\uD55C \uD314\uB3C4\uAC00 \uB3C4\uAE68\uBE44
+    \uBB34\uB9AC\uB85C \uD63C\uB780\uD574\uC84C\uB2E4\""
+  - "\"\uB2F9\uC2E0\uC758 \uAC80\uB0A0\uC5D0 \uC870\uC120\uC758 \uBBF8\uB798\uAC00
+    \uB2EC\uB824\uC788\uB2E4\""
   fadeTime: 1
   subtitleFadeTime: 0.5
 --- !u!4 &1323079026
