@@ -1023,6 +1023,7 @@ MonoBehaviour:
   playerAttackManager: {fileID: 913355445}
   playerJumpManager: {fileID: 913355440}
   playerRollingManager: {fileID: 913355438}
+  playerPotionManager: {fileID: 0}
 --- !u!114 &913355443
 MonoBehaviour:
   m_ObjectHideFlags: 0
