@@ -14,11 +14,19 @@ public class BossAttackManager : MonoBehaviour
     private BossController bossController;
     private BossLocomotionManager locomotionManager;
     private Animator animator;
+
+    public GameObject batPrefab;
+    public GameObject swordPrefab;
+
     [SerializeField] private float attackRange = 5f;
-    [SerializeField] private float attack_2_Range_MIN = 10f;
+    [SerializeField] private float attack_2_Range_MIN = 7f;
     [SerializeField] private float TeleportThershold = 10f;
 
     [SerializeField] private float walkingWhileAttack = 1.5f;
+
+    [SerializeField] private float batSpawnHeight = 15f;
+    [SerializeField] private float gridSpacing1 = 5f;
+    [SerializeField] private float gridSpacing2 = 8f;
 
     [SerializeField] private bool hasHitPlayer = false;
     [SerializeField] private int attackNumber = 1;
@@ -100,16 +108,6 @@ public class BossAttackManager : MonoBehaviour
 
     public void Attack2(float distanceToPlayer)
     {
-        /*
-        // if we want attack2 only after running, use this code.
-
-        if (distanceToPlayer <= attack_2_Range_MIN)
-        {
-            Debug.Log("Too close to attack2");
-            ChooseAttack();
-            return;
-        }
-        */
 
         if (!isAttacking && distanceToPlayer <= attackRange)
         {
@@ -184,12 +182,6 @@ public class BossAttackManager : MonoBehaviour
 
     public void SummonBat(float distanceToPlayer)
     {
-        if (distanceToPlayer <= attack_2_Range_MIN)
-        {
-            Debug.Log("Too close to summon bats");
-            ChooseAttack();
-            return;
-        }
 
         if (!isAttacking && distanceToPlayer >= attack_2_Range_MIN)
         {
@@ -199,18 +191,25 @@ public class BossAttackManager : MonoBehaviour
 
             Debug.Log("summon bat start");
             animator.SetTrigger("SummonBat");
-            locomotionManager.agent.speed = 0f;
+            locomotionManager.agent.speed = 0.1f;
+            Spawn3x3Bats();
         }
     }
+    public void Spawn3x3Bats()
+    {
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                Vector3 spawnPosition1 = player.position + Vector3.up * batSpawnHeight
+                                      + new Vector3(i * gridSpacing1, 0, j * gridSpacing1);
 
+                Instantiate(batPrefab, spawnPosition1, batPrefab.transform.rotation);
+            }
+        }
+    }
     public void SummonSword(float distanceToPlayer)
     {
-        if (distanceToPlayer <= attack_2_Range_MIN)
-        {
-            Debug.Log("Too close to summon swords");
-            ChooseAttack();
-            return;
-        }
 
         if (!isAttacking && distanceToPlayer >= attack_2_Range_MIN)
         {
@@ -220,9 +219,28 @@ public class BossAttackManager : MonoBehaviour
 
             Debug.Log("summon sword start");
             animator.SetTrigger("SummonSword");
-            locomotionManager.agent.speed = 0f;
+            locomotionManager.agent.speed = 0.1f;
+
+            Spawn3x3Swords();
         }
     }
+
+    public void Spawn3x3Swords()
+    {
+        Quaternion spawnRotation = transform.rotation * Quaternion.Euler(-90, 0, 0);
+        for (int i = 0; i <= 2; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                Vector3 spawnPosition = transform.position + transform.forward * 3f
+                                    + transform.up * i * gridSpacing2
+                                    + transform.right * j * gridSpacing2;
+
+                Instantiate(swordPrefab, spawnPosition, spawnRotation);
+            }
+        }
+    }
+
 
     public void TeleportStart(float distanceToPlayer)
     {
@@ -242,7 +260,7 @@ public class BossAttackManager : MonoBehaviour
 
             Debug.Log("teleport start");
             animator.SetTrigger("Teleport");
-            locomotionManager.agent.speed = 0f;
+            locomotionManager.agent.speed = 0.1f;
         }
     }
 
@@ -288,6 +306,21 @@ public class BossAttackManager : MonoBehaviour
     }
     public void ChooseAttack()
     {
-        attackNumber = Random.Range(6, 10);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (distanceToPlayer >= TeleportThershold)
+        {
+            int[] values = { 2, 7, 8, 9 };
+            attackNumber = values[Random.Range(0, values.Length)];
+        }
+        else if (distanceToPlayer <= attack_2_Range_MIN)
+        {
+            int[] values = { 1, 2, 3, 4, 5, 6 };
+            attackNumber = values[Random.Range(0, values.Length)];
+        }
+        else
+        {
+            attackNumber = Random.Range(1, 10);
+        }
+        
     }
 }
