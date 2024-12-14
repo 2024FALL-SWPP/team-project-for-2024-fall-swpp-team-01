@@ -28,10 +28,26 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         if (isEntering) return;
+
+        if (currentHealth <= 0)
+        {
+            DefeatBoss();
+        }
         locomotionManager.HandleMovement();
         attackManager.HandleAttack();
     }
 
+
+    void DefeatBoss()
+    {
+        animator.SetTrigger("Idle_trigger");
+        animator.SetTrigger("death_trigger");
+    }
+
+    public void DestroyBoss()
+    {
+        Destroy(gameObject);
+    }
     public void SetBossState(int state)
     {
         bossState = state;

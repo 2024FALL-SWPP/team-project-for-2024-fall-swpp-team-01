@@ -28,7 +28,7 @@ public class BossAttackManager : MonoBehaviour
     [SerializeField] private float gridSpacing1 = 5f;
     [SerializeField] private float gridSpacing2 = 8f;
 
-    [SerializeField] private bool hasHitPlayer = false;
+    [SerializeField] private bool hasHitPlayer = false; //to avoid double attack. if collision detected, please set hasHitPlayer = true.
     [SerializeField] private int attackNumber = 1;
 
     public bool isAttacking = false;
