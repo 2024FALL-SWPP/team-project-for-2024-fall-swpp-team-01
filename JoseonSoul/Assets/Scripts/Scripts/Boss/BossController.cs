@@ -1,4 +1,4 @@
-using Enemy;
+using Boss;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,29 +11,43 @@ public class BossController : MonoBehaviour
 
     [SerializeField] private int bossState = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    private bool isEntering = true;
+
+    public int maxHealth = 100;
+
+    private void Start()
     {
         locomotionManager = GetComponent<BossLocomotionManager>();
         attackManager = GetComponent<BossAttackManager>();
         animator = GetComponent<Animator>();
+
+        StartCoroutine(BossEntrance());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-    }
-
-
-    void SyncAnimationState()
-    {
-        animator.SetInteger("enemy_state", bossState);
+        if (isEntering) return;
+        locomotionManager.HandleMovement();
+        attackManager.HandleAttack();
     }
 
     public void SetBossState(int state)
     {
         bossState = state;
-        SyncAnimationState();
+        animator.SetInteger("boss_state", bossState);
+    }
+
+    public int GetBossState()
+    {
+        return bossState;
+    }
+
+    private IEnumerator BossEntrance()
+    {
+        SetBossState((int)BossState.Idle);
+        animator.SetTrigger("Angry_trigger");
+        yield return new WaitForSeconds(4.0f);
+        animator.SetTrigger("Idle_trigger");
+        isEntering = false;
     }
 }
