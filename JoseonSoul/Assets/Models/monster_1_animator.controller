@@ -502,14 +502,14 @@ AnimatorStateMachine:
     m_Position: {x: 440, y: -370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3137451979972450013}
-    m_Position: {x: 560, y: -10, z: 0}
+    m_Position: {x: 590, y: 40, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 670, y: -400, z: 0}
-  m_EntryPosition: {x: 710, y: 70, z: 0}
+  m_EntryPosition: {x: 660, y: 170, z: 0}
   m_ExitPosition: {x: 20, y: 10, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 3137451979972450013}
