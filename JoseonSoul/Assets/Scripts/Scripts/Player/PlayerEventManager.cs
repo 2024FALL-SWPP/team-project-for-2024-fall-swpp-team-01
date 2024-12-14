@@ -49,10 +49,15 @@ public class PlayerEventManager : MonoBehaviour
             canEvent = true;
 
             string wellName = other.gameObject.name;
-            char lastChar = wellName[wellName.Length - 1];
-
-            wellId = int.Parse(lastChar.ToString());
-            //Add logic to detect wellId
+            string[] splitName = wellName.Split('_');
+            if (splitName.Length > 1)
+            {
+                wellId = int.Parse(splitName[1]);
+            }
+            else
+            {
+                Debug.LogError($"Invalid well name format: {wellName}");
+            }
         }
 
         if (other.CompareTag("Fire"))  
