@@ -1107,6 +1107,7 @@ MonoBehaviour:
   hasHitPlayer: 0
   attackNumber: 1
   isAttacking: 0
+  isHitting: 0
   attackDamage: 40
 --- !u!114 &7058492876519193469
 MonoBehaviour:
@@ -1158,8 +1159,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5642052, y: 4.909396, z: 1.599021}
-  m_Center: {x: 0.33922577, y: 1.9546981, z: 0.29951048}
+  m_Size: {x: 1.5642052, y: 4.4070826, z: 1.599021}
+  m_Center: {x: 0.33922577, y: 2.205855, z: 0.29951048}
 --- !u!54 &251505695
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -287,7 +287,9 @@ public class BossAttackManager : MonoBehaviour
         isHitting = false;
     }
 
-    public void IsHitting()
+
+    public void StartHitting()
+
     {
         isHitting = true;
     }
