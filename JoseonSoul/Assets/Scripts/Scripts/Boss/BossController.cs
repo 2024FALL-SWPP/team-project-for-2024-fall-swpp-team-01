@@ -1,7 +1,9 @@
 using Boss;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class BossController : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class BossController : MonoBehaviour
         locomotionManager = GetComponent<BossLocomotionManager>();
         attackManager = GetComponent<BossAttackManager>();
         animator = GetComponent<Animator>();
+
+        Stage_UIManager.Instance.UpdateBossNowHP(maxHealth, true);
 
         StartCoroutine(BossEntrance());
     }
@@ -71,5 +75,6 @@ public class BossController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Stage_UIManager.Instance.UpdateBossNowHP(-damage, false);
     }
 }
