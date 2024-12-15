@@ -18,6 +18,7 @@ public class PlayerAttackedManager : MonoBehaviour
 
     public Transform playerTransform; // Reference to the player's transform
     public float shieldBlockAngle = 120f; // Shield blocks attacks within this angle
+    private DeathUIManager deathUIManager;
 
     void Start()
     {
@@ -34,6 +35,12 @@ public class PlayerAttackedManager : MonoBehaviour
 
         if (playerTransform == null)
             playerTransform = transform; // Assign the player's transform if not provided
+
+        deathUIManager = GameObject.Find("Death_UIManager").GetComponent<DeathUIManager>();
+        
+        if (deathUIManager == null)
+            Debug.LogError("DeathUIManager not detected");
+
     }
 
     void Update()
@@ -144,9 +151,12 @@ public class PlayerAttackedManager : MonoBehaviour
             playerController.SetPlayerState((int)PlayerState.Dead);
             soundManager.SetGameOver();
 
+            deathUIManager.ShowDeathUI();
+            
+            // 3초 후 재시작
+            Invoke("RestartGame", 3.0f);
+            
             Debug.Log("Player is dead.");
-
-            Invoke("RestartGame",5.0f);
         }
         else
         {
