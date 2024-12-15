@@ -1529,6 +1529,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 571177937}
   scaleFactor: 1.2
+--- !u!1 &340331656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 340331658}
+  - component: {fileID: 340331657}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &340331657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340331656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6cecf974ca5594a938b6f1255dbe27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleSceneMusic: {fileID: 8300000, guid: 1dfd36dc8aa24e1478503ca7d69ab86b, type: 3}
+  stage1Music: {fileID: 8300000, guid: b341bb4d21d20054eaf1b6cdc61c11d9, type: 3}
+  stage2Music: {fileID: 8300000, guid: b341bb4d21d20054eaf1b6cdc61c11d9, type: 3}
+  bossStageMusic: {fileID: 8300000, guid: acd5c7e86f60a084f91b49728a6acc42, type: 3}
+  walkingSound: {fileID: 8300000, guid: 4fa303de8923b5a4f999f7e530d65044, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 0c4105a8fe42afc48aa891eab898ed9f, type: 3}
+  knifeSounds:
+  - {fileID: 8300000, guid: bda596646eb41dc41817ec564dfae9b1, type: 3}
+  - {fileID: 8300000, guid: 9b6fc3177bf86ff40a9df9b8d2f70d23, type: 3}
+  - {fileID: 8300000, guid: 73fead3f92b98e34e9be1aab2553cdc4, type: 3}
+  - {fileID: 8300000, guid: 7293dbe546aee3b469ab03e4057b1ee2, type: 3}
+  - {fileID: 8300000, guid: 4c728a37e09e4fa41bed888ea2fb5f8a, type: 3}
+  bodyPunchedSounds:
+  - {fileID: 8300000, guid: 0636de77d33954b4e954bf3b2efe274a, type: 3}
+  - {fileID: 8300000, guid: b69d8f18ced1e4242a4e81ebc326b205, type: 3}
+  - {fileID: 8300000, guid: 5a0a24f3fbc046e44a2a294785912381, type: 3}
+  - {fileID: 8300000, guid: d8cb8fec13318d744965c049ff46b85a, type: 3}
+  - {fileID: 8300000, guid: 3bbc5173b9ff8154fbacd89724cfed4f, type: 3}
+--- !u!4 &340331658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340331656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 203.856, y: -310.20404, z: -118.93359}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &351931779
 GameObject:
   m_ObjectHideFlags: 0
