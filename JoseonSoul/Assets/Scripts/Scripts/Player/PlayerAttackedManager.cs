@@ -86,16 +86,22 @@ public class PlayerAttackedManager : MonoBehaviour
         if (collision.collider.CompareTag("EnemyAttack") && hittable)
         {
             Vector3 attackerPosition = collision.transform.position;
-
+            int damage = 0;
+            EnemyAttackManager enemyAttackManager = collision.gameObject.GetComponent<EnemyAttackManager>();
+            if (enemyAttackManager != null)
+            {
+                damage = enemyAttackManager.attackDamage;
+            }
             if (IsAttackBlocked(attackerPosition))
             {
                 Debug.Log("Attack blocked by the shield.");
+                healthManager.updateCurrentSP(-damage/2,false);
                 // Optional: Add effects or animations for blocking
                 return; // Attack is blocked, no further damage logic needed
             }
-
+            
             // If not blocked, handle damage
-            HandleDamage(5f); // Adjust damage value as needed
+            HandleDamage(damage); // Adjust damage value as needed
         }
     }
 
@@ -122,10 +128,10 @@ public class PlayerAttackedManager : MonoBehaviour
     /// Handles applying damage to the player and updating states.
     /// </summary>
     /// <param name="damage">The amount of damage to apply.</param>
-    private void HandleDamage(float damage)
+    private void HandleDamage(int damage)
     {
         // Apply damage to the player's health
-        healthManager.updateCurrentHP(-damage, false);
+        healthManager.updateCurrentHP((float)-damage, false);
 
         // Check if the player's health has dropped to zero or below
         if (healthManager.getCurrentHP() <= 0)
@@ -135,6 +141,8 @@ public class PlayerAttackedManager : MonoBehaviour
             playerController.SetPlayerState((int)PlayerState.Dead);
 
             Debug.Log("Player is dead.");
+
+            Invoke("RestartGame",5.0f);
         }
         else
         {
@@ -143,7 +151,7 @@ public class PlayerAttackedManager : MonoBehaviour
             Debug.Log("Player is stunned after taking damage.");
 
             // Schedule the end of the stunned state
-            Invoke(nameof(EndStunned), 2f);
+            Invoke(nameof(EndStunned), 1.06f);
         }
     }
 
@@ -158,5 +166,12 @@ public class PlayerAttackedManager : MonoBehaviour
             playerController.SetPlayerState((int)PlayerState.Idle);
             Debug.Log("Player recovered from stunned state.");
         }
+    }
+
+    void RestartGame()
+    {
+        healthManager.updateCurrentHP(PlayerHealthManager.maxHP,true);
+        GameManager.Instance.LoadInfo();
+        GameManager.Instance.LoadScene(true);
     }
 }

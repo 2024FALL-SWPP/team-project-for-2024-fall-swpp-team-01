@@ -16,7 +16,7 @@ public class EnemyAttackManager : MonoBehaviour
     [SerializeField] private float attackActiveDuration = 1.0f;
 
     [SerializeField] private bool isAttacking = false;
-    [SerializeField] private int attackDamage = 10;
+    [SerializeField] public int attackDamage = 10;
 
     private bool hasDealtDamage = false;
 

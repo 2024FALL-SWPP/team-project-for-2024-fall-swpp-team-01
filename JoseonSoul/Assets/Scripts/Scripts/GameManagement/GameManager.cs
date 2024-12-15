@@ -6,6 +6,7 @@ using Player;
 using System.IO;
 using System;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Save Info")]
     [SerializeField] private int currentSceneIndex;
     [SerializeField] private Vector3 lastVisitedFire;
+    [SerializeField] private int lastVisitedFireSceneIdx;
     [SerializeField] private bool[] wellPurified;
     [SerializeField] private String filePath;
 
@@ -21,18 +23,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float currentHP;
     [SerializeField] private int potionRemained;
     [Header("Player Init Positions")]
-    [SerializeField] private Vector3[] initPositions = new Vector3[5]{
+    [SerializeField] private Vector3[] initPositions = new Vector3[4]{
         new Vector3(0,0,0),//Stage1Scene1
         new Vector3(0,0,0),//Stage1Scene2
-        new Vector3(0,0,0),//Boss1
         new Vector3(0,0,0),//Stage2
-        new Vector3(0,0,0)//Boss2
+        new Vector3(0,0,0),//boss
     };
 
     [Header("Singleton Objects")]
     public GameObject player = PlayerController.Instance;
     public Stage_UIManager stage_UIManager = Stage_UIManager.Instance;
     public ThirdPersonCameraController mainCamera = ThirdPersonCameraController.Instance;
+
+
+    private PlayerHealthManager healthManager;
+    private PlayerPotionManager potionManager;
     
 
     private void Awake()
@@ -51,12 +56,30 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void Start()
+    {
+        healthManager = PlayerController.Instance.GetComponent<PlayerHealthManager>();
+        if(healthManager == null)
+            Debug.LogError("Player Health Manager Not Detected");
+
+        potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
+        if(potionManager == null)
+            Debug.LogError("Player Potion Manager Not Detected");
+    }
+
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         player.SetActive(true);
+        Stage_UIManager.Instance.EventTextOff();
     }
 
     public void LoadGame()
+    {
+        LoadInfo();
+        LoadScene(true);
+    }
+
+    public void LoadInfo()
     {
         if (File.Exists(filePath))
         {
@@ -67,18 +90,22 @@ public class GameManager : MonoBehaviour
             Debug.Log("SceneIndex: " + gameData.currentSceneIndex);
             Debug.Log("Last Visited Fire: " + gameData.lastVisitedFire);
 
-            this.currentSceneIndex = gameData.currentSceneIndex;
-            this.lastVisitedFire = gameData.lastVisitedFire;
-            this.wellPurified = gameData.wellPurified;
+            currentSceneIndex = gameData.currentSceneIndex;
+            lastVisitedFireSceneIdx = currentSceneIndex;
+            lastVisitedFire = gameData.lastVisitedFire;
+            wellPurified = gameData.wellPurified;
 
             currentHP = PlayerHealthManager.maxHP;
-            // potionRemained = PlayerPotionManager.maxPotion;
-
-            LoadScene(true);
+            potionRemained = PlayerPotionManager.maxPotion;
         }
         else
         {
-            Debug.Log("No save file found at: " + filePath);
+            currentHP = PlayerHealthManager.maxHP;
+            currentSceneIndex = 0;
+            wellPurified = new bool[4]{false,false,false,false};
+            lastVisitedFireSceneIdx = 0;
+            lastVisitedFire = new Vector3(0,0,0);
+            potionRemained = PlayerPotionManager.maxPotion;
         }
     }
 
@@ -87,7 +114,10 @@ public class GameManager : MonoBehaviour
         currentHP = PlayerHealthManager.maxHP;
         currentSceneIndex = 0;
         wellPurified = new bool[4]{false,false,false,false};
-        //potionRemained = PlayerPotionManager.maxPotion;
+        lastVisitedFireSceneIdx = 0;
+        lastVisitedFire = new Vector3(0,0,0);
+        potionRemained = PlayerPotionManager.maxPotion;
+        SaveGame();
         LoadScene(false);
     }
 
@@ -107,16 +137,24 @@ public class GameManager : MonoBehaviour
     }
 
 //저장된 Data Load면 True, 스토리 진행 상 다음 Scene으로 넘어가는거면 False
-    private void LoadScene(bool load)
+    public void LoadScene(bool load)
     {
-        SceneManager.LoadScene(currentSceneIndex);
-
         PlayerController playerController = player.GetComponent<PlayerController>();
 
         if(load)
-            playerController.InitPlayer(currentHP,potionRemained,lastVisitedFire);
+        {
+            SceneManager.LoadScene(lastVisitedFireSceneIdx);
+            if(lastVisitedFire == Vector3.zero)
+                playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
+            else
+                playerController.InitPlayer(currentHP,potionRemained,lastVisitedFire);
+        }
         else
+        {
+            SceneManager.LoadScene(currentSceneIndex);
             playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
+        }
+            
         
         Debug.Log("New Scene Loaded");
     }
@@ -137,10 +175,12 @@ public class GameManager : MonoBehaviour
         {
             lastVisitedFire = player.transform.position;
             
-            currentHP = PlayerHealthManager.maxHP;
-            // potionRemained = PlayerPotionManager.maxPotion;
+            healthManager.updateCurrentHP(PlayerHealthManager.maxHP, true);
+            potionManager.updateCurrentPotion(PlayerPotionManager.maxPotion);
             SaveGame();
             Debug.Log("Saved and Healed");
+
+            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Game Saved!");
         }
 
         if(eventId == (int)GameManagement.Event.NextStage)
@@ -148,13 +188,33 @@ public class GameManager : MonoBehaviour
             if(wellPurified[0] && wellPurified[1] && wellPurified[2] && wellPurified[3])
                 NextScene();
             else
-                Debug.Log("Some wells are not Purified");
+            {
+                stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Some well is not Purified");
+            }
         }
     }
 
     public void PurifyWell(int wellId)
     {
         Debug.Log(wellId.ToString() + " Purified!!");
-        wellPurified[wellId] = true;
+        if(!wellPurified[wellId])
+        {
+            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Well Purifed");
+            wellPurified[wellId] = true;
+        }
+        
+
+        
     }
+
+    public void exitGame()
+    {
+        Debug.Log("QUIT BUTTON PRESSED");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit(); // 빌드된 환경에서 게임 종료
+        #endif
+    }
+
 }
