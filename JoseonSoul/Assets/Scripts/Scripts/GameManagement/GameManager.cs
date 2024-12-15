@@ -67,7 +67,8 @@ public class GameManager : MonoBehaviour
         if(potionManager == null)
             Debug.LogError("Player Potion Manager Not Detected");
 
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        
+        soundManager = SoundManager.Instance;
         soundManager.SetBgm(-1);
     }
 
