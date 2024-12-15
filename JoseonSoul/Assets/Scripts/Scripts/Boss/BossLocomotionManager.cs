@@ -13,7 +13,7 @@ public class BossLocomotionManager : MonoBehaviour
     private Animator animator;
 
     [SerializeField] private float walkTimer = 0f;
-    [SerializeField] private const float runThreshold = 3f;
+    [SerializeField] private const float runThreshold = 2f;
 
     [SerializeField] private float walkSpeed = 2f;
     [SerializeField] private float runSpeed = 8f;

@@ -11,6 +11,7 @@ public class BatMoveForward : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitAndMove());
+        Destroy(gameObject, 6f);
     }
 
     // Update is called once per frame

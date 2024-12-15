@@ -374,7 +374,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.31726402
-        functionName: EndHitting
+        functionName: StartHitting
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -567,7 +567,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.24676022
-        functionName: EndHitting
+        functionName: StartHitting
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
