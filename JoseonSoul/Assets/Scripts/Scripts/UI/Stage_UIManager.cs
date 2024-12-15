@@ -184,7 +184,7 @@ public class Stage_UIManager : MonoBehaviour
     private float maxHP, maxSP, bossMaxHP = 500, hpAnimSpeed = 1, hpAnimDelay = 2, bossHPAnimSpeed = 1, bossHPAnimDelay = 2;
 
     // initial settings - variables
-    private float nowHP = 87, oldHP = 87, SP = 68, bossNowHP = 470, bossOldHP = 470, potionCount = 0;
+    private float nowHP = 87, oldHP = 87, SP = 68, bossNowHP = 500, bossOldHP = 470, potionCount = 0;
 
     [Header("Stage_Canvas")]
     public GameObject canvas;
