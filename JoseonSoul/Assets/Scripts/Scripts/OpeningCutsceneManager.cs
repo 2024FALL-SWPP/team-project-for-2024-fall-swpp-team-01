@@ -134,6 +134,6 @@ public class OpeningCutsceneManager : MonoBehaviour
     private void EndCutscene()
     {
         Debug.Log("Cutscene ended");
-        // SceneManager.LoadScene("NextScene");
+        GameManager.Instance.NextScene();
     }
 }

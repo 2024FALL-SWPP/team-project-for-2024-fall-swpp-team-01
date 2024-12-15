@@ -34,15 +34,15 @@ public class Stage_UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if(scene.buildIndex == 4)
+        if(scene.buildIndex <1 || scene.buildIndex > 4)
             canvas.SetActive(false);
         else
         {
-            if(scene.buildIndex == 3)
+            canvas.SetActive(true);
+            if(scene.buildIndex == 4)
                 setBossStage(true);
             else
                 setBossStage(false);
-            canvas.SetActive(true);
         }
 
     }

@@ -67,4 +67,9 @@ public class BossController : MonoBehaviour
         animator.SetTrigger("Idle_trigger");
         isEntering = false;
     }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+    }
 }

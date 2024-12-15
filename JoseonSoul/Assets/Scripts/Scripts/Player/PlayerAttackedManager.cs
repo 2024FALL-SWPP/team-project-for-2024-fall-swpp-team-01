@@ -12,7 +12,6 @@ public class PlayerAttackedManager : MonoBehaviour
 {
     private PlayerController playerController;
     private PlayerHealthManager healthManager;
-    private SoundManager soundManager;
     private bool hittable = false;
     private bool isBlocking = false;
 
@@ -24,7 +23,6 @@ public class PlayerAttackedManager : MonoBehaviour
         // Get PlayerController and ensure it's not null
         playerController = GetComponent<PlayerController>();
         healthManager = GetComponent<PlayerHealthManager>();
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         if (playerController == null)
             Debug.LogError("PlayerController not detected");
@@ -83,28 +81,44 @@ public class PlayerAttackedManager : MonoBehaviour
     /// Handles collision with enemy attacks.
     /// </summary>
     /// <param name="collision">The collider of the object hitting the player.</param>
-    void OnCollisionEnter(Collision collision)
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     if (collision.collider.CompareTag("EnemyAttack") && hittable)
+    //     {
+    //         Vector3 attackerPosition = collision.transform.position;
+    //         int damage = 0;
+    //         EnemyAttackManager enemyAttackManager = collision.gameObject.GetComponent<EnemyAttackManager>();
+    //         if (enemyAttackManager != null)
+    //         {
+    //             damage = enemyAttackManager.attackDamage;
+    //         }
+    //         if (IsAttackBlocked(attackerPosition))
+    //         {
+    //             Debug.Log("Attack blocked by the shield.");
+    //             healthManager.updateCurrentSP(-damage/2,false);
+    //             // Optional: Add effects or animations for blocking
+    //             return; // Attack is blocked, no further damage logic needed
+    //         }
+    //         
+    //         // If not blocked, handle damage
+    //         HandleDamage(damage); // Adjust damage value as needed
+    //     }
+    // }
+
+    public void HandleEnemyAttack(int damage, GameObject attacker)
     {
-        if (collision.collider.CompareTag("EnemyAttack") && hittable)
+        if (!hittable) return;
+        Debug.Log("HandleEnemyAttack ran");
+        Vector3 attackerPosition = attacker.transform.position;
+        
+        if (IsAttackBlocked(attackerPosition))
         {
-            Vector3 attackerPosition = collision.transform.position;
-            int damage = 0;
-            EnemyAttackManager enemyAttackManager = collision.gameObject.GetComponent<EnemyAttackManager>();
-            if (enemyAttackManager != null)
-            {
-                damage = enemyAttackManager.attackDamage;
-            }
-            if (IsAttackBlocked(attackerPosition))
-            {
-                Debug.Log("Attack blocked by the shield.");
-                healthManager.updateCurrentSP(-damage/2,false);
-                // Optional: Add effects or animations for blocking
-                return; // Attack is blocked, no further damage logic needed
-            }
-            
-            // If not blocked, handle damage
-            HandleDamage(damage); // Adjust damage value as needed
+            Debug.Log("Attack blocked by the shield.");
+            healthManager.updateCurrentSP(-damage / 2, false);
+            return; 
         }
+        
+        HandleDamage(damage);
     }
 
     /// <summary>
@@ -134,7 +148,6 @@ public class PlayerAttackedManager : MonoBehaviour
     {
         // Apply damage to the player's health
         healthManager.updateCurrentHP((float)-damage, false);
-        soundManager.SetAttacked();
 
         // Check if the player's health has dropped to zero or below
         if (healthManager.getCurrentHP() <= 0)
@@ -142,7 +155,6 @@ public class PlayerAttackedManager : MonoBehaviour
             // Set health to zero and update the player's state to Dead
             healthManager.updateCurrentHP(0f, true);
             playerController.SetPlayerState((int)PlayerState.Dead);
-            soundManager.SetGameOver();
 
             Debug.Log("Player is dead.");
 

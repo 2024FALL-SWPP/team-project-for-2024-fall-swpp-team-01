@@ -5,12 +5,11 @@ namespace Boss
         Idle, // 0
         Walking, // 1
         Running, // 2
-        jumping, // 3
+       /* jumping, // 3
         stomping, // 4
         angry, // 5
         Casting1, // 6
         Casting2, // 7
-        /*
         Attack1_1, // 8
         Attack1_2, // 9
         Attack1_3, // 10

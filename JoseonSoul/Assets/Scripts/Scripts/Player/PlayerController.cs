@@ -63,8 +63,6 @@ public class PlayerController : MonoBehaviour
         playerRollingManager = Instance.GetComponent<PlayerRollingManager>();
         if(playerRollingManager == null)
             Debug.LogError("Rolling Manager Not Detected");
-
-        Instance.SetActive(false);
     }
 
     // Update is called once per frame
