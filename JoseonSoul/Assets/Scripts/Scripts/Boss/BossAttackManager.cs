@@ -34,6 +34,7 @@ public class BossAttackManager : MonoBehaviour
     [SerializeField] private int attackNumber = 1;
 
     public bool isAttacking = false;
+    public bool isHitting = false;
 
     public int attackDamage = 40;
 
@@ -283,14 +284,25 @@ public class BossAttackManager : MonoBehaviour
         locomotionManager.agent.speed = moveSpeed;
         animator.SetTrigger(attackName);
         hasHitPlayer = false;
+        isHitting = false;
     }
 
+    public void IsHitting()
+    {
+        isHitting = true;
+    }
+
+    public void EndHitting()
+    {
+        isHitting = false;
+    }
     public void AttackAllFinished()
     {
         ChooseAttack();
         isAttacking = false;
         hasHitPlayer = false;
         animator.SetTrigger("Idle_trigger");
+        isHitting = false;
     }
 
     public void SummonAllFinished()
@@ -329,7 +341,7 @@ public class BossAttackManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if the player entered the trigger zone
-        if (other.CompareTag("Player") && isAttacking && !hasHitPlayer)
+        if (other.CompareTag("Player") && isHitting && !hasHitPlayer)
         {
             Debug.Log("enemy trigger");
             int damage = 70;
