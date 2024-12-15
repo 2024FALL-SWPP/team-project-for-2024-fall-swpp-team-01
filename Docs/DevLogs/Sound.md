@@ -25,5 +25,7 @@
 | -- | -- | -- | -- |
 | 0 | Walking | Walking Footsteps | |
 | 1 | Game over | Funny Falling Notes | |
-| 2 | Player attack | Knife Swing | |
+| 2 | Player attack | Knife Swing | **임팩트가 좀 약한데 Body Hit으로 바꿀까요?** |
 | 3 | Attacked | Body Punch | |
+
+수정 필요 - 다른 소리 효과 넣어야 하는 게 많은 것 같은데 현재 `main`에 병합된 내용이 많지 않은 것 같아서... 접근 가능한 script가 제한되는 것 같습니다. 어차피 `SoundManager` 기본 구조 다 잡아뒀으니 소리 추가하는 건 어렵지 않을 겁니다.
