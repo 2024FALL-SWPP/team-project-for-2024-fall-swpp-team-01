@@ -71,9 +71,20 @@ public class GameManager : MonoBehaviour
         soundManager.SetBgm(-1);
     }
 
-    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
     {
-        player.SetActive(true);
+        int sceneIdx = scene.buildIndex;
+        Debug.Log("Scene Loaded + " + sceneIdx.ToString());
+        if(1<= sceneIdx && sceneIdx <=4)
+        {
+            Debug.Log("Player Activated!");
+            player.SetActive(true);
+        }
+        else
+        {
+            player.SetActive(false);
+        }
+         
         Stage_UIManager.Instance.EventTextOff();
     }
 
@@ -150,7 +161,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(lastVisitedFireSceneIdx);
             soundManager.SetBgm(lastVisitedFireSceneIdx);
             if(lastVisitedFire == Vector3.zero)
-                playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
+                playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex-1]);
             else
                 playerController.InitPlayer(currentHP,potionRemained,lastVisitedFire);
         }
@@ -158,7 +169,7 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(currentSceneIndex);
             soundManager.SetBgm(currentSceneIndex);
-            playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
+            playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex-1]);
         }
             
         
