@@ -194,18 +194,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PurifyWell(int wellId)
+    public bool[] GetWellPurifiedStatus()
     {
-        Debug.Log(wellId.ToString() + " Purified!!");
-        if(!wellPurified[wellId])
-        {
-            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Well Purifed");
-            wellPurified[wellId] = true;
-        }
-        
-
-        
+        return wellPurified;
     }
+
+    public void PurifyWell(int wellId)
+{
+    Debug.Log($"Attempting to purify well_{wellId}");
+    if(!wellPurified[wellId])
+    {
+        stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Well Purifed");
+        wellPurified[wellId] = true;
+
+        GameObject well = GameObject.Find($"well_{wellId}");
+        if (well != null)
+        {
+            Debug.Log($"Found well_{wellId}, applying purification effect");
+            WellParticleManager particleManager = well.GetComponent<WellParticleManager>();
+            if (particleManager != null)
+            {
+                particleManager.OnWellPurified();
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Could not find well_{wellId}");
+        }
+    }
+}
 
     public void exitGame()
     {
