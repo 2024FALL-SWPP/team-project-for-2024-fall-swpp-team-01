@@ -35,7 +35,11 @@ public class PlayerEventManager : MonoBehaviour
             if(eventId == (int)GameManagement.Event.Well)
                 gameManager.PurifyWell(wellId);
             else
+            {
                 gameManager.handleEvent(eventId);
+                canEvent = false;
+            }
+                
         }
             
     }
