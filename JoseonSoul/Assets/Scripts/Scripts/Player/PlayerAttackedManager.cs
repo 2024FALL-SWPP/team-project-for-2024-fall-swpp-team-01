@@ -167,6 +167,7 @@ public class PlayerAttackedManager : MonoBehaviour
             playerController.SetPlayerState((int)PlayerState.Dead);
 
             deathUIManager.ShowDeathUI();
+            soundManager.SetGameOver();
             
             // 3초 후 재시작
             Invoke("RestartGame", 3.0f);
