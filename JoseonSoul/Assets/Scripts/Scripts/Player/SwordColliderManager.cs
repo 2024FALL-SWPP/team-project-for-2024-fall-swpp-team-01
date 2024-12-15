@@ -65,6 +65,7 @@ public class SwordColliderManager : MonoBehaviour
 
         if (other.CompareTag("BossBody"))
         {
+            Debug.Log("boss got damage");
             other.GetComponent<BossController>().TakeDamage(damage);
             DisableCollider();
         }

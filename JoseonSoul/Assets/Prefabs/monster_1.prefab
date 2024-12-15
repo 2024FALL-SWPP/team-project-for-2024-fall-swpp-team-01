@@ -450,11 +450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a146edb147694b937bdfa717cab82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 2
+  attackRange: 3
   attackCooldown: 1.5
   attackActiveDuration: 1
   isAttacking: 0
-  attackDamage: 10
+  attackDamage: 40
 --- !u!114 &-6157970248272098854
 MonoBehaviour:
   m_ObjectHideFlags: 0

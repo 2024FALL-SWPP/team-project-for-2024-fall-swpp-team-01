@@ -27,7 +27,7 @@ public class PlayerAttackManager : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         swordColliderManager = GetComponentInChildren<SwordColliderManager>();
         healthManager = GetComponent<PlayerHealthManager>();
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager = SoundManager.Instance;
 
         if (playerController == null)
             Debug.LogError("PlayerController is null");

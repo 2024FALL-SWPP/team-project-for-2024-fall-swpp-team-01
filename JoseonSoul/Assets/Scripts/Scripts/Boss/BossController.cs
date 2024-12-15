@@ -15,8 +15,8 @@ public class BossController : MonoBehaviour
 
     private bool isEntering = true;
 
-    [SerializeField] private int maxHealth = 100;
-    public int currentHealth = 100;
+    [SerializeField] private int maxHealth = 500;
+    public int currentHealth = 500;
 
     private void Start()
     {
