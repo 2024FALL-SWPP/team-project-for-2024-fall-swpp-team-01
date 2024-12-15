@@ -62,5 +62,11 @@ public class SwordColliderManager : MonoBehaviour
             // Disable the collider to prevent multiple hits in one attack
             DisableCollider();
         }
+
+        if (other.CompareTag("BossBody"))
+        {
+            other.GetComponent<BossController>().TakeDamage(damage);
+            DisableCollider();
+        }
     }
 }
