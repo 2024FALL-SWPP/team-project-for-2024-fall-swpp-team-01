@@ -12,12 +12,13 @@ public class SoundManager : MonoBehaviour
     public AudioClip walkingSound;
     public AudioClip gameOverSound;
     public List<AudioClip> knifeSounds;
+    public List<AudioClip> bodyPunchedSounds;
 
     private static SoundManager instance;
 
     private AudioSource BGMAudioSource;
     private List<AudioSource> SFXAudioSources = new List<AudioSource>();
-    private int SFXSourcesNum = 5; // 0: Walking, 1: GameOver, 2: Knife, ...
+    private int SFXSourcesNum = 5; // 0: Walking, 1: GameOver, 2: Knife, 3: Attacked, ...
 
     private void Awake()
     {
@@ -43,13 +44,13 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     public void SetBgm(int sceneId)
     {
         Debug.Log(sceneId);
-        switch(sceneId)
+        switch (sceneId)
         {
             case -2: // Stop the bgm
                 BGMAudioSource.Stop();
@@ -70,7 +71,17 @@ public class SoundManager : MonoBehaviour
             case 1: // Stage 1 Scene 2
                 break;
 
-            // 이런 식으로 채워나가면 됩니다...
+            case 2: // Stage 2
+                BGMAudioSource.clip = stage2Music;
+                BGMAudioSource.loop = true;
+                BGMAudioSource.Play();
+                break;
+
+            case 3: // Boss Stage
+                BGMAudioSource.clip = bossStageMusic;
+                BGMAudioSource.loop = true;
+                BGMAudioSource.Play();
+                break;
         }
     }
 
@@ -98,5 +109,11 @@ public class SoundManager : MonoBehaviour
     {
         SFXAudioSources[2].clip = knifeSounds[Random.Range(0, knifeSounds.Count)];
         SFXAudioSources[2].Play();
+    }
+
+    public void SetAttacked()
+    {
+        SFXAudioSources[3].clip = bodyPunchedSounds[Random.Range(0, bodyPunchedSounds.Count)];
+        SFXAudioSources[3].Play();
     }
 }

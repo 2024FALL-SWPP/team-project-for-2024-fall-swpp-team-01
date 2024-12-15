@@ -1570,6 +1570,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 73fead3f92b98e34e9be1aab2553cdc4, type: 3}
   - {fileID: 8300000, guid: 7293dbe546aee3b469ab03e4057b1ee2, type: 3}
   - {fileID: 8300000, guid: 4c728a37e09e4fa41bed888ea2fb5f8a, type: 3}
+  bodyPunchedSounds:
+  - {fileID: 8300000, guid: 0636de77d33954b4e954bf3b2efe274a, type: 3}
+  - {fileID: 8300000, guid: b69d8f18ced1e4242a4e81ebc326b205, type: 3}
+  - {fileID: 8300000, guid: 5a0a24f3fbc046e44a2a294785912381, type: 3}
+  - {fileID: 8300000, guid: d8cb8fec13318d744965c049ff46b85a, type: 3}
+  - {fileID: 8300000, guid: 3bbc5173b9ff8154fbacd89724cfed4f, type: 3}
 --- !u!4 &340331658
 Transform:
   m_ObjectHideFlags: 0

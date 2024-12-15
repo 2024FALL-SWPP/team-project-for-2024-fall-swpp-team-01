@@ -134,6 +134,7 @@ public class PlayerAttackedManager : MonoBehaviour
     {
         // Apply damage to the player's health
         healthManager.updateCurrentHP((float)-damage, false);
+        soundManager.SetAttacked();
 
         // Check if the player's health has dropped to zero or below
         if (healthManager.getCurrentHP() <= 0)
