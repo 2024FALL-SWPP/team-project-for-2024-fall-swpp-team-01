@@ -1,3 +1,4 @@
+using System;
 using Enemy;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Data.Common;
 using UnityEngine.AI;
 using System.Security.Cryptography;
 using JetBrains.Annotations;
+using Random = UnityEngine.Random;
 
 public class BossAttackManager : MonoBehaviour
 {
@@ -322,5 +324,24 @@ public class BossAttackManager : MonoBehaviour
             attackNumber = Random.Range(1, 10);
         }
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the player entered the trigger zone
+        if (other.CompareTag("Player") && isAttacking && !hasHitPlayer)
+        {
+            Debug.Log("enemy trigger");
+            int damage = 70;
+
+            // Call the player's HandleEnemyAttack function
+            PlayerAttackedManager playerController = other.gameObject.GetComponent<PlayerAttackedManager>();
+            if (playerController != null)
+            {
+                playerController.HandleEnemyAttack(damage, gameObject);
+            }
+
+            hasHitPlayer = true; 
+        }
     }
 }

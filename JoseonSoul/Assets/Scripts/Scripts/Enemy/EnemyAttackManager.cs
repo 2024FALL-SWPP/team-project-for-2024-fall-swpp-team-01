@@ -51,7 +51,7 @@ public class EnemyAttackManager : MonoBehaviour
     void StartAttack()
     {
         isAttacking = true;
-        hasDealtDamage = true;
+        hasDealtDamage = false;
 
         locomotionManager.StopMoving();
 
@@ -96,9 +96,20 @@ public class EnemyAttackManager : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        // Check if the player entered the trigger zone
         if (other.CompareTag("Player") && isAttacking && !hasDealtDamage)
         {
-            Debug.Log("Player entered the trigger zone!");
+            Debug.Log("enemy trigger");
+            int damage = 40;
+
+            // Call the player's HandleEnemyAttack function
+            PlayerAttackedManager playerController = other.gameObject.GetComponent<PlayerAttackedManager>();
+            if (playerController != null)
+            {
+                playerController.HandleEnemyAttack(damage, gameObject); // Pass damage and attacker
+            }
+
+            hasDealtDamage = true; // Prevent duplicate damage
         }
     }
 }
