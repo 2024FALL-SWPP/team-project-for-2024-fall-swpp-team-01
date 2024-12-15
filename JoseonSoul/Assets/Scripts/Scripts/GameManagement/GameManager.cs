@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private PlayerHealthManager healthManager;
     private PlayerPotionManager potionManager;
+    private SoundManager soundManager;
     
 
     private void Awake()
@@ -65,6 +66,9 @@ public class GameManager : MonoBehaviour
         potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
         if(potionManager == null)
             Debug.LogError("Player Potion Manager Not Detected");
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.SetBgm(-1);
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -144,6 +148,7 @@ public class GameManager : MonoBehaviour
         if(load)
         {
             SceneManager.LoadScene(lastVisitedFireSceneIdx);
+            soundManager.SetBgm(lastVisitedFireSceneIdx);
             if(lastVisitedFire == Vector3.zero)
                 playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
             else
@@ -152,6 +157,7 @@ public class GameManager : MonoBehaviour
         else
         {
             SceneManager.LoadScene(currentSceneIndex);
+            soundManager.SetBgm(currentSceneIndex);
             playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
         }
             

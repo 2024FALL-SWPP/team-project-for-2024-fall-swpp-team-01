@@ -12,6 +12,7 @@ public class PlayerAttackedManager : MonoBehaviour
 {
     private PlayerController playerController;
     private PlayerHealthManager healthManager;
+    private SoundManager soundManager;
     private bool hittable = false;
     private bool isBlocking = false;
 
@@ -23,6 +24,7 @@ public class PlayerAttackedManager : MonoBehaviour
         // Get PlayerController and ensure it's not null
         playerController = GetComponent<PlayerController>();
         healthManager = GetComponent<PlayerHealthManager>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         if (playerController == null)
             Debug.LogError("PlayerController not detected");
@@ -139,6 +141,7 @@ public class PlayerAttackedManager : MonoBehaviour
             // Set health to zero and update the player's state to Dead
             healthManager.updateCurrentHP(0f, true);
             playerController.SetPlayerState((int)PlayerState.Dead);
+            soundManager.SetGameOver();
 
             Debug.Log("Player is dead.");
 

@@ -14,6 +14,7 @@ public class PlayerAttackManager : MonoBehaviour
     private PlayerController playerController;
     private SwordColliderManager swordColliderManager;
     private PlayerHealthManager healthManager;
+    private SoundManager soundManager;
 
     private bool isQueued = false; // Indicates if the next attack is queued
     private float openPhaseDuration = 0.2f;   // Duration of the Open phase
@@ -26,6 +27,7 @@ public class PlayerAttackManager : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         swordColliderManager = GetComponentInChildren<SwordColliderManager>();
         healthManager = GetComponent<PlayerHealthManager>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         if (playerController == null)
             Debug.LogError("PlayerController is null");
@@ -71,6 +73,7 @@ public class PlayerAttackManager : MonoBehaviour
     {
         playerController.SetPlayerState((int)PlayerState.Attacking1Closed);
         healthManager.updateCurrentSP(-staminaConsume,false);
+        soundManager.SetKnifeSound();
         isQueued = false; // Reset any previous queue
 
         // Enable the sword collider
@@ -107,6 +110,7 @@ public class PlayerAttackManager : MonoBehaviour
         playerController.SetPlayerState((int)PlayerState.Attacking2Closed);
         healthManager.updateCurrentSP(-staminaConsume,false);
         Debug.Log("Attack2 Closed Started");
+        soundManager.SetKnifeSound();
         isQueued = false;
 
         // Enable the sword collider
@@ -143,6 +147,7 @@ public class PlayerAttackManager : MonoBehaviour
     {
         playerController.SetPlayerState((int)PlayerState.Attacking3Closed);
         healthManager.updateCurrentSP(-staminaConsume,false);
+        soundManager.SetKnifeSound();
         isQueued = false;
 
         // Enable the sword collider

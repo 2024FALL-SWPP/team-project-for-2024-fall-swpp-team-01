@@ -7,3 +7,14 @@
 - [Stage2](https://www.youtube.com/watch?v=tRiZG9WGRGo)
 - [이건 뭐지?](https://youtu.be/nb89_EBBQT0?si=rDmzDhzm-Qx8UXxV&t=123)
 - 기타 효과음: [https://www.epidemicsound.com](https://www.epidemicsound.com/)
+
+## 구현 진행 상황
+### BGM
+| Scene | BGM | Remarks |
+| -- | -- | -- |
+| TitleScene | [TitleScene](https://www.youtube.com/watch?v=8Erdny-jZW4) | **적용 완료** |
+| Stage 1 Scene 1 | [Stage2](https://www.youtube.com/watch?v=tRiZG9WGRGo) - **Stage 1 음악이 안 보이는데 어떤 걸까요?** | 임시 적용 완료 |
+| Stage 1 Scene 2 | [Stage2](https://www.youtube.com/watch?v=tRiZG9WGRGo) - Stage 1 Scene 1의 BGM 끊지 않고 재생 | 임시 적용 완료
+| Stage 2 | [Stage2](https://www.youtube.com/watch?v=tRiZG9WGRGo) | ??? |
+
+### Sound Effects
