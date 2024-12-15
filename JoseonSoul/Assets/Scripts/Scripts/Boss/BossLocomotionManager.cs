@@ -42,8 +42,18 @@ public class BossLocomotionManager : MonoBehaviour
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         Vector3 targetPosition = player.position - directionToPlayer * desiredDistance;
         agent.SetDestination(targetPosition);
+        float remainingDistance = Vector3.Distance(transform.position, player.position);
+        if (remainingDistance <= desiredDistance)
+        {
+            agent.updateRotation = false;
+            LookAtPlayer();
+        }
+        else
+        {
+            agent.updateRotation = true;
+        }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (attackManager.isAttacking) 
         {
@@ -67,4 +77,10 @@ public class BossLocomotionManager : MonoBehaviour
         }
     }
 
+    void LookAtPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 7f);
+    }
 }
