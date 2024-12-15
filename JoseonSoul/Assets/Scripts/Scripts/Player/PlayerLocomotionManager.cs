@@ -23,6 +23,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     private Animator animator;
     private PlayerHealthManager healthManager;
     private PlayerController playerController;
+    private SoundManager soundManager;
 
     public float Speed { get => speed; set => speed = value; }
 
@@ -49,6 +50,8 @@ public class PlayerLocomotionManager : MonoBehaviour
         healthManager = GetComponent<PlayerHealthManager>();
         if(healthManager == null)
             Debug.LogError("No HealthManager Detected");
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     void Update()
@@ -96,6 +99,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             {
                 DecrementStamina();
             }
+            soundManager.SetRunning(true);
         }
         // Optionally, handle idle state when there's no input
         else
@@ -103,6 +107,7 @@ public class PlayerLocomotionManager : MonoBehaviour
             playerController.SetPlayerState((int)PlayerState.Idle);
             //animator.SetInteger("player_state", (int)PlayerState.Idle);
             // Implement idle behavior if needed (e.g., stop movement animations)
+            soundManager.SetRunning(false);
         }
     }
 

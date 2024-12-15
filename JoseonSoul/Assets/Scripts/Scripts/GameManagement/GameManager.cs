@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private PlayerHealthManager healthManager;
     private PlayerPotionManager potionManager;
+    private SoundManager soundManager;
     
 
     private void Awake()
@@ -65,6 +66,9 @@ public class GameManager : MonoBehaviour
         potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
         if(potionManager == null)
             Debug.LogError("Player Potion Manager Not Detected");
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.SetBgm(-1);
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -144,6 +148,7 @@ public class GameManager : MonoBehaviour
         if(load)
         {
             SceneManager.LoadScene(lastVisitedFireSceneIdx);
+            soundManager.SetBgm(lastVisitedFireSceneIdx);
             if(lastVisitedFire == Vector3.zero)
                 playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
             else
@@ -152,6 +157,7 @@ public class GameManager : MonoBehaviour
         else
         {
             SceneManager.LoadScene(currentSceneIndex);
+            soundManager.SetBgm(currentSceneIndex);
             playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
         }
             
@@ -194,18 +200,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PurifyWell(int wellId)
+    public bool[] GetWellPurifiedStatus()
     {
-        Debug.Log(wellId.ToString() + " Purified!!");
-        if(!wellPurified[wellId])
-        {
-            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Well Purifed");
-            wellPurified[wellId] = true;
-        }
-        
-
-        
+        return wellPurified;
     }
+
+    public void PurifyWell(int wellId)
+{
+    Debug.Log($"Attempting to purify well_{wellId}");
+    if(!wellPurified[wellId])
+    {
+        stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Well Purifed");
+        wellPurified[wellId] = true;
+
+        GameObject well = GameObject.Find($"well_{wellId}");
+        if (well != null)
+        {
+            Debug.Log($"Found well_{wellId}, applying purification effect");
+            WellParticleManager particleManager = well.GetComponent<WellParticleManager>();
+            if (particleManager != null)
+            {
+                particleManager.OnWellPurified();
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Could not find well_{wellId}");
+        }
+    }
+}
 
     public void exitGame()
     {
