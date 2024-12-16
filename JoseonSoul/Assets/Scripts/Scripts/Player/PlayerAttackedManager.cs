@@ -63,6 +63,27 @@ public class PlayerAttackedManager : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DeathZone"))
+        {
+            HandleInstantDeath();
+        }
+    }
+
+    private void HandleInstantDeath()
+    {
+        healthManager.updateCurrentHP(0f, true);
+        playerController.SetPlayerState((int)PlayerState.Dead);
+
+        deathUIManager.ShowDeathUI();
+        soundManager.SetGameOver();
+        
+        Invoke("RestartGame", 3.0f);
+        
+        Debug.Log("Player died from death zone.");
+    }
+
     /// <summary>
     /// Activates the shield and updates the player state to Guarding.
     /// </summary>
