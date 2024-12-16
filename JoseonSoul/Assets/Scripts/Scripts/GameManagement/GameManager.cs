@@ -85,6 +85,11 @@ public class GameManager : MonoBehaviour
         {
             player.SetActive(false);
         }
+
+        if(sceneIdx == 5)
+        {
+            Invoke("NextScene", 10.0f);
+        }
          
         Stage_UIManager.Instance.EventTextOff();
     }
