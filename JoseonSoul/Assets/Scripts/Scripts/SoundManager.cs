@@ -16,12 +16,13 @@ public class SoundManager : MonoBehaviour
     public List<AudioClip> growlingSounds;
     public List<AudioClip> longRoarSounds;
     public List<AudioClip> shortRoarSounds;
+    public List<AudioClip> shieldBlockSounds;
 
     public static SoundManager Instance { get; private set; }
 
     private AudioSource BGMAudioSource;
     private List<AudioSource> SFXAudioSources = new List<AudioSource>();
-    private int SFXSourcesNum = 7; // 0: Walking, 1: GameOver, 2: Knife, 3: Attacked, 4 : Growling, 5 : Long Roar, 6 : Short Roar
+    private int SFXSourcesNum = 8; // 0: Walking, 1: GameOver, 2: Knife, 3: Attacked, 4 : Growling, 5 : Long Roar, 6 : Short Roar, 7 : Shield Block
 
     private void Awake()
     {
@@ -150,7 +151,14 @@ public class SoundManager : MonoBehaviour
     public void SetShortRoarSound()
     {
         SFXAudioSources[6].clip = shortRoarSounds[Random.Range(0, shortRoarSounds.Count)];
-        SFXAudioSources[4].volume = 0.4f;
+        SFXAudioSources[6].volume = 0.4f;
         SFXAudioSources[6].Play();
+    }
+
+    public void SetShieldBlockSound()
+    {
+        SFXAudioSources[7].clip = shieldBlockSounds[Random.Range(0, shieldBlockSounds.Count)];
+        SFXAudioSources[7].volume = 0.4f;
+        SFXAudioSources[7].Play();
     }
 }

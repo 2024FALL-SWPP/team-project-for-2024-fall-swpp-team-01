@@ -70,7 +70,6 @@ public class PlayerAttackedManager : MonoBehaviour
     {
         isBlocking = true;
         playerController.SetPlayerState((int)PlayerState.Guarding);
-        Debug.Log("Shield activated.");
     }
 
     /// <summary>
@@ -124,6 +123,7 @@ public class PlayerAttackedManager : MonoBehaviour
         {
             Debug.Log("Attack blocked by the shield.");
             healthManager.updateCurrentSP(-damage / 2, false);
+            SoundManager.Instance.SetShieldBlockSound();
             return; 
         }
         

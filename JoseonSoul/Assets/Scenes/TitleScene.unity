@@ -1812,6 +1812,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0ef0649912ca247ee98e9201b34b6c04, type: 3}
   - {fileID: 8300000, guid: 194ef7ef6c2ed4c8c9031a6b20b6cbe8, type: 3}
   - {fileID: 8300000, guid: a40bc61e372ba4a3b93e920e334aecdf, type: 3}
+  shieldBlockSounds:
+  - {fileID: 8300000, guid: 026f6031bbeb9438e8f783074ca1d546, type: 3}
 --- !u!4 &340331658
 Transform:
   m_ObjectHideFlags: 0
