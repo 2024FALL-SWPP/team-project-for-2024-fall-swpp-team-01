@@ -119,7 +119,7 @@ public class PlayerAttackedManager : MonoBehaviour
         Debug.Log("HandleEnemyAttack ran");
         Vector3 attackerPosition = attacker.transform.position;
         
-        if (IsAttackBlocked(attackerPosition))
+        if (IsAttackBlocked(attackerPosition, damage))
         {
             Debug.Log("Attack blocked by the shield.");
             healthManager.updateCurrentSP(-damage / 2, false);
@@ -135,9 +135,10 @@ public class PlayerAttackedManager : MonoBehaviour
     /// </summary>
     /// <param name="attackerPosition">The position of the attacker.</param>
     /// <returns>True if the attack is blocked by the shield; false otherwise.</returns>
-    private bool IsAttackBlocked(Vector3 attackerPosition)
+    private bool IsAttackBlocked(Vector3 attackerPosition, int damage)
     {
         if (!isBlocking) return false;
+        if (healthManager.getCurrentSP() < damage / 2) return false;
 
         Vector3 toAttacker = attackerPosition - playerTransform.position; // Vector from player to attacker
         Vector3 forward = playerTransform.forward; // Player's forward direction

@@ -158,7 +158,7 @@ public class SoundManager : MonoBehaviour
     public void SetShieldBlockSound()
     {
         SFXAudioSources[7].clip = shieldBlockSounds[Random.Range(0, shieldBlockSounds.Count)];
-        SFXAudioSources[7].volume = 0.4f;
+        SFXAudioSources[7].volume = 1.0f;
         SFXAudioSources[7].Play();
     }
 }

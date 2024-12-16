@@ -374,7 +374,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.31726402
-        functionName: EndHitting
+        functionName: StartHitting
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -567,7 +567,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.24676022
-        functionName: EndHitting
+        functionName: StartHitting
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -660,7 +660,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.40974212
+      - time: 1
         functionName: Recover
         data: 
         objectReferenceParameter: {instanceID: 0}

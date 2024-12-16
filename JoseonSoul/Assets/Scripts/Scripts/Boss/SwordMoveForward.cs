@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordMoveForward : MonoBehaviour
 {
-    [SerializeField] private float speed = 20.0f;
+    [SerializeField] private float speed = 30.0f;
     private bool isMoving = false;
 
     // Start is called before the first frame update

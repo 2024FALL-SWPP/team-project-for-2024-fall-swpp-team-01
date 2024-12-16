@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 182587603275735444}
   - component: {fileID: -2163030009891021267}
   - component: {fileID: 3441753362782024975}
+  - component: {fileID: 1211529041883524074}
   m_Layer: 0
   m_Name: boss_bat
   m_TagString: Untagged
@@ -107,8 +108,20 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839810629327405121}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.104799956, y: 0.10479998, z: 0.4731623}
-  m_Center: {x: 0, y: -9.567012e-16, z: -0.067321874}
+  m_Size: {x: 0.14144939, y: 0.149474, z: 0.4731623}
+  m_Center: {x: 0.007852202, y: 0.0013426443, z: -0.067321874}
+--- !u!114 &1211529041883524074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839810629327405121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c5b99382b7f4b0f8cc4152899eba22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
