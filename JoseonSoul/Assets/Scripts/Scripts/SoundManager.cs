@@ -98,7 +98,7 @@ public class SoundManager : MonoBehaviour
             SFXAudioSources[0].loop = true;
             SFXAudioSources[0].Play();
         }
-        else if (!isRunning & SFXAudioSources[0].isPlaying)
+        else if (!isRunning && SFXAudioSources[0].isPlaying)
         {
             SFXAudioSources[0].Stop();
         }

@@ -411,6 +411,7 @@ MonoBehaviour:
   stage_UIManager: {fileID: 1882150238}
   mainCamera: {fileID: 425531605}
   uiCamera: {fileID: 174900591}
+  soundManager: {fileID: 340331657}
 --- !u!4 &130529253
 Transform:
   m_ObjectHideFlags: 0
