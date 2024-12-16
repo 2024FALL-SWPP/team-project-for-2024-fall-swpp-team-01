@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(lastVisitedFireSceneIdx);
             soundManager.SetBgm(lastVisitedFireSceneIdx);
             if(lastVisitedFire == Vector3.zero)
-                playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex-1]);
+                playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
             else
                 playerController.InitPlayer(currentHP,potionRemained,lastVisitedFire);
         }
@@ -173,7 +173,7 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(currentSceneIndex);
             soundManager.SetBgm(currentSceneIndex);
-            playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex-1]);
+            playerController.InitPlayer(currentHP,potionRemained,initPositions[currentSceneIndex]);
         }
             
         
