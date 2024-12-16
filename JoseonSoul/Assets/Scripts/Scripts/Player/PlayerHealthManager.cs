@@ -1,4 +1,5 @@
 using System;
+using Player;
 using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class PlayerHealthManager : MonoBehaviour
     public Stage_UIManager UIManager;
     public GameManager gameManager;
     public PlayerPotionManager potionManager;
+    public PlayerController playerController;
 
     
     public event Action<float> OnHealthChanged;
@@ -33,6 +35,8 @@ public class PlayerHealthManager : MonoBehaviour
         potionManager = PlayerController.Instance.GetComponent<PlayerPotionManager>();
         if(potionManager == null)
             Debug.LogError("Potion Manager Not Detected");
+
+        playerController = PlayerController.Instance.GetComponent<PlayerController>();
 
         currentHP = maxHP;
         currentSP = maxSP;
@@ -90,7 +94,10 @@ public class PlayerHealthManager : MonoBehaviour
 
     private void RefillStamina()
     {
-        updateCurrentSP(SPIncrementSpeed * Time.deltaTime, false);
+        float SPIncrementSpeedNow = SPIncrementSpeed;
+        if(playerController.GetPlayerState() == (int)PlayerState.Guarding)
+            SPIncrementSpeedNow *= 0.5f;
+        updateCurrentSP(SPIncrementSpeedNow * Time.deltaTime, false);
         currentSP = Mathf.Clamp(currentSP, 0, maxSP);
         return;
     }

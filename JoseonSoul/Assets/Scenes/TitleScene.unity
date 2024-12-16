@@ -411,6 +411,7 @@ MonoBehaviour:
   stage_UIManager: {fileID: 1882150238}
   mainCamera: {fileID: 425531605}
   uiCamera: {fileID: 174900591}
+  soundManager: {fileID: 340331657}
 --- !u!4 &130529253
 Transform:
   m_ObjectHideFlags: 0
@@ -1799,6 +1800,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5a0a24f3fbc046e44a2a294785912381, type: 3}
   - {fileID: 8300000, guid: d8cb8fec13318d744965c049ff46b85a, type: 3}
   - {fileID: 8300000, guid: 3bbc5173b9ff8154fbacd89724cfed4f, type: 3}
+  growlingSounds:
+  - {fileID: 8300000, guid: b88b71d58ba1446b4b4afdbd5c9339bb, type: 3}
+  - {fileID: 8300000, guid: e1f2c5bc5e74c4eddb22a6d1b36cc9d9, type: 3}
+  - {fileID: 8300000, guid: f5a032e8d559147f79e0d8d5b439b8f2, type: 3}
+  longRoarSounds:
+  - {fileID: 8300000, guid: ce7a7d55cd3fa4ad4b49f3e092f734a4, type: 3}
+  shortRoarSounds:
+  - {fileID: 8300000, guid: 26a09367c1d0c46ac9643d37c58f7e23, type: 3}
+  - {fileID: 8300000, guid: 1fd80b52fce6b42eb8bd4a7fe20927e7, type: 3}
+  - {fileID: 8300000, guid: 0ef0649912ca247ee98e9201b34b6c04, type: 3}
+  - {fileID: 8300000, guid: 194ef7ef6c2ed4c8c9031a6b20b6cbe8, type: 3}
+  - {fileID: 8300000, guid: a40bc61e372ba4a3b93e920e334aecdf, type: 3}
+  shieldBlockSounds:
+  - {fileID: 8300000, guid: 026f6031bbeb9438e8f783074ca1d546, type: 3}
 --- !u!4 &340331658
 Transform:
   m_ObjectHideFlags: 0

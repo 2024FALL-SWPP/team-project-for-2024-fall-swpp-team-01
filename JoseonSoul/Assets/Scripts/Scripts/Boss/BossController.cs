@@ -10,6 +10,7 @@ public class BossController : MonoBehaviour
     private BossLocomotionManager locomotionManager;
     private BossAttackManager attackManager;
     private Animator animator;
+    private SoundManager soundManager;
 
     [SerializeField] private int bossState = 0;
 
@@ -23,8 +24,10 @@ public class BossController : MonoBehaviour
         locomotionManager = GetComponent<BossLocomotionManager>();
         attackManager = GetComponent<BossAttackManager>();
         animator = GetComponent<Animator>();
+        soundManager = SoundManager.Instance;
 
         Stage_UIManager.Instance.UpdateBossNowHP(maxHealth, true);
+        soundManager.SetLongRoarSound();
 
         StartCoroutine(BossEntrance());
     }

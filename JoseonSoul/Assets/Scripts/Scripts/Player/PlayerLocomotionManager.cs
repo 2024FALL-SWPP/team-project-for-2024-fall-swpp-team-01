@@ -51,7 +51,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         if(healthManager == null)
             Debug.LogError("No HealthManager Detected");
 
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager = SoundManager.Instance;
     }
 
     void Update()

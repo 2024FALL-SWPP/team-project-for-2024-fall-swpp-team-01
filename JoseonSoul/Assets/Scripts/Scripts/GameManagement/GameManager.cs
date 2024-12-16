@@ -35,11 +35,11 @@ public class GameManager : MonoBehaviour
     public Stage_UIManager stage_UIManager = Stage_UIManager.Instance;
     public ThirdPersonCameraController mainCamera = ThirdPersonCameraController.Instance;
     public CutSceneCameraController uiCamera = CutSceneCameraController.Instance;
+    public SoundManager soundManager = SoundManager.Instance;
 
 
     private PlayerHealthManager healthManager;
     private PlayerPotionManager potionManager;
-    private SoundManager soundManager;
     
 
     private void Awake()
@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
             player.SetActive(false);
             mainCamera.gameObject.SetActive(false);
             uiCamera.gameObject.SetActive(true);
+            soundManager.SetRunning(false);
         }
          
         Stage_UIManager.Instance.EventTextOff();
