@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
-  m_ActiveColorSpace: 1
+  m_ActiveColorSpace: 0
   unsupportedMSAAFallback: 0
   m_MTRendering: 1
   mipStripping: 0
@@ -602,7 +602,7 @@ PlayerSettings:
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
   webGLMemorySize: 16
-  webGLExceptionSupport: 1
+  webGLExceptionSupport: 2
   webGLNameFilesAsHashes: 0
   webGLDataCaching: 1
   webGLDebugSymbols: 0
@@ -611,7 +611,7 @@ PlayerSettings:
   webGLTemplate: APPLICATION:Default
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 1
+  webGLCompressionFormat: 2
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
@@ -721,11 +721,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: ebfb8869-6553-4b69-a532-0b60d924657a
+  cloudProjectId: e9e95f15-2193-4538-969f-fa7d85f5ce5e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: JoseonSoul 2024-11-01_15-37-12
-  organizationId: sheon_0409
+  projectName: JoseonSoul
+  organizationId: toplucky125
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
