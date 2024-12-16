@@ -12,6 +12,12 @@ using Random = UnityEngine.Random;
 
 public class BossAttackManager : MonoBehaviour
 {
+    public Transform swordTransform;
+    private Vector3 walkPosition = new Vector3(0.57f, 0.59f, 2.01f);
+    private Vector3 walkRotation = new Vector3(-17.96f, 15.65f, 9.22f);
+    private Vector3 attackPosition = new Vector3(-0.3f, 2.2f, 0.08f);
+    private Vector3 attackRotation = new Vector3(-81.22f, -68.53f, 87.08f);
+
     private Transform player;
     private BossController bossController;
     private BossLocomotionManager locomotionManager;
@@ -21,8 +27,8 @@ public class BossAttackManager : MonoBehaviour
     public GameObject swordPrefab;
 
     [SerializeField] private float attackRange = 5f;
-    [SerializeField] private float attack_2_Range_MIN = 7f;
-    [SerializeField] private float TeleportThershold = 10f;
+    [SerializeField] private float attack_2_Range_MIN = 8f;
+    [SerializeField] private float TeleportThershold = 8f;
 
     [SerializeField] private float walkingWhileAttack = 1.5f;
 
@@ -57,7 +63,20 @@ public class BossAttackManager : MonoBehaviour
 
     public void HandleAttack()
     {
-        if (isAttacking) return;
+        Vector3 targetPosition = isAttacking ? attackPosition : walkPosition;
+        Vector3 targetRotation = isAttacking ? attackRotation : walkRotation;
+
+        swordTransform.localPosition = Vector3.Lerp(swordTransform.localPosition, targetPosition, Time.deltaTime * 20f);
+
+        Quaternion currentRotation = swordTransform.localRotation;
+        Quaternion targetQuaternion = Quaternion.Euler(targetRotation);
+        swordTransform.localRotation = Quaternion.Slerp(currentRotation, targetQuaternion, Time.deltaTime * 20f);
+
+        if (isAttacking)
+        {
+            return;
+        }
+        
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -119,7 +138,7 @@ public class BossAttackManager : MonoBehaviour
     public void Attack2(float distanceToPlayer)
     {
 
-        if (!isAttacking && distanceToPlayer <= attackRange)
+        if (!isAttacking && distanceToPlayer <= attack_2_Range_MIN)
         {
             isAttacking = true;
             hasHitPlayer = false;
@@ -193,7 +212,7 @@ public class BossAttackManager : MonoBehaviour
     public void SummonBat(float distanceToPlayer)
     {
 
-        if (!isAttacking && distanceToPlayer >= attack_2_Range_MIN)
+        if (!isAttacking)
         {
             isAttacking = true;
             hasHitPlayer = false;
@@ -221,7 +240,7 @@ public class BossAttackManager : MonoBehaviour
     public void SummonSword(float distanceToPlayer)
     {
 
-        if (!isAttacking && distanceToPlayer >= attack_2_Range_MIN)
+        if (!isAttacking)
         {
             isAttacking = true;
             hasHitPlayer = false;
@@ -330,12 +349,12 @@ public class BossAttackManager : MonoBehaviour
     public void ChooseAttack()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer >= TeleportThershold)
+        if (distanceToPlayer >= 7f)
         {
             int[] values = { 2, 7, 8, 9 };
             attackNumber = values[Random.Range(0, values.Length)];
         }
-        else if (distanceToPlayer <= attack_2_Range_MIN)
+        else if (distanceToPlayer <= attackRange)
         {
             int[] values = { 1, 2, 3, 4, 5, 6 };
             attackNumber = values[Random.Range(0, values.Length)];
