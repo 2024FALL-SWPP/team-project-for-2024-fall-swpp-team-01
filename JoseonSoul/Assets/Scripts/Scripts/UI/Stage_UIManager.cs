@@ -27,19 +27,19 @@ public class Stage_UIManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(canvas);
-        canvas.SetActive(false);
+        canvas.SetActive(true);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if(scene.buildIndex <1 || scene.buildIndex > 4)
+        if(scene.buildIndex == 0 || scene.buildIndex == 4 || scene.buildIndex > 5)
             canvas.SetActive(false);
         else
         {
             canvas.SetActive(true);
-            if(scene.buildIndex == 4)
+            if(scene.buildIndex == 5)
                 setBossStage(true);
             else
                 setBossStage(false);

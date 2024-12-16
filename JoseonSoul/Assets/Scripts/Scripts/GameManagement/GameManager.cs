@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         int sceneIdx = scene.buildIndex;
         Debug.Log("Scene Loaded + " + sceneIdx.ToString());
-        if(1<= sceneIdx && sceneIdx <=4)
+        if((1<= sceneIdx && sceneIdx <=3) || sceneIdx == 5)
         {
             Debug.Log("Player Activated!");
             player.SetActive(true);
@@ -84,11 +84,6 @@ public class GameManager : MonoBehaviour
         else
         {
             player.SetActive(false);
-        }
-
-        if(sceneIdx == 5)
-        {
-            Invoke("NextScene", 10.0f);
         }
          
         Stage_UIManager.Instance.EventTextOff();

@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 1425148829}
   - component: {fileID: 1425148831}
   - component: {fileID: 1425148830}
+  - component: {fileID: 1425148832}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -409,6 +410,20 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &1425148832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425148827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa04dd7144f6c4592bc5f2a03f5002b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 0}
+  nextSceneName: 
 --- !u!1 &1523476411
 GameObject:
   m_ObjectHideFlags: 0

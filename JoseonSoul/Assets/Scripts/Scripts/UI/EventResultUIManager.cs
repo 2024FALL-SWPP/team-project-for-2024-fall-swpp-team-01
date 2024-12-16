@@ -8,22 +8,21 @@ using UnityEngine;
 public class EventResultUIManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Canvas canvas;
+    public TextMeshProUGUI text;
     void Start()
     {
-        DontDestroyOnLoad(canvas);
-        canvas.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
     }
 
     public void ActvateEventCanvas(String text)
     {
-        canvas.gameObject.SetActive(true);
-        canvas.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        this.text.gameObject.SetActive(true);
+        this.text.text = text;
         Invoke("EndEvent",3.0f);
     }
 
     void EndEvent()
     {
-        canvas.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
     }
 }
