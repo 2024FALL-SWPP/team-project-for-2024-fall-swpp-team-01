@@ -12,9 +12,9 @@ public class ThirdPersonCameraController : MonoBehaviour
     [Tooltip("Rotation speed for mouse/controller input.")]
     public float rotationSpeed = 5.0f;
     [Tooltip("Minimum vertical angle (in degrees).")]
-    public float minYAngle = -20f;
+    public float minYAngle = 0f;
     [Tooltip("Maximum vertical angle (in degrees).")]
-    public float maxYAngle = 80f;
+    public float maxYAngle = 50f;
 
     [Header("Zoom Settings")]
     [Tooltip("Default distance from the target.")]
