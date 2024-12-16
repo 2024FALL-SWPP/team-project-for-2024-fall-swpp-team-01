@@ -190,9 +190,9 @@ public class Stage_UIManager : MonoBehaviour
     public GameObject canvas;
 
     [Header("Strings for message")]
-    private String[] eventStrings = {"Purify a Well : E", // Well Event String
-                                    "Save and Heal : E", // Fire Event String
-                                    "Move to next Stage : E"}; // Next Stage Event String
+    private String[] eventStrings = {"우물 정화 : E", // Well Event String
+                                    "저장 및 회복 : E", // Fire Event String
+                                    "이동하기 : E"}; // Next Stage Event String
 
 
     private PlayerHealthManager healthManager;

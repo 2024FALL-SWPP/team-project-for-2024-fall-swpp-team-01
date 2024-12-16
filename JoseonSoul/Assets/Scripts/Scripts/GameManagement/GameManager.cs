@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
             SaveGame();
             Debug.Log("Saved and Healed");
 
-            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Game Saved!");
+            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("저장되었습니다");
         }
 
         if(eventId == (int)GameManagement.Event.NextStage)
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
                 NextScene();
             else
             {
-                stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Some well is not Purified");
+                stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("아직 정화되지 않은 우물이 있습니다");
             }
         }
     }
@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
     Debug.Log($"Attempting to purify well_{wellId}");
     if(!wellPurified[wellId])
     {
-        stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Well Purifed");
+        stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("우물이 정화되었습니다");
         wellPurified[wellId] = true;
 
         GameObject well = GameObject.Find($"well_{wellId}");
