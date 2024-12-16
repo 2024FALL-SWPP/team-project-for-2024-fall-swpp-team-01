@@ -6,12 +6,44 @@ using TMPro;
 using UnityEngine.UI;
 public class Title_UIManager : MonoBehaviour
 {
+
+    public static Title_UIManager Instance { get; private set; }
+    public GameObject canvas;
+    
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 객체 유지
+        }
+        else
+        {
+            Destroy(gameObject);  // 이미 인스턴스가 있으면 새로 생성된 오브젝트 삭제
+            return;
+        }
+
+        DontDestroyOnLoad(canvas);
+        canvas.SetActive(true);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    {
+        if(scene.buildIndex == 7)
+            canvas.SetActive(true);
+        else
+            canvas.SetActive(false);
+    }
+
     [Header("Manager Objects")]
     public GameObject ControlsPanel;
     public GameManager gameManager;
     
     void Start()
     {
+        gameManager = GameManager.Instance;
         if(gameManager == null)
             Debug.LogError("Game Manager Not Found");
         ControlsPanel.SetActive(false);

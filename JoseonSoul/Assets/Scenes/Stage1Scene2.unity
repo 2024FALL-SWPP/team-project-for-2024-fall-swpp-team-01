@@ -17004,7 +17004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2110250237483508594, guid: d66232209c54743aeac56ade4927a6b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4605768
+      value: -1.948
       objectReference: {fileID: 0}
     - target: {fileID: 2110250237483508594, guid: d66232209c54743aeac56ade4927a6b6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25050,6 +25050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageObject: {fileID: 0}
   profileImage: {fileID: 21300000, guid: 667c5286a7c36a54eb6a4b6a33d8bf8a, type: 3}
+  menuPanel: {fileID: 0}
   profileText: {fileID: 0}
   hpText: {fileID: 0}
   interactionText: {fileID: 0}

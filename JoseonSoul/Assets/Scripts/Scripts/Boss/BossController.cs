@@ -46,6 +46,14 @@ public class BossController : MonoBehaviour
     {
         animator.SetTrigger("Idle_trigger");
         animator.SetTrigger("death_trigger");
+
+        Invoke("PlayEndingScene",3.0f);
+        isEntering = true;
+    }
+
+    void PlayEndingScene()
+    {
+        GameManager.Instance.NextScene();
     }
 
     public void DestroyBoss()

@@ -77,8 +77,14 @@ public class SoundManager : MonoBehaviour
                 BGMAudioSource.Play();
                 break;
 
-            case 4: // Boss Stage
+            case 4: // Boss CutScene
                 BGMAudioSource.clip = bossStageMusic;
+                BGMAudioSource.loop = true;
+                BGMAudioSource.Play();
+                break;
+
+            case 6: // Ending CutScene
+                BGMAudioSource.clip = titleSceneMusic;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.Play();
                 break;
