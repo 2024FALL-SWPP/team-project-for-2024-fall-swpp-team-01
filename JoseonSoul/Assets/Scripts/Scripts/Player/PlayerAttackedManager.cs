@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using Player;
 using UnityEngine;
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Player;
 
 public class PlayerAttackedManager : MonoBehaviour
 {

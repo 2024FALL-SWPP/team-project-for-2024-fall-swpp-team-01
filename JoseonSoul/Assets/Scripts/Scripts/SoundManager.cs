@@ -59,38 +59,52 @@ public class SoundManager : MonoBehaviour
                 BGMAudioSource.Stop();
                 break;
 
-            case -1: // Title Scene
+            case 0: // Title Scene
                 BGMAudioSource.clip = titleSceneMusic;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.volume = 1.0f;
                 BGMAudioSource.Play();
                 break;
 
-            case 1: // Stage 1 Scene 1
+            case 1: // Start CutScene
+                BGMAudioSource.clip = titleSceneMusic;
+                BGMAudioSource.loop = true;
+                BGMAudioSource.volume = 1.0f;
+                BGMAudioSource.Play();
+                break;
+
+            case 2: // Stage 1 Scene 1
                 BGMAudioSource.clip = stage1Music;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.volume = 0.3f;
                 BGMAudioSource.Play();
                 break;
 
-            case 2: // Stage 1 Scene 2
+            case 3: // Stage 1 Scene 2
+                BGMAudioSource.clip = stage1Music;
+                BGMAudioSource.loop = true;
+                BGMAudioSource.volume = 0.3f;
+                BGMAudioSource.Play();
                 break;
 
-            case 3: // Stage 2
+            case 4: // Stage 2
                 BGMAudioSource.clip = stage2Music;
                 BGMAudioSource.volume = 0.3f;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.Play();
                 break;
 
-            case 4: // Boss CutScene
+            case 5: // Boss CutScene
                 BGMAudioSource.clip = bossStageMusic;
                 BGMAudioSource.volume = 0.5f;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.Play();
                 break;
 
-            case 6: // Ending CutScene
+            case 6:
+                break;
+
+            case 7: // Ending CutScene
                 BGMAudioSource.clip = titleSceneMusic;
                 BGMAudioSource.volume = 1.0f;
                 BGMAudioSource.loop = true;

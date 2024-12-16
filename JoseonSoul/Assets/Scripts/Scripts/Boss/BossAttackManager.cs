@@ -6,7 +6,6 @@ using UnityEngine;
 using Boss;
 using System.Data.Common;
 using UnityEngine.AI;
-using System.Security.Cryptography;
 using JetBrains.Annotations;
 using Random = UnityEngine.Random;
 

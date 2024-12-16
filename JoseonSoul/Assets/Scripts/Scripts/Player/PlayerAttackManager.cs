@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Player;
-using Unity.VisualScripting; // Ensure this namespace contains PlayerController and PlayerState
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Player;
-
 public class PlayerAttackManager : MonoBehaviour
 {
     private PlayerController playerController;

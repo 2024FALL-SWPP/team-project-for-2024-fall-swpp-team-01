@@ -1,5 +1,4 @@
-// ThirdPersonCameraController.cs
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class ThirdPersonCameraController : MonoBehaviour

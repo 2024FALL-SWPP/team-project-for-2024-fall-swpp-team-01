@@ -34,12 +34,12 @@ public class Stage_UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if(scene.buildIndex == 0 || scene.buildIndex == 4 || scene.buildIndex > 5)
+        if(scene.buildIndex <= 1 || scene.buildIndex == 5 || scene.buildIndex == 7) // Title, CutScene
             canvas.SetActive(false);
         else
         {
             canvas.SetActive(true);
-            if(scene.buildIndex == 5)
+            if(scene.buildIndex == 6)
                 setBossStage(true);
             else
                 setBossStage(false);
