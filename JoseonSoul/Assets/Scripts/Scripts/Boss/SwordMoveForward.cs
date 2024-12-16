@@ -11,7 +11,7 @@ public class SwordMoveForward : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitAndMove());
-        Destroy(gameObject, 6f);
+        StartCoroutine(RemoveAfterSeconds(8.0f));
     }
 
     // Update is called once per frame
@@ -27,5 +27,11 @@ public class SwordMoveForward : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         isMoving = true;
+    }
+    
+    IEnumerator RemoveAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
     }
 }
