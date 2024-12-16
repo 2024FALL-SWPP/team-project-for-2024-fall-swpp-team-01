@@ -61,6 +61,13 @@ public class BossAttackManager : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+        int randInt = Random.Range(0,4);
+        Debug.Log(randInt.ToString());
+        if(randInt == 0)
+        {
+            SoundManager.Instance.SetShortRoarSound();
+        }
+
         switch (attackNumber)
         {
             case 1:

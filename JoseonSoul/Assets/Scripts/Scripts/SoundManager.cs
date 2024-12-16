@@ -13,12 +13,15 @@ public class SoundManager : MonoBehaviour
     public AudioClip gameOverSound;
     public List<AudioClip> knifeSounds;
     public List<AudioClip> bodyPunchedSounds;
+    public List<AudioClip> growlingSounds;
+    public List<AudioClip> longRoarSounds;
+    public List<AudioClip> shortRoarSounds;
 
     public static SoundManager Instance { get; private set; }
 
     private AudioSource BGMAudioSource;
     private List<AudioSource> SFXAudioSources = new List<AudioSource>();
-    private int SFXSourcesNum = 5; // 0: Walking, 1: GameOver, 2: Knife, 3: Attacked, ...
+    private int SFXSourcesNum = 7; // 0: Walking, 1: GameOver, 2: Knife, 3: Attacked, 4 : Growling, 5 : Long Roar, 6 : Short Roar
 
     private void Awake()
     {
@@ -49,7 +52,6 @@ public class SoundManager : MonoBehaviour
 
     public void SetBgm(int sceneId)
     {
-        Debug.Log(sceneId);
         switch (sceneId)
         {
             case -2: // Stop the bgm
@@ -121,5 +123,23 @@ public class SoundManager : MonoBehaviour
     {
         SFXAudioSources[3].clip = bodyPunchedSounds[Random.Range(0, bodyPunchedSounds.Count)];
         SFXAudioSources[3].Play();
+    }
+
+    public void SetGrowlingSound()
+    {
+        SFXAudioSources[4].clip = growlingSounds[Random.Range(0, growlingSounds.Count)];
+        SFXAudioSources[4].Play();
+    }
+
+    public void SetLongRoarSound()
+    {
+        SFXAudioSources[5].clip = longRoarSounds[Random.Range(0, longRoarSounds.Count)];
+        SFXAudioSources[5].Play();
+    }
+
+    public void SetShortRoarSound()
+    {
+        SFXAudioSources[6].clip = shortRoarSounds[Random.Range(0, shortRoarSounds.Count)];
+        SFXAudioSources[6].Play();
     }
 }

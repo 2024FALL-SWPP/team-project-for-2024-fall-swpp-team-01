@@ -61,6 +61,8 @@ public class SwordColliderManager : MonoBehaviour
 
             // Disable the collider to prevent multiple hits in one attack
             DisableCollider();
+
+            SoundManager.Instance.SetAttacked();
         }
 
         if (other.CompareTag("BossBody"))
@@ -68,6 +70,8 @@ public class SwordColliderManager : MonoBehaviour
             Debug.Log("boss got damage");
             other.GetComponent<BossController>().TakeDamage(damage);
             DisableCollider();
+
+            SoundManager.Instance.SetAttacked();
         }
     }
 }

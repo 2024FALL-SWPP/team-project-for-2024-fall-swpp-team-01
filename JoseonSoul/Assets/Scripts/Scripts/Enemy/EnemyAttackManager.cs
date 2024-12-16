@@ -10,6 +10,7 @@ public class EnemyAttackManager : MonoBehaviour
     private Animator animator;
     private EnemyLocomotionManager locomotionManager;
     private EnemyController enemyController;
+    private SoundManager soundManager;
 
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1.5f;
@@ -35,6 +36,8 @@ public class EnemyAttackManager : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         locomotionManager = GetComponent<EnemyLocomotionManager>();
         animator = GetComponent<Animator>();
+
+        soundManager = SoundManager.Instance;
     }
 
     // Update is called once per frame
@@ -71,7 +74,8 @@ public class EnemyAttackManager : MonoBehaviour
 
     IEnumerator AttackCooldownRoutine()
     {
-
+        if( Random.Range(0,5) ==0 )
+            soundManager.SetGrowlingSound();
         yield return new WaitForSeconds(attackActiveDuration);
         isAttacking = false;
         yield return new WaitForSeconds(attackCooldown - attackActiveDuration);
