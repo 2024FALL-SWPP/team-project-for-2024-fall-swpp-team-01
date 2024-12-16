@@ -61,12 +61,14 @@ public class SoundManager : MonoBehaviour
             case -1: // Title Scene
                 BGMAudioSource.clip = titleSceneMusic;
                 BGMAudioSource.loop = true;
+                BGMAudioSource.volume = 1.0f;
                 BGMAudioSource.Play();
                 break;
 
             case 1: // Stage 1 Scene 1
                 BGMAudioSource.clip = stage1Music;
                 BGMAudioSource.loop = true;
+                BGMAudioSource.volume = 0.3f;
                 BGMAudioSource.Play();
                 break;
 
@@ -75,18 +77,21 @@ public class SoundManager : MonoBehaviour
 
             case 3: // Stage 2
                 BGMAudioSource.clip = stage2Music;
+                BGMAudioSource.volume = 0.3f;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.Play();
                 break;
 
             case 4: // Boss CutScene
                 BGMAudioSource.clip = bossStageMusic;
+                BGMAudioSource.volume = 0.5f;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.Play();
                 break;
 
             case 6: // Ending CutScene
                 BGMAudioSource.clip = titleSceneMusic;
+                BGMAudioSource.volume = 1.0f;
                 BGMAudioSource.loop = true;
                 BGMAudioSource.Play();
                 break;
@@ -98,6 +103,7 @@ public class SoundManager : MonoBehaviour
         if (isRunning && !SFXAudioSources[0].isPlaying)
         {
             SFXAudioSources[0].loop = true;
+            SFXAudioSources[0].volume = 0.3f;
             SFXAudioSources[0].Play();
         }
         else if (!isRunning && SFXAudioSources[0].isPlaying)
@@ -116,30 +122,35 @@ public class SoundManager : MonoBehaviour
     public void SetKnifeSound()
     {
         SFXAudioSources[2].clip = knifeSounds[Random.Range(0, knifeSounds.Count)];
+        SFXAudioSources[2].volume = 0.6f;
         SFXAudioSources[2].Play();
     }
 
     public void SetAttacked()
     {
         SFXAudioSources[3].clip = bodyPunchedSounds[Random.Range(0, bodyPunchedSounds.Count)];
+        SFXAudioSources[3].volume = 0.4f;
         SFXAudioSources[3].Play();
     }
 
     public void SetGrowlingSound()
     {
         SFXAudioSources[4].clip = growlingSounds[Random.Range(0, growlingSounds.Count)];
+        SFXAudioSources[4].volume = 0.4f;
         SFXAudioSources[4].Play();
     }
 
     public void SetLongRoarSound()
     {
         SFXAudioSources[5].clip = longRoarSounds[Random.Range(0, longRoarSounds.Count)];
+        SFXAudioSources[5].volume = 0.7f;
         SFXAudioSources[5].Play();
     }
 
     public void SetShortRoarSound()
     {
         SFXAudioSources[6].clip = shortRoarSounds[Random.Range(0, shortRoarSounds.Count)];
+        SFXAudioSources[4].volume = 0.4f;
         SFXAudioSources[6].Play();
     }
 }

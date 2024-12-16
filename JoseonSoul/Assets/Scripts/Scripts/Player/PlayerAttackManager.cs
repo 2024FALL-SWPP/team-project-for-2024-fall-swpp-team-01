@@ -18,7 +18,7 @@ public class PlayerAttackManager : MonoBehaviour
 
     private bool isQueued = false; // Indicates if the next attack is queued
     private float openPhaseDuration = 0.2f;   // Duration of the Open phase
-    private float closedPhaseDuration = 1.3f; // Duration of the Closed phase
+    private float closedPhaseDuration = 0.8f; // Duration of the Closed phase
     private float attackOpenEndTime = 0f;     // Tracks when the Open phase ends
     private float staminaConsume = 35.0f;
 
