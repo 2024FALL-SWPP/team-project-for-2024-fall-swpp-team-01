@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public GameObject player = PlayerController.Instance;
     public Stage_UIManager stage_UIManager = Stage_UIManager.Instance;
     public ThirdPersonCameraController mainCamera = ThirdPersonCameraController.Instance;
+    public CutSceneCameraController uiCamera = CutSceneCameraController.Instance;
 
 
     private PlayerHealthManager healthManager;
@@ -75,15 +76,17 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
     {
         int sceneIdx = scene.buildIndex;
-        Debug.Log("Scene Loaded + " + sceneIdx.ToString());
-        if((1<= sceneIdx && sceneIdx <=3) || sceneIdx == 5)
+        if((1<= sceneIdx && sceneIdx <=3) || sceneIdx == 5) // Stage
         {
-            Debug.Log("Player Activated!");
             player.SetActive(true);
+            mainCamera.gameObject.SetActive(true);
+            uiCamera.gameObject.SetActive(false);
         }
-        else
+        else // UI
         {
             player.SetActive(false);
+            mainCamera.gameObject.SetActive(false);
+            uiCamera.gameObject.SetActive(true);
         }
          
         Stage_UIManager.Instance.EventTextOff();

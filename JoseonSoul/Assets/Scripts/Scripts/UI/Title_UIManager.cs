@@ -24,6 +24,7 @@ public class Title_UIManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(canvas);
+        canvas.SetActive(true);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -32,7 +33,6 @@ public class Title_UIManager : MonoBehaviour
     {
         if(scene.buildIndex == 7)
             canvas.SetActive(true);
-
         else
             canvas.SetActive(false);
     }
