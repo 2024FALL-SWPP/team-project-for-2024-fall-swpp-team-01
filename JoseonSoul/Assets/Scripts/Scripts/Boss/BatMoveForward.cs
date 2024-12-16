@@ -11,6 +11,7 @@ public class BatMoveForward : MonoBehaviour
     void Start()
     {
         StartCoroutine(WaitAndMove());
+        StartCoroutine(RemoveAfterSeconds(8.0f));
     }
 
     // Update is called once per frame
@@ -26,5 +27,11 @@ public class BatMoveForward : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         isMoving = true;
+    }
+
+    IEnumerator RemoveAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
     }
 }

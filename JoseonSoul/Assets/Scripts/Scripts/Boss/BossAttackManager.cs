@@ -28,7 +28,7 @@ public class BossAttackManager : MonoBehaviour
 
     [SerializeField] private float batSpawnHeight = 15f;
     [SerializeField] private float gridSpacing1 = 5f;
-    [SerializeField] private float gridSpacing2 = 8f;
+    [SerializeField] private float gridSpacing2 = 2f;
 
     [SerializeField] private bool hasHitPlayer = false; //to avoid double attack. if collision detected, please set hasHitPlayer = true.
     [SerializeField] private int attackNumber = 1;
@@ -209,7 +209,7 @@ public class BossAttackManager : MonoBehaviour
     {
         for (int i = -1; i <= 1; i++)
         {
-            for (int j = -1; j <= 1; j++)
+            for (int j = -3; j <= 3; j++)
             {
                 Vector3 spawnPosition1 = player.position + Vector3.up * batSpawnHeight
                                       + new Vector3(i * gridSpacing1, 0, j * gridSpacing1);
