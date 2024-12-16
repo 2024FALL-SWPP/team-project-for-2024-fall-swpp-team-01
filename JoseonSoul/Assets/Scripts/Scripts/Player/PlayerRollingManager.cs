@@ -58,6 +58,13 @@ public class PlayerRollingManager : MonoBehaviour
             rollingDirection = transform.forward;
         else
             rollingDirection = locomotionManager.CalculateMoveDirection(horizontal,vertical);
+        // **Immediate Rotation to Rolling Direction**
+        if (rollingDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(rollingDirection);
+            transform.rotation = targetRotation;
+        }
+
         healthManager.updateCurrentSP(-staminaDecrement,false);
         InvincibleRoll();
         Invoke("HittableRoll", invincibleTime);
