@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEngine.UI;
 public class Title_UIManager : MonoBehaviour
 {
 
@@ -31,7 +29,7 @@ public class Title_UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if(scene.buildIndex == 7)
+        if(scene.buildIndex == 0)
             canvas.SetActive(true);
         else
             canvas.SetActive(false);

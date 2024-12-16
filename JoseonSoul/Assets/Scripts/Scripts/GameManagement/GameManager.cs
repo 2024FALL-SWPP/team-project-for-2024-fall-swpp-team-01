@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 using Player;
 using System.IO;
 using System;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -70,13 +67,13 @@ public class GameManager : MonoBehaviour
 
         
         soundManager = SoundManager.Instance;
-        soundManager.SetBgm(-1);
+        soundManager.SetBgm(0);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
     {
         int sceneIdx = scene.buildIndex;
-        if((1<= sceneIdx && sceneIdx <=3) || sceneIdx == 5) // Stage
+        if((2<= sceneIdx && sceneIdx <=4) || sceneIdx == 6) // Stage
         {
             player.SetActive(true);
             mainCamera.gameObject.SetActive(true);
@@ -121,9 +118,9 @@ public class GameManager : MonoBehaviour
         else
         {
             currentHP = PlayerHealthManager.maxHP;
-            currentSceneIndex = 0;
+            currentSceneIndex = 1;
             wellPurified = new bool[4]{false,false,false,false};
-            lastVisitedFireSceneIdx = 0;
+            lastVisitedFireSceneIdx = 1;
             lastVisitedFire = new Vector3(0,0,0);
             potionRemained = PlayerPotionManager.maxPotion;
         }
@@ -134,11 +131,11 @@ public class GameManager : MonoBehaviour
         currentHP = PlayerHealthManager.maxHP;
         currentSceneIndex = 0;
         wellPurified = new bool[4]{false,false,false,false};
-        lastVisitedFireSceneIdx = 0;
+        lastVisitedFireSceneIdx = 1;
         lastVisitedFire = new Vector3(0,0,0);
         potionRemained = PlayerPotionManager.maxPotion;
         SaveGame();
-        LoadScene(false);
+        NextScene();
     }
 
     public void SaveGame()
@@ -153,6 +150,7 @@ public class GameManager : MonoBehaviour
     public void NextScene()
     {
         currentSceneIndex += 1;
+        currentSceneIndex %= 8;
         LoadScene(false);
     }
 
@@ -202,7 +200,7 @@ public class GameManager : MonoBehaviour
             SaveGame();
             Debug.Log("Saved and Healed");
 
-            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Game Saved!");
+            stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("저장되었습니다");
         }
 
         if(eventId == (int)GameManagement.Event.NextStage)
@@ -211,7 +209,7 @@ public class GameManager : MonoBehaviour
                 NextScene();
             else
             {
-                stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Some well is not Purified");
+                stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("아직 정화되지 않은 우물이 있습니다");
             }
         }
     }
@@ -226,7 +224,7 @@ public class GameManager : MonoBehaviour
     Debug.Log($"Attempting to purify well_{wellId}");
     if(!wellPurified[wellId])
     {
-        stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("Well Purifed");
+        stage_UIManager.gameObject.GetComponent<EventResultUIManager>().ActvateEventCanvas("우물이 정화되었습니다");
         wellPurified[wellId] = true;
 
         GameObject well = GameObject.Find($"well_{wellId}");
