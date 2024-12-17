@@ -3012,7 +3012,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 913355438, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
       propertyPath: staminaDecrement
-      value: 50
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 913355439, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
       propertyPath: cameraTransform
