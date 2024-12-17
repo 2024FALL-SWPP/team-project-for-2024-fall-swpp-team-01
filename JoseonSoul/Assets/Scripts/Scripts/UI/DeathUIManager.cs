@@ -15,9 +15,7 @@ public class DeathUIManager : MonoBehaviour
 
     void Start()
     {
-        // UI 요소들을 시작할 때 숨김
-        deathImage.gameObject.SetActive(false);
-        countdownText.gameObject.SetActive(false);
+        canvas.gameObject.SetActive(false);
     }
 
     void Awake()
@@ -41,8 +39,7 @@ public class DeathUIManager : MonoBehaviour
     {
         if (!isCountingDown)
         {
-            deathImage.gameObject.SetActive(true);
-            countdownText.gameObject.SetActive(true);
+            canvas.gameObject.SetActive(true);
             StartCoroutine(CountdownToRestart());
         }
     }
@@ -58,8 +55,7 @@ public class DeathUIManager : MonoBehaviour
         }
 
         // UI 숨기기
-        deathImage.gameObject.SetActive(false);
-        countdownText.gameObject.SetActive(false);
+        canvas.gameObject.SetActive(false);
         isCountingDown = false;
     }
 }
