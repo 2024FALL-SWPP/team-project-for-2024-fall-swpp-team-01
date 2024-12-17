@@ -73,6 +73,12 @@ public class PlayerPotionManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.R))
                 HandlePotion();
         }
+
+        if( state == (int)PlayerState.Stunned )
+        {
+            potionTransform.gameObject.SetActive(false);
+            shieldTransform.gameObject.SetActive(true);
+        }
     }
 
     void HandlePotion()
