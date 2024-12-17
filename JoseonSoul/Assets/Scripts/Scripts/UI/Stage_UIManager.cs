@@ -51,7 +51,7 @@ public class Stage_UIManager : MonoBehaviour
     void Update()
     {
         // ESC 키를 눌렀을 때
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && canvas.activeSelf)
         {
             if (escButtonOn)
             {
