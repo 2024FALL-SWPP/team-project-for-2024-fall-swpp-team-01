@@ -3010,10 +3010,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 913355438, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
+      propertyPath: staminaDecrement
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 913355439, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 425531604}
+    - target: {fileID: 913355439, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
+      propertyPath: staminaDecrementSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 913355441, guid: 3d9d503cfca5af54fa9f48d2916eca93, type: 3}
       propertyPath: UIManager
       value: 

@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487f0ec63f5f94465baaf9325667fc65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaDecrement: 20
+  staminaDecrement: 27
   invincibleTime: 0.9
   totalTime: 1.1
   rollingSpeed: 4
@@ -1005,6 +1005,7 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   gameManager: {fileID: 0}
   potionManager: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!114 &913355442
 MonoBehaviour:
   m_ObjectHideFlags: 0

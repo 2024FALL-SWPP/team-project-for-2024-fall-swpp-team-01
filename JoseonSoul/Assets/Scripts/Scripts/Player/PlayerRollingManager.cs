@@ -6,7 +6,7 @@ using Player;
 public class PlayerRollingManager : MonoBehaviour
 {
     [Header("Rolling Settings")]
-    [SerializeField] private float staminaDecrement = 20.0f;
+    [SerializeField] private float staminaDecrement = 27.0f;
     [SerializeField] private float invincibleTime = 0.9f;
     [SerializeField] private float totalTime = 1.1f;
     [SerializeField] private float rollingSpeed = 7.0f;
