@@ -20,6 +20,13 @@ public class VideoCutSceneManager : MonoBehaviour
         videoPlayer.loopPointReached += OnVideoEnd;
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            GameManager.Instance.NextScene();
+        }
+    }
+
     private void OnVideoEnd(VideoPlayer vp)
     {
         GameManager.Instance.NextScene();
