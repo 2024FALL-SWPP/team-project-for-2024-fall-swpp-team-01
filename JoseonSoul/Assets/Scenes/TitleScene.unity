@@ -2183,8 +2183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 957419719}
   rotationSpeed: 5
-  minYAngle: -20
-  maxYAngle: 80
+  minYAngle: 5
+  maxYAngle: 50
   defaultDistance: 5
   minDistance: 2
   maxDistance: 10
