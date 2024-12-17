@@ -258,11 +258,12 @@ public class BossAttackManager : MonoBehaviour
         Quaternion spawnRotation = transform.rotation * Quaternion.Euler(-90, 0, 0);
         for (int i = 0; i <= 2; i++)
         {
-            for (int j = -1; j <= 1; j++)
+            for (int j = -3; j <= 3; j++)
             {
                 Vector3 spawnPosition = transform.position + transform.forward * 3f
-                                    + transform.up * i * gridSpacing2
+                                    + transform.up * (i + 0.3f) * gridSpacing2
                                     + transform.right * j * gridSpacing2;
+                                        
 
                 Instantiate(swordPrefab, spawnPosition, spawnRotation);
             }

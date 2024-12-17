@@ -1095,6 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3590cdd3ddd4ff449affd2ba9c1f762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordTransform: {fileID: 0}
   batPrefab: {fileID: 1839810629327405121, guid: 2d1a7ffc5147dd94d82ad72ef40a4c9a, type: 3}
   swordPrefab: {fileID: 7436741638397506367, guid: 9782e513e752ed74a9f9ac46159d0eb1, type: 3}
   attackRange: 5
@@ -1103,7 +1104,7 @@ MonoBehaviour:
   walkingWhileAttack: 1.5
   batSpawnHeight: 15
   gridSpacing1: 5
-  gridSpacing2: 8
+  gridSpacing2: 2
   hasHitPlayer: 0
   attackNumber: 1
   isAttacking: 0
