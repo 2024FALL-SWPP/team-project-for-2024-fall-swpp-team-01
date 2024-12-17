@@ -10,12 +10,28 @@ public class DeathUIManager : MonoBehaviour
     public TextMeshProUGUI countdownText;
     public Canvas canvas;
     private bool isCountingDown = false;
+    public static DeathUIManager Instance { get; private set; }
+    
 
     void Start()
     {
         // UI 요소들을 시작할 때 숨김
         deathImage.gameObject.SetActive(false);
         countdownText.gameObject.SetActive(false);
+    }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시에도 객체 유지
+        }
+        else
+        {
+            Destroy(gameObject);  // 이미 인스턴스가 있으면 새로 생성된 오브젝트 삭제
+            return;
+        }
 
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(canvas);
@@ -37,7 +53,7 @@ public class DeathUIManager : MonoBehaviour
         
         for (int i = 3; i > 0; i--)
         {
-            countdownText.text = $"To be continued in {i} sec...";
+            countdownText.text = $"{i}초 후 다시 시작됩니다";
             yield return new WaitForSeconds(1f);
         }
 
